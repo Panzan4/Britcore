@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BritCore</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@600;700&display=swap">
+<style>
+:root{color-scheme:light;--bg:#FFF8EC;--ink:#1F2933;--mute:#5B6B78;--card:#FFFFFF;--line:#EBE0CC;--navy:#1D3557;--accent:#1D3557;--accent-dark:#14283F;--accent-soft:#DCE6EE;--onaccent:#fff;--sky:#A8DADC;--slate:#457B9D;--mapdot:#2ECC71;--trim:#2ECC71;--board:#3E4C7C;--board2:#4F5F9A;--boardtxt:#DCE3F5;--amber:#F5D98B;--red:#D0374A;--green:#2F7D5B;--shadow:0 2px 10px rgba(29,53,87,.10);--shadow-lg:0 6px 14px rgba(29,53,87,.26);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 Nunito,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:0 18px 140px}
+header{padding:14px 0 8px;text-align:center;display:flex;align-items:center;justify-content:center;gap:10px}
+.logo{width:36px;height:40px;flex:none}
+h1{margin:0;font:700 clamp(20px,6.8vw,30px)/1.2 Quicksand,Nunito,system-ui,sans-serif;white-space:nowrap;color:var(--navy);letter-spacing:.005em}
+nav{position:fixed;left:16px;right:16px;bottom:calc(14px + env(safe-area-inset-bottom,0px));max-width:608px;margin:0 auto;z-index:15;display:flex;align-items:center;background:var(--card);border-radius:24px;box-shadow:0 14px 30px rgba(29,53,87,.22);padding:8px 4px}
+nav button{flex:1;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--mute);font:700 11px Nunito,system-ui,sans-serif;padding:6px 0;border-radius:16px;cursor:pointer}
+nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav button[aria-selected="true"]{color:var(--accent);background:var(--accent-soft)}
+button:focus-visible,summary:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+h2{font-size:22px;font-weight:800;margin:0 0 2px;text-align:center}
+h3{margin:14px 0 8px;font-size:19px;text-align:center}
+.lead{margin:0 0 10px;color:var(--mute)}
+.hero{background:linear-gradient(160deg,var(--board2),var(--board));color:var(--boardtxt);border-radius:24px;padding:24px 20px;margin-bottom:16px}
+.hero-k{margin:0;font-size:17px}
+.hero-h{margin:4px 0 10px;font-size:36px;line-height:1.1;font-weight:800;color:var(--amber)}
+.hero-t{margin:0 0 14px;font-size:20px;line-height:1.45;color:#fff}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.pills span{background:rgba(255,255,255,.14);color:#fff;border-radius:999px;padding:6px 14px;font-weight:700;font-size:15px}
+.hero-s{margin:0;font-size:15px}
+.upd{background:var(--card);border-radius:18px;box-shadow:var(--shadow);border:1px solid var(--line);margin-bottom:14px}
+.upd summary{padding:15px 16px;font-weight:700;font-size:18px;cursor:pointer;background:#F0F4F8;color:#1D3557;border-radius:16px}
+.upd-b{padding:0 16px 16px}
+.ex{margin:22px 0 10px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tiles button{text-align:left;border:0;border-radius:22px;padding:16px;min-height:96px;font:800 19px Nunito,system-ui,sans-serif;color:#1F3556;cursor:pointer}
+.tiles button:nth-child(1){background:#CDE4F7}
+.tiles button:nth-child(2){background:#CFEDEF}
+.tiles button:nth-child(3){background:#DADFF8}
+.tiles button:nth-child(4){background:#E3EEF9}
+.tiles span{display:block;font:600 14px/1.3 Nunito,system-ui,sans-serif;color:#3B5478;margin-top:4px}
+.board{background:linear-gradient(160deg,var(--board2),var(--board));border-radius:24px;padding:6px 18px;color:var(--boardtxt)}
+.board details{border-bottom:1px solid rgba(255,255,255,.15)}
+.board details:last-child{border-bottom:0}
+.board summary{list-style:none;display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:15px 0;cursor:pointer}
+.board summary::-webkit-details-marker{display:none}
+.board summary:focus-visible,.board a:focus-visible{outline-color:var(--amber)}
+.dest{color:var(--amber);font-weight:800;font-size:20px}
+.dur{color:var(--amber);font-weight:700;text-align:right;white-space:nowrap}
+.from{grid-column:1/3;font-size:15px}
+.more{padding:0 0 16px;font-size:16px}
+.more p{margin:0 0 8px}
+a.tl{color:var(--amber);font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chips button{font:700 15px Nunito,system-ui,sans-serif;padding:9px 16px;border-radius:999px;border:0;background:var(--accent-soft);color:var(--accent);cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--accent);color:var(--onaccent)}
+.list{list-style:none;margin:0;padding:0}
+.list li{background:var(--card);border-radius:18px;box-shadow:var(--shadow);border:1px solid var(--line);padding:14px 16px;margin-bottom:10px}
+.list b{display:block;font-size:18px;font-weight:800}
+.list span{color:var(--mute);font-size:16px}
+.tag{display:inline-block;font-weight:800;font-size:14px;margin-right:6px;color:var(--accent)}
+.free .tag{color:var(--green)}
+.guide details{background:var(--card);border-radius:18px;box-shadow:var(--shadow);border:1px solid var(--line);margin-bottom:10px}
+.guide summary{padding:15px 16px;font-weight:700;font-size:18px;cursor:pointer}
+.guide .body{padding:0 16px 16px}
+.guide p{margin:0 0 8px}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px}
+dt{font-weight:800}
+dd{margin:0}
+.tool{display:block;background:var(--card);border-radius:18px;box-shadow:var(--shadow);border:1px solid var(--line);padding:15px 16px;margin-bottom:12px;color:var(--ink);text-decoration:none}
+.tool b{display:block;font-size:19px;font-weight:800;color:var(--accent)}
+.tool span{color:var(--mute);font-size:16px}
+.lnk{color:var(--accent);font-weight:700}
+.tool.cmap{background:#C9EBC7;border-color:transparent;box-shadow:none}
+.tool.cmap b{color:#1F6B34}
+.tool.tline{background:#C4ECE4;border-color:transparent;box-shadow:none}
+.tool.tline b{color:#0E6B5E}
+.tool.rcard{background:#D3DDF6;border-color:transparent;box-shadow:none}
+.tool.rcard b{color:#2F4A93}
+.tool.cmap span,.tool.tline span,.tool.rcard span{color:#2E3B4A}
+.note{margin-top:22px;font-size:15px;color:var(--mute)}
+.ghost{font:700 16px Nunito,system-ui,sans-serif;padding:10px 18px;border-radius:999px;border:1.5px solid var(--accent);background:var(--card);color:var(--accent);cursor:pointer;margin:0 8px 8px 0}
+a.ghost{display:inline-block;text-decoration:none}
+.big{font-size:22px;font-weight:800;margin:8px 0 2px}
+.small{font-size:15px;color:var(--mute);margin:0 0 10px}
+label{display:block;font-weight:700;margin-bottom:10px}
+input,select,textarea{display:block;width:100%;margin-top:4px;font:400 17px Nunito,system-ui,sans-serif;padding:11px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink)}
+textarea{min-height:170px;margin:8px 0;font-size:16px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.capout{margin:8px 0}
+.sos-fab{position:fixed;right:16px;bottom:calc(104px + env(safe-area-inset-bottom,0px));z-index:20;background:#C8102E;color:#fff;border:3px solid #fff;border-radius:999px;font:800 17px Nunito,system-ui,sans-serif;min-width:60px;height:60px;box-shadow:0 2px 10px rgba(0,0,0,.35);cursor:pointer}
+.sos-wrap{position:fixed;inset:0;z-index:30;background:rgba(20,18,45,.7);display:flex;align-items:flex-end;justify-content:center}
+.sos-card{background:var(--bg);color:var(--ink);width:100%;max-width:640px;max-height:100%;overflow-y:auto;padding:20px 18px calc(18px + env(safe-area-inset-bottom,0px));border-radius:24px 24px 0 0}
+.call{display:block;text-decoration:none;color:#fff;border-radius:18px;padding:16px;margin-bottom:10px}
+.call b{display:block;font-size:26px;font-weight:800}
+.call span{font-size:16px}
+.call.red{background:#C8102E}
+.call.blue{background:#0B4EA2}
+.list li.city{padding:0}
+.city summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:16px;font-weight:800;font-size:19px;cursor:pointer}
+.city summary::-webkit-details-marker{display:none}
+.city summary::after{content:"+";color:var(--accent);font-size:26px;font-weight:700;line-height:1}
+.city details[open] summary::after{content:"\2013"}
+.cbody{padding:0 16px 16px}
+.cbody p{margin:0 0 10px}
+.cbody b{display:inline;font-size:inherit}
+.start{background:var(--card);border-radius:24px;box-shadow:0 6px 20px rgba(46,42,79,.12);border:1px solid var(--line);padding:14px 16px;margin:6px 0 18px;text-align:center}
+.start h2{margin:0 0 2px}
+.start .lead{font-size:19px;font-weight:700;color:var(--ink);margin:0 0 12px}
+.start .small{margin:12px 0 0}
+a.go{display:block;text-align:center;text-decoration:none;background:var(--accent);color:var(--onaccent);border-radius:999px;padding:14px 22px;font:800 18px Nunito,system-ui,sans-serif}
+.pl{display:flex;align-items:center;gap:12px}
+.pt{flex:1;min-width:0}
+.tk{flex:none;width:34px;height:34px;border-radius:50%;border:2px solid var(--accent);background:var(--card);color:transparent;font:800 18px Nunito,system-ui,sans-serif;cursor:pointer;padding:0;line-height:1}
+.tk[aria-checked="true"]{background:var(--trim);border-color:var(--trim);color:var(--onaccent)}
+.rate{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
+.rb{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--accent);background:var(--card);color:var(--accent);font:800 17px Nunito,system-ui,sans-serif;cursor:pointer;padding:0}
+.rb[aria-pressed="true"]{background:var(--accent);color:var(--onaccent)}
+.rlab{color:var(--mute);font-size:15px}
+.list .why{display:block;color:var(--accent);font-weight:700;font-size:15px;margin-top:2px}
+input[type=search]{-webkit-appearance:none;appearance:none}
+.chips.scroll{flex-wrap:nowrap;overflow-x:auto;margin-right:-18px;padding-right:18px;scrollbar-width:none}
+.chips.scroll::-webkit-scrollbar{display:none}
+.chips.scroll button{flex:none}
+.seg{display:flex;background:var(--accent-soft);border-radius:999px;padding:4px;margin:0 0 14px}
+.seg button{flex:1;border:0;background:none;border-radius:999px;padding:10px 6px;font:800 15px Nunito,system-ui,sans-serif;color:var(--accent);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--onaccent)}
+nav button.nav-sos{flex:none;align-self:center;flex-direction:row;background:#C8102E;color:#fff;border-radius:999px;min-width:48px;height:48px;padding:0 10px;margin:0 4px 0 6px;font:800 14px Nunito,system-ui,sans-serif}
+.cbody .lab{display:block;color:var(--accent);font-size:14px;font-weight:800;margin-bottom:2px}
+.cbody{margin-top:10px}
+.dtl{background:none;border:0;color:var(--accent);font:800 15px Nunito,system-ui,sans-serif;padding:8px 0 0;cursor:pointer}
+.kindNote{margin:0 0 12px}
+.cbody p{margin:0 0 12px}
+#travel{position:fixed;top:0;left:0;right:0;bottom:0;max-width:640px;margin:0 auto;z-index:10;overflow:hidden;background:linear-gradient(160deg,var(--sky),var(--bg) 60%)}
+.hubTopo{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
+.mapSearchFloat{position:absolute;top:calc(16px + env(safe-area-inset-top,0px));left:16px;right:16px;z-index:2}
+.hubSearchBar{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:999px;padding:13px 18px;box-shadow:var(--shadow-lg);border:1px solid var(--line)}
+.hubSearchBar svg{flex:none;width:19px;height:19px;stroke:var(--mute);fill:none;stroke-width:2;stroke-linecap:round}
+.hubSearchBar input{border:0;outline:0;background:none;flex:1;font-size:15px;color:var(--ink);font-family:inherit;font-weight:600;min-width:0}
+.hubSearchBar input::placeholder{color:var(--mute);font-weight:500}
+.hubChipsRow{display:flex;gap:8px;margin-top:10px;overflow-x:auto}
+.hubChip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--slate);font:700 13px Nunito,system-ui,sans-serif;padding:7px 13px;border-radius:999px;cursor:pointer;box-shadow:var(--shadow)}
+.hubChip:hover{background:var(--sky);color:var(--navy)}
+.hubChip:active{transform:scale(.94)}
+.hubUserDot{position:absolute;left:44%;top:38%;width:16px;height:16px;border-radius:50%;background:var(--mapdot);animation:hubPulse 2.2s infinite}
+.hubUserDot::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid #fff}
+@keyframes hubPulse{0%{box-shadow:0 0 0 0 rgba(46,204,113,.55)}70%{box-shadow:0 0 0 16px rgba(46,204,113,0)}100%{box-shadow:0 0 0 0 rgba(46,204,113,0)}}
+@keyframes jPulse{0%{box-shadow:0 0 0 0 rgba(46,204,113,.55)}70%{box-shadow:0 0 0 6px rgba(46,204,113,0)}100%{box-shadow:0 0 0 0 rgba(46,204,113,0)}}
+.hubPin{position:absolute;left:68%;top:22%;transform:translate(-50%,-100%);transition:opacity .25s,transform .25s;opacity:0;pointer-events:none}
+.hubPin.show{opacity:1}
+.hubRoute{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity .25s}
+.hubRoute.show{opacity:1}
+.hubSheet{position:absolute;left:0;right:0;bottom:0;background:var(--card);border-radius:26px 26px 0 0;
+  box-shadow:0 -10px 24px rgba(29,53,87,.2);padding:8px 16px 16px;transform:translateY(calc(100% - 92px));
+  transition:transform .38s cubic-bezier(.22,.9,.32,1);max-height:75vh;overflow-y:auto;z-index:2;cursor:pointer}
+.hubSheet.open{transform:translateY(0);cursor:auto}
+.hubHandle{width:38px;height:5px;border-radius:3px;background:var(--line);margin:6px auto 10px}
+.hubSheetHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
+.hubSheetHead h3{margin:0;font-size:16.5px;font-weight:800;color:var(--navy)}
+.hubSheetHead span{display:block;font-size:12px;font-weight:600;color:var(--mute);margin-top:2px}
+.hubClose{border:0;background:var(--line);color:var(--mute);width:26px;height:26px;border-radius:50%;font-size:14px;line-height:1;cursor:pointer}
+.hubRow{display:flex;align-items:center;gap:10px;padding:11px 2px;border-bottom:1px solid var(--line)}
+.hubRow:last-of-type{border-bottom:0}
+.hubIco{flex:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--sky)}
+.hubText{flex:1;min-width:0}
+.hubText b{display:block;font-size:14.5px;font-weight:800;color:var(--navy)}
+.hubText p{margin:2px 0 0;font-size:13px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hubText .hubMeta{margin-top:3px;font-size:12.5px;font-weight:700;color:var(--slate)}
+.hubCta{flex:none;border:0;background:var(--accent);color:#fff;font:800 12.5px Nunito,system-ui,sans-serif;padding:9px 13px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;transition:background-color .15s,transform .12s,opacity .12s}
+.hubCta:hover{background:var(--accent-dark)}
+.hubCta:active{transform:scale(.93);opacity:.82}
+.hubLegal{font-size:12px;color:var(--mute);line-height:1.5;margin:12px 2px 2px;padding-top:10px;border-top:1px solid var(--line)}
+#today,#today *{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+#useLoc,#qrBtn{background:#F0F4F8;color:#1D3557;border:0;display:inline-flex;align-items:center;gap:7px;padding:8px 16px;margin-bottom:4px}
+.recBadge{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--trim);color:#fff;font-weight:800;font-size:9px;letter-spacing:.03em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+#startCard p.small:empty{margin:0;display:none}
+#qrBtn{position:relative;border:2px solid var(--trim)}
+#startTitle{color:var(--navy)}
+#today [data-go="guide"]{background:#FFFFFF;box-shadow:var(--shadow);color:#1D3557;border:0;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;margin:16px 0 0;padding:18px 20px;font-size:17px}
+.discGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.discTile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:var(--navy);border-radius:20px;box-shadow:0 8px 18px rgba(29,53,87,.28);border:0;padding:18px 10px;min-height:94px;text-align:center;color:#fff;text-decoration:none}
+.discTile svg{width:26px;height:26px}
+.discTile b{font-size:14px;font-weight:800;line-height:1.25}
+.discTile-empty{background:transparent;box-shadow:none;border:1.5px dashed var(--line);color:var(--mute)}
+#live{position:fixed;top:calc(66px + env(safe-area-inset-top,0px));left:0;right:0;bottom:calc(96px + env(safe-area-inset-bottom,0px));max-width:640px;margin:0 auto;padding:0 18px;z-index:5;display:flex;flex-direction:column}
+.nextTile{position:relative;overflow:hidden;flex:1;min-height:0;background:var(--card);border-radius:22px;box-shadow:0 6px 20px rgba(29,53,87,.12);border:1px solid var(--line);padding:14px 12px 12px 24px;display:flex;flex-direction:column;text-align:left}
+.nextTile::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--navy)}
+.jHead{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nextK{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--navy)}
+.jPhase{font-size:10.5px;font-weight:800;color:var(--navy);background:var(--accent-soft);border-radius:999px;padding:3px 9px}
+.jTimeline{flex:1;min-height:0;display:flex;flex-direction:column;margin:10px 0 8px}
+.jRow{display:flex;align-items:center;gap:10px}
+.jDot{flex:none;width:16px;height:16px;border-radius:50%}
+.jDot-on{background:var(--trim);box-shadow:0 0 0 4px rgba(46,204,113,.2);animation:jPulse 2.2s infinite}
+.jDot-off{border:3px solid var(--mute)}
+.jTxt b{display:block;font-size:14px;font-weight:800;color:var(--navy);line-height:1.25}
+.jTxt small{display:block;font-size:11.5px;color:var(--mute);margin-top:1px}
+.jLine{flex:1;min-height:16px;width:3px;margin-left:6.5px;background:radial-gradient(circle,#9AA5B1 1.3px,transparent 1.9px) center top/3px 9px repeat-y}
+.jFoot{display:flex;align-items:center;gap:9px;border-top:1.5px solid var(--line);padding-top:8px}
+.jFoot svg{flex:none;width:26px;height:26px;stroke:var(--navy);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.jFoot b{display:block;font-size:14px;font-weight:800;color:var(--navy)}
+.jFoot small{display:block;font-size:11.5px;color:var(--mute)}
+.jBody{flex:1;min-height:0;display:flex;flex-direction:column;overflow-y:auto;overflow-x:visible}
+.jDot{transition:background .5s,box-shadow .5s,border-color .5s}
+.jDot-done{background:var(--navy)}
+#journeySeg.auto{pointer-events:none}
+.jScanBtn{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;border:0;border-radius:999px;background:#F0F4F8;color:#1D3557;font:800 14.5px Nunito,system-ui,sans-serif;padding:11px 16px;cursor:pointer;transition:transform .12s}
+.jScanBtn:active{transform:scale(.98)}
+.linkBtn{background:none;border:0;color:var(--accent);font:700 12.5px Nunito,system-ui,sans-serif;padding:6px 5px;cursor:pointer}
+#jEmpty .linkBtn{align-self:center}
+.jMsg{margin:2px 0 6px;text-align:center}
+.jMsg:empty{display:none}
+.jTimeline-solo{margin-bottom:8px}
+.jDropZone{border:2px dashed var(--line);border-radius:16px;padding:0 14px;text-align:center;color:var(--mute);font-size:12.5px;font-weight:700;opacity:0;max-height:0;overflow:hidden;transition:opacity .18s,max-height .18s,padding .18s,border-color .18s,background .18s,color .18s}
+.jDropZone.show{opacity:1;max-height:44px;padding:12px 14px;margin-top:8px}
+.jDropZone.hover{border-color:var(--navy);background:var(--accent-soft);color:var(--navy)}
+.jHandle{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:1.5px dashed var(--accent);border-radius:999px;background:none;color:var(--accent);font:700 13.5px Nunito,system-ui,sans-serif;padding:10px 14px;margin-top:8px;cursor:grab;touch-action:none;user-select:none}
+.jHandle.dragging{cursor:grabbing;opacity:.65}
+.jGrip{flex:none;display:flex}
+.jFlightTop{display:flex;align-items:baseline;justify-content:space-between;gap:6px;margin-top:8px}
+.jFlightTop b{font-size:16px;color:var(--navy);font-weight:800}
+.jFlightTop span{color:var(--mute);font-weight:700;margin-left:6px;font-size:13px}
+#jFlight .jTimeline{margin:12px 0 8px}
+#jFlight .jLine{min-height:10px}
+.jFeed{list-style:none;margin:0 0 6px;padding:0;font-size:11.5px;color:var(--mute)}
+.jFeed li{display:flex;gap:7px;padding:1.5px 0}
+.jFeed li:first-child{color:var(--navy);font-weight:700}
+.jFeed time{flex:none;width:34px;font-weight:700}
+.fForm{position:absolute;inset:0;z-index:3;background:var(--card);padding:18px 18px 18px 30px;overflow-y:auto}
+.fForm h3{margin:0 0 4px}
+#fErr:empty{display:none}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<img class="logo" src="data:image/png;base64,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" alt="" width="36" height="40">
+<h1>BritCore</h1>
+</header>
+<nav role="tablist" aria-label="Sections">
+<button role="tab" id="t-today" aria-selected="true" data-p="today"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9L7 7M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg><span>Today</span></button>
+<button role="tab" id="t-live" aria-selected="false" data-p="live"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5" style="fill:var(--trim);stroke:none"/></svg><span>Live</span></button>
+<button role="tab" id="t-travel" aria-selected="false" data-p="travel"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>Travel</span></button>
+<button role="tab" id="t-discounts" aria-selected="false" data-p="discounts"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l7-7h6v6l-7 7-6-6z"/><circle cx="14.5" cy="9.5" r="1.5"/></svg><span>Discounts</span></button>
+<button role="tab" id="t-account" aria-selected="false" data-p="account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg><span>Account</span></button>
+</nav>
+<button type="button" id="sosBtn" class="sos-fab" aria-haspopup="dialog" aria-label="Emergency help">SOS</button>
+
+<section id="today" role="tabpanel" aria-labelledby="t-today">
+<div class="start" id="startCard">
+<h2 id="startTitle">Where are we starting?</h2>
+<button type="button" class="ghost" id="qrBtn"><span class="recBadge">Recommended</span>Scan boarding pass or ticket<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M4 8V4h4"/><path d="M16 4h4v4"/><path d="M4 16v4h4"/><path d="M20 16v4h-4"/></svg></button>
+<input id="qrFile" type="file" accept="image/*" hidden>
+<p class="small" id="qrOut"></p>
+<button type="button" class="ghost" id="useLoc">Use my current location<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5" style="fill:var(--trim);stroke:none"/></svg></button>
+<input id="fromIn" type="hidden" value="">
+<p class="small" id="startMsg" role="status" aria-live="polite"></p>
+</div>
+<div class="hero">
+<p class="hero-k">What to wear today</p>
+<p class="hero-h" id="heroH"></p>
+<p class="hero-t" id="heroT" role="status" aria-live="polite"></p>
+<div class="pills" id="heroP"></div>
+<p class="hero-s" id="packSrc"></p>
+</div>
+<details class="upd" hidden><summary>Update the forecast</summary><div class="upd-b">
+<div id="cityBox" hidden><label>City<select id="citySel"></select></label></div>
+<div class="row"><label>Now (°C)<input id="tNow" type="number" inputmode="numeric" value="15"></label><label>Later today (°C)<input id="tLater" type="number" inputmode="numeric" value="11"></label></div>
+<label>Coldest at<select id="tHour"></select></label>
+<div class="chips" id="rainBox"></div>
+<p><a class="lnk" href="https://www.metoffice.gov.uk/weather/forecast" target="_blank" rel="noopener">Open the Met Office forecast</a></p>
+</div></details>
+<button type="button" class="ghost" data-go="guide"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" style="stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="9"/><path d="M9.4 9.2a2.6 2.6 0 0 1 5 .9c0 2-2.5 2-2.5 3.8"/><circle cx="12" cy="17.2" r="1" fill="var(--trim)" stroke="none"/></svg>Guide: how to do England</button>
+</section>
+
+<section id="live" role="tabpanel" aria-labelledby="t-live" hidden>
+<div class="seg" id="journeySeg" aria-label="Journey type">
+<button type="button" aria-pressed="true">Arrival</button>
+<button type="button" aria-pressed="false">Trip</button>
+<button type="button" aria-pressed="false">Departure</button>
+</div>
+<div class="nextTile" id="nextTile" aria-live="polite">
+<div class="jBody" id="jEmpty">
+<div class="jTimeline jTimeline-solo">
+<div class="jRow"><span class="jDot jDot-on"></span><div class="jTxt"><b>Your location</b><small>Now</small></div></div>
+<div class="jLine"></div>
+</div>
+<div class="jDropZone" id="jDropZone">Drop here to add a connection or stop</div>
+<button type="button" class="jHandle" id="jHandle"><span class="jGrip"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" style="stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round"><circle cx="9" cy="6" r=".6" fill="currentColor" stroke="none"/><circle cx="15" cy="6" r=".6" fill="currentColor" stroke="none"/><circle cx="9" cy="12" r=".6" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r=".6" fill="currentColor" stroke="none"/><circle cx="9" cy="18" r=".6" fill="currentColor" stroke="none"/><circle cx="15" cy="18" r=".6" fill="currentColor" stroke="none"/></svg></span>Add connection<span class="jGrip"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" style="stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round"><circle cx="9" cy="6" r=".6" fill="currentColor" stroke="none"/><circle cx="15" cy="6" r=".6" fill="currentColor" stroke="none"/><circle cx="9" cy="12" r=".6" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r=".6" fill="currentColor" stroke="none"/><circle cx="9" cy="18" r=".6" fill="currentColor" stroke="none"/><circle cx="15" cy="18" r=".6" fill="currentColor" stroke="none"/></svg></span></button>
+<p class="small jMsg" id="jMsg" role="status"></p>
+</div>
+<div class="jBody" id="jFlight" hidden>
+<div class="jFlightTop"><b id="fNo"></b><span id="fRoute"></span></div>
+<div class="jTimeline">
+<div class="jRow"><span class="jDot jDot-on"></span><div class="jTxt"><b>Your location</b><small>Live now</small></div></div>
+<div class="jLine"></div>
+<div class="jRow"><span class="jDot jDot-off" id="d1"></span><div class="jTxt"><b>Check-in</b><small id="fCheck"></small></div></div>
+<div class="jLine"></div>
+<div class="jRow"><span class="jDot jDot-off" id="d2"></span><div class="jTxt"><b>Departure</b><small id="fDep"></small></div></div>
+<div class="jLine"></div>
+<div class="jRow"><span class="jDot jDot-off" id="d3"></span><div class="jTxt"><b>Arrival</b><small id="fArr"></small></div></div>
+<div class="jLine"></div>
+<div class="jRow"><span class="jDot jDot-off" id="d4"></span><div class="jTxt"><b>Hotel ETA</b><small id="fHotel"></small></div></div>
+</div>
+<div class="jFoot"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b id="fStat"></b><small id="fCount"></small></div></div>
+</div>
+<div class="fForm" id="fForm" hidden>
+<h3>Flight details</h3>
+<p class="small" id="fNote"></p>
+<label>Flight<input id="inFlight" type="text" maxlength="8" placeholder="For example BA117" autocapitalize="characters"></label>
+<div class="row"><label>From<input id="inFrom" type="text" maxlength="3" placeholder="LHR" autocapitalize="characters"></label><label>To<input id="inTo" type="text" maxlength="3" placeholder="JFK" autocapitalize="characters"></label></div>
+<div class="row"><label>Date<input id="inDate" type="date"></label><label>Departs<input id="inTime" type="time"></label></div>
+<div class="row"><label>Flight time<input id="inDur" type="time" value="02:00"></label><label>Gate<input id="inGate" type="text" maxlength="4" placeholder="Optional"></label></div>
+<p class="small" id="fErr" role="alert"></p>
+<button type="button" class="jScanBtn" id="fSave">Save and track</button>
+<button type="button" class="linkBtn" id="fCancel">Cancel</button>
+</div>
+</div>
+</section>
+
+<section id="list" role="tabpanel" aria-labelledby="t-list" hidden>
+<h2>My places</h2>
+<div class="seg" aria-label="My list views"><button type="button" aria-pressed="true" data-v="find">Find places</button><button type="button" aria-pressed="false" data-v="mine">My list<span id="cnt"></span></button><button type="button" aria-pressed="false" data-v="ideas">Ideas</button></div>
+<div id="v-find">
+<div class="hubSearchBar">
+<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.2" y2="16.2"/></svg>
+<input id="q" type="search" placeholder="Search places, then tick to add">
+</div>
+<div class="chips scroll" id="kindChips" style="margin-top:12px"></div>
+<ul class="list" id="results"></ul>
+<p class="small" id="resNote"></p>
+</div>
+<div id="v-mine" hidden>
+<p class="small">After you visit, rate each place: 1 not for me, 2 liked it, 3 loved it.</p>
+<ul class="list" id="mine"></ul>
+</div>
+<div id="v-ideas" hidden>
+<ul class="list" id="recs"></ul>
+<p class="small">Ideas match the themes of places you rate highly. Your list is saved on this device only.</p>
+</div>
+</section>
+
+<section id="travel" role="tabpanel" aria-labelledby="t-travel" hidden>
+<svg class="hubTopo" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true">
+<path d="M-10 60 Q100 10 210 55 T430 40" fill="none" stroke="var(--slate)" stroke-width="2"/>
+<path d="M-10 140 Q120 90 230 135 T430 120" fill="none" stroke="var(--slate)" stroke-width="2"/>
+<path d="M-10 230 Q110 190 220 225 T430 205" fill="none" stroke="var(--slate)" stroke-width="1.6"/>
+<path d="M-10 310 Q130 270 240 305 T430 290" fill="none" stroke="var(--slate)" stroke-width="1.6"/>
+<path d="M60 -10 L60 410" stroke="var(--navy)" stroke-width="0.6" opacity="0.35"/>
+<path d="M180 -10 L180 410" stroke="var(--navy)" stroke-width="0.6" opacity="0.35"/>
+<path d="M300 -10 L300 410" stroke="var(--navy)" stroke-width="0.6" opacity="0.35"/>
+</svg>
+<svg class="hubRoute" id="hubRoute" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+<line x1="44" y1="30" x2="68" y2="14" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="3 3"/>
+</svg>
+<div class="hubUserDot" aria-label="Your location"></div>
+<div class="hubPin" id="hubPin" aria-hidden="true">
+<svg width="28" height="36" viewBox="0 0 30 38">
+<path d="M15 0C6.7 0 0 6.6 0 14.8 0 25.9 15 38 15 38S30 25.9 30 14.8C30 6.6 23.3 0 15 0z" fill="var(--accent)"/>
+<circle cx="15" cy="14.5" r="5.5" fill="#fff"/>
+</svg>
+</div>
+<div class="mapSearchFloat">
+<div class="hubSearchBar">
+<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.2" y2="16.2"/></svg>
+<input id="hubQ" type="text" placeholder="Where to in England? (e.g., Tower of London)">
+</div>
+<div class="hubChipsRow">
+<button type="button" class="hubChip" data-hubpick="Tower of London">Tower of London</button>
+<button type="button" class="hubChip" data-hubpick="Buckingham Palace">Buckingham Palace</button>
+</div>
+</div>
+<div class="hubSheet" id="hubSheet">
+<div class="hubHandle" id="hubHandle"></div>
+<div class="hubSheetHead">
+<h3 id="hubTitle">Routes<span>3 ways to get there</span></h3>
+<button type="button" class="hubClose" id="hubClose" aria-label="Close">&times;</button>
+</div>
+<div class="hubRow">
+<div class="hubIco" style="background:var(--sky)">&#128647;</div>
+<div class="hubText"><b>National Rail / Tube</b><p>Fastest route via King's Cross</p><div class="hubMeta">~35 mins &bull; &pound;12.50</div></div>
+<button type="button" class="hubCta" onclick="event.stopPropagation()">Book Ticket
+<svg width="11" height="11" viewBox="0 0 24 24" style="stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
+</button>
+</div>
+<div class="hubRow">
+<div class="hubIco" style="background:#F0E4D8">&#128661;</div>
+<div class="hubText"><b>London Black Cab (Gett)</b><p>Iconic city route via bus lanes</p><div class="hubMeta">~20 mins &bull; &pound;24.00 (Est)</div></div>
+<button type="button" class="hubCta" onclick="event.stopPropagation()">Hail Cab</button>
+</div>
+<div class="hubRow">
+<div class="hubIco" style="background:#E4E9F5">&#128663;</div>
+<div class="hubText"><b>UberX / Bolt</b><p>Standard private hire pickup</p><div class="hubMeta">~22 mins &bull; &pound;18.50</div></div>
+<button type="button" class="hubCta" onclick="event.stopPropagation()">Request Ride</button>
+</div>
+<p class="hubLegal">&#8505;&#65039; BritCore is user-supported. Transit bookings or app downloads via our tracking links may earn us a small partner commission at no extra cost to you. &#127468;&#127463;</p>
+</div>
+</section>
+
+<section id="discounts" role="tabpanel" aria-labelledby="t-discounts" hidden>
+<h2>Discounts and passes</h2>
+<p class="lead">Tap a category for train, attraction and dining savings.</p>
+<div class="discGrid">
+<a class="discTile" href="https://www.airalo.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" style="stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M6 3h8l5 5v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><rect x="8.5" y="10.5" width="7" height="6" rx="1.2"/><path d="M8.5 13.5h7"/></svg><b>eSIMs</b></a>
+<a class="discTile" href="https://www.railcard.co.uk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" style="stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><rect x="5" y="4" width="14" height="12" rx="4"/><path d="M5 11h14"/><circle cx="8.5" cy="19" r="1.3"/><circle cx="15.5" cy="19" r="1.3"/><path d="M7 16l-2 3M17 16l2 3"/></svg><b>Railcards</b></a>
+<a class="discTile" href="https://www.nationaltrust.org.uk/membership" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" style="stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M4 11l8-6 8 6"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/></svg><b>National Trust</b></a>
+<a class="discTile" href="https://www.english-heritage.org.uk/join" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" style="stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M3 20V9h2V6h2v3h2v11"/><path d="M21 20V9h-2V6h-2v3h-2v11"/><path d="M3 20h18"/><path d="M7 13h10"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/></svg><b>English Heritage</b></a>
+<a class="discTile" href="https://www.hrp.org.uk/membership" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" style="stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M4 18h16"/><path d="M5 18l-1.5-8L8 13l4-6 4 6 4.5-3L19 18"/></svg><b>Royal Palaces</b></a>
+<a class="discTile" href="https://www.thelondonpass.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" style="stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M4 8a2 2 0 0 1 0 4v4h16v-4a2 2 0 0 1 0-4V4H4z"/><path d="M14 4.5v3M14 10.5v3M14 16.5v3" stroke-dasharray="0"/></svg><b>London Pass</b></a>
+<a class="discTile" href="https://www.myunidays.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" style="stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M2 9l10-4 10 4-10 4-10-4z"/><path d="M6 11v4c0 1.5 3 2.5 6 2.5s6-1 6-2.5v-4"/><path d="M21 9v5"/></svg><b>Student &amp; Youth</b></a>
+<a class="discTile" href="https://www.tastecard.co.uk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" style="stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M6 3v6M8 3v6M6 9a2 2 0 0 0 2 2v9"/><path d="M17 3c-1.6 0-2.7 1.6-2.7 4s1.1 4 2.7 4v10"/></svg><b>Restaurants</b></a>
+<div class="discTile discTile-empty"><svg viewBox="0 0 24 24" aria-hidden="true" style="stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><path d="M12 5v14M5 12h14"/></svg><b>Coming soon</b></div>
+</div>
+<p class="small">Compare a pass's price with what you'd pay entering each place separately — they're only a saving if you'll use them enough.</p>
+</section>
+
+<section id="guide" role="tabpanel" aria-labelledby="t-guide" hidden>
+<h2>How to do England</h2>
+<p class="lead">The unwritten rules, made simple.</p>
+<div class="guide" id="guidebox"></div>
+<div class="guide" id="guide2">
+<details><summary>Driving on the left</summary><div class="body">
+<svg viewBox="0 0 140 140" width="140" height="140" style="color:var(--ink);display:block;margin:0 auto 8px" role="img" aria-label="Roundabout with traffic flowing clockwise"><circle cx="70" cy="70" r="34" fill="none" stroke="currentColor" stroke-width="14" opacity=".22"/><path d="M70 26 A44 44 0 0 1 114 70" fill="none" stroke="#C8102E" stroke-width="4"/><polygon points="108,66 120,66 114,78" fill="#C8102E"/><line x1="70" y1="140" x2="70" y2="106" stroke="currentColor" stroke-width="14" opacity=".22"/></svg>
+<p><b>The basics:</b> Keep left and overtake on the right. Speed limits are in mph. Check your licence is valid for visiting drivers before you drive.</p>
+<p><b>Roundabouts:</b> Go clockwise and give way to traffic coming from your right. Use the left lane to turn left or go straight on, and the right lane to turn right. Signal left after you pass the exit before yours.</p>
+<p><b>Zebra crossings:</b> Give way to people waiting to cross.</p>
+<p><b>Motorways:</b> Keep left unless overtaking. A red X above a lane means it is closed, so never drive in it. Overhead speed limits in a red circle must be obeyed.</p>
+<p><b>Country lanes:</b> Many are single track with passing places. Pull into a passing place on your left, or wait opposite one on your right, and never park in one. Slow down for blind bends and pass horses slowly with plenty of room.</p>
+<p><b>London:</b> There is a congestion charge and an ultra low emission zone, so check TfL before you drive in.</p>
+</div></details>
+<details><summary>Nearby essentials</summary><div class="body">
+<p>Tap to search near you in your maps app.</p>
+<div class="chips" id="nearBox"></div>
+<p><b>Pharmacies:</b> Look for Boots or Superdrug. <b>Supermarkets:</b> Tesco, Sainsbury's, Asda, Morrisons, Co-op and M&amp;S Food. Large shops can only open for six hours on Sundays, while small local branches often stay open longer.</p>
+</div></details>
+</div>
+</section>
+
+<section id="account" role="tabpanel" aria-labelledby="t-account" hidden>
+<h2>Account</h2>
+<button type="button" class="ghost" data-go="guide">Guide: how to do England</button>
+<button type="button" class="ghost" data-go="list">My places</button>
+<p class="lead">There's no sign-in yet. Everything you've ticked, rated or typed is saved privately on this phone only, not on a server.</p>
+<button type="button" class="ghost" id="clearListBtn">Clear my list and ratings</button>
+<p class="small" id="acctMsg" role="status" aria-live="polite"></p>
+<p class="note">A real account with sign-in and syncing across devices needs the app to be hosted with its own server, which isn't set up yet.</p>
+</section>
+</div>
+
+<div id="sos" class="sos-wrap" role="dialog" aria-modal="true" aria-label="Emergency help" hidden>
+<div class="sos-card">
+<h2>Emergency help</h2>
+<a class="call red" href="tel:999"><b>Call 999</b><span>Life-threatening emergency: police, fire, ambulance, coastguard</span></a>
+<a class="call blue" href="tel:111"><b>Call NHS 111</b><span>Urgent medical help that is not an emergency</span></a>
+<h3>Where am I?</h3>
+<button type="button" id="locBtn" class="ghost">Find my location</button>
+<div id="locMsg" role="status" aria-live="polite"></div>
+<p class="small">A postcode cannot be worked out here. If you can see one on a sign or building, give that too, along with street names or landmarks. 112 also works. Many phones share your location automatically on 999 calls, but always tell the operator where you are.</p>
+<button type="button" id="sosClose" class="ghost">Close</button>
+</div></div>
+<script>
+var trips=[
+["Oxford","about 1 hr","Paddington","Historic colleges, the Radcliffe Camera and the free Ashmolean Museum.","Some colleges charge entry or close to visitors, so check before you go."],
+["Cambridge","about 50 min to 1 hr","King's Cross","Punting on the River Cam, King's College Chapel and the riverside Backs.","Some colleges close to visitors during exam season."],
+["Bath","about 1 hr 30","Paddington","The Roman Baths, Bath Abbey and the Royal Crescent.","Book the Roman Baths ahead in busy months."],
+["Brighton","about 1 hr","Victoria or London Bridge","The Palace Pier, the Lanes for shopping and the seafront.","The beach is pebbles, so bring comfortable shoes."],
+["Canterbury","about 1 hr","St Pancras","Canterbury Cathedral, medieval streets and river boat tours.","The high-speed service from St Pancras is usually the quickest."],
+["Windsor","30 to 60 min","Paddington or Waterloo","Windsor Castle and a walk by the Thames.","The castle can close for royal events, so check its official site."],
+["Salisbury","about 1 hr 30","Waterloo","Salisbury Cathedral, plus a short trip out to Stonehenge.","Stonehenge uses timed tickets, so book in advance."]
+];
+var rain={
+"London":[["British Museum",1],["Natural History Museum",1],["V&A",1],["Tate Modern",1,"Special exhibitions cost extra"],["Borough Market",0,"Mostly covered, good for lunch"]],
+"Manchester":[["John Rylands Library",1],["Science and Industry Museum",1],["The Whitworth",1],["Manchester Museum",1]],
+"Liverpool":[["World Museum",1],["Walker Art Gallery",1],["Merseyside Maritime Museum",1],["Tate Liverpool",1,"Special exhibitions cost extra"]],
+"York":[["National Railway Museum",1],["York Minster",0],["JORVIK Viking Centre",0],["York Castle Museum",0]],
+"Bath":[["Roman Baths",0],["Thermae Bath Spa",0,"Rooftop pool with city views"],["Jane Austen Centre",0]],
+"Birmingham":[["Birmingham Museum and Art Gallery",1],["Library of Birmingham",1]],
+"Bristol":[["M Shed",1],["Bristol Museum and Art Gallery",1]],
+"Newcastle":[["Discovery Museum",1],["Great North Museum: Hancock",1]]
+};
+var guide=[
+["Pubs",["Order and pay at the bar. There is usually no table service.","Tipping in pubs is not expected."]],
+["Money and tipping",["Many restaurants add a service charge of about 12.5%. Check your bill before adding a tip.","Contactless is accepted almost everywhere, so you need very little cash."]],
+["Getting around",["In London, tap in and out on the Tube and buses with a contactless card or phone. Daily fares are capped.","On escalators, stand on the right and walk on the left.","Outside London, buy train tickets in advance for cheaper fares. Railcards can cut prices further."]],
+["Manners",["People queue, and jumping the line is a big offence.","\u201cYou alright?\u201d is a greeting, not a health check. A simple \u201cGood, you?\u201d works.","Say sorry and cheers often."]],
+["Practical basics",["Emergency number: 999 (112 also works).","Plugs are Type G at 230V, so bring an adaptor.","Tap water is safe to drink.","Check gov.uk before you travel, as many visitors need permission to enter."]]
+];
+var slang=[["Quid","A pound (\u00A3)"],["Cuppa","A cup of tea"],["Loo","Toilet"],["Crisps","What Americans call chips"],["Chips","What Americans call fries"],["A half","Half a pint of beer"],["Bank holiday","A public holiday"]];
+
+function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h)e.innerHTML=h;return e}
+
+
+
+var gb=document.getElementById("guidebox");
+guide.forEach(function(g){
+var d=el("details");
+d.innerHTML='<summary>'+g[0]+'</summary><div class="body">'+g[1].map(function(x){return"<p>"+x+"</p>"}).join("")+'</div>';
+gb.appendChild(d)});
+var sd=el("details");
+sd.innerHTML='<summary>Slang decoder</summary><div class="body"><dl>'+slang.map(function(s){return"<dt>"+s[0]+"</dt><dd>"+s[1]+"</dd>"}).join("")+'</dl></div>';
+gb.appendChild(sd);
+
+var places={
+"Cities":[
+["London","City","The Tower of London, the South Bank and Borough Market. For trips out of the city, see the Trips tab."],
+["Manchester","City","Science and Industry Museum, John Rylands Library and the music and cafes of the Northern Quarter. Nearby: Chester, Liverpool and the Peak District."],
+["Liverpool","City","Albert Dock, Beatles history and two cathedrals. Nearby: Chester and the Wirral coast."],
+["Birmingham","City","Canals around Brindleyplace, the Jewellery Quarter and the curry houses of the Balti Triangle. Nearby: Warwick Castle and Stratford-upon-Avon."],
+["Bristol","City","Clifton Suspension Bridge, the SS Great Britain and harbourside street art. Nearby: Bath, a short train ride away."],
+["York","City","The medieval city walls, York Minster and the Shambles. Nearby: Harrogate, Durham and Scarborough."],
+["Newcastle","City","The Quayside and its Tyne bridges. Nearby: Durham, Hadrian's Wall and Alnwick Castle."],
+["Bath","City","The Roman Baths, Bath Abbey and the Royal Crescent. Nearby: Bristol, a short train ride away."]],
+"Historic towns":[
+["Stratford-upon-Avon","Warwickshire","Shakespeare's birthplace, riverside walks and theatres. Reachable by train from London or Birmingham."],
+["Winchester","Hampshire","An ancient capital of England with a huge cathedral. About 1 hr from London Waterloo by train."],
+["Rye","East Sussex","Cobbled Mermaid Street and timber-framed medieval houses. Reachable by train from London with a change."],
+["Whitby","North Yorkshire","Abbey ruins above a fishing harbour, plus fish and chips. Trains on the Esk Valley line and buses serve it, but driving is easier."],
+["Ludlow","Shropshire","Medieval streets, a castle and a strong food scene. On the train line between Shrewsbury and Hereford."],
+["Haworth","West Yorkshire","Home of the Bronte family, with a heritage steam railway nearby."],
+["Bourton-on-the-Water","Cotswolds","Honey-coloured stone and a shallow river through the village centre. Driving or a tour is easiest."],
+["Ironbridge","Shropshire","The world's first iron bridge and museums of the Industrial Revolution. Drive, or take a bus from Telford."]],
+"Castles":[
+["Windsor Castle","Berkshire","The oldest and largest inhabited castle in the world. About 30 to 60 min from London."],
+["Tower of London","London","The Crown Jewels and almost 1,000 years of history. Book ahead in busy months."],
+["Warwick Castle","Warwickshire","A medieval castle with towers, a dungeon and live events. Walkable from Warwick station."],
+["Dover Castle","Kent","A medieval fortress above the Channel with secret wartime tunnels. It sits on a hill, so allow time."],
+["Durham Castle","County Durham","A Norman castle beside the cathedral in a World Heritage Site. Some parts open only on guided tours."],
+["Alnwick Castle","Northumberland","Used as Hogwarts in the Harry Potter films. Take a train to Alnmouth, then a bus."],
+["Bamburgh Castle","Northumberland","A dramatic castle above a wide beach. Best reached by car or bus."],
+["Lindisfarne Castle","Northumberland","A small castle on Holy Island, reached by a tidal causeway. Check crossing times first, as the road floods at high tide."],
+["Bodiam Castle","East Sussex","A classic moated medieval castle run by the National Trust."],
+["Tintagel Castle","Cornwall","Clifftop ruins linked to the King Arthur legend. The paths are steep."]],
+"Famous pubs":[
+["Ye Olde Trip to Jerusalem","Nottingham","Built into the rock beneath the castle, and claims to be England's oldest inn."],
+["The Eagle","Cambridge","Crick and Watson are said to have announced their DNA discovery here in 1953."],
+["Ye Olde Cheshire Cheese","London","Rebuilt after the Great Fire of 1666, with dark low-ceilinged rooms off Fleet Street."],
+["The George Inn","London","The last surviving galleried coaching inn in London, in Southwark."],
+["Prospect of Whitby","London","A riverside pub in Wapping that claims to date from 1520."],
+["The Llandoger Trow","Bristol","A timber-framed harbourside pub said to have inspired Treasure Island."],
+["Jamaica Inn","Cornwall","A lonely Bodmin Moor coaching inn made famous by Daphne du Maurier's novel."],
+["Turf Tavern","Oxford","Tucked down a narrow alley, with a cosy courtyard."]],
+"Themed trails":[
+["Shakespeare","Stratford and London","Shakespeare's Birthplace, Holy Trinity Church where he is buried, and Shakespeare's Globe on London's South Bank."],
+["Harry Potter","London, Oxford, Northumberland","King's Cross for Platform 9 3/4, Leadenhall Market, Christ Church in Oxford and Alnwick Castle."],
+["Jane Austen","Bath and Hampshire","The Jane Austen Centre in Bath, Jane Austen's House in Chawton and her grave in Winchester Cathedral."],
+["The Beatles","Liverpool","The Beatles Story at Albert Dock, the Cavern Club on Mathew Street, Penny Lane and Strawberry Field."],
+["Roman England","Chester, Bath, Northumberland","Chester's Roman walls and amphitheatre, the Roman Baths in Bath and Hadrian's Wall."],
+["Bronte country","West Yorkshire","The Bronte Parsonage Museum in Haworth, then a moorland walk to Top Withens, a ruin often linked to Wuthering Heights."],
+["King Arthur legends","Cornwall and Somerset","Tintagel Castle on the Cornish cliffs and Glastonbury Tor in Somerset."],
+["Industrial heritage","Shropshire, Manchester, Bradford","Ironbridge Gorge, Manchester's Science and Industry Museum and the model village of Saltaire near Bradford."]],
+"Viewpoints":[
+["Primrose Hill","London","A short climb in a park north of Regent's Park with a wide view of the city skyline."],
+["Sky Garden","London","A free indoor garden and viewing platform high up in the City. You need to book ahead."],
+["Greenwich Park","London","Views over the Thames and Canary Wharf from beside the Royal Observatory."],
+["Glastonbury Tor","Somerset","A hilltop tower visible for miles. The climb is free and takes roughly half an hour."],
+["Broadway Tower","Worcestershire","A folly on a Cotswolds ridge with views across many counties on a clear day."],
+["Catbells","Lake District","A short fell climb with big views over Derwentwater. Wear proper footwear."],
+["Roseberry Topping","North Yorkshire","A distinctive steep hill at the edge of the North York Moors. The final climb is rocky."],
+["Seven Sisters Cliffs","East Sussex","Chalk cliffs best seen from the paths at Seaford Head or Birling Gap. Stay well back from the edges."],
+["White Cliffs of Dover","Kent","Chalk cliffs and sea views on the clifftop walk from the National Trust visitor centre. Keep clear of the edge."],
+["Durdle Door","Dorset","A natural limestone arch on the Jurassic Coast. The path down is steep and parking is charged."]],
+"Heritage":[
+["National Trust","Heritage","Historic houses, gardens and coastline. <a class=lnk href=https://www.nationaltrust.org.uk/visit target=_blank rel=noopener>Find places to visit</a>. Overseas visitors can buy a short-term pass, so check the site."],
+["English Heritage","Heritage","Castles, abbeys and Roman sites, including Stonehenge and Tintagel. <a class=lnk href=https://www.english-heritage.org.uk/visit/ target=_blank rel=noopener>Find places to visit</a>. Overseas visitors can buy a short-term pass, so check the site."],
+["Historic Houses","Heritage","Privately owned houses and gardens, many not run by the big charities. <a class=lnk href=https://www.historichouses.org target=_blank rel=noopener>Search their sites</a>."]]
+};
+var cityInfo={
+"London":[["Food","Nearly every cuisine is here. Try curry houses on Brick Lane, Chinese restaurants in Chinatown, Turkish grills around Dalston and Green Lanes, Caribbean food in Brixton and street food at Borough Market. A pub Sunday roast is a classic."],["Music","Live music every night. Jazz at Ronnie Scott's in Soho, indie and rock gigs in Camden, classical at the Royal Albert Hall and Southbank Centre, and big West End musicals. Grime, drill and Afrobeats are strongest in East and South London."],["Nightlife","Soho for cocktail bars and LGBTQ+ venues around Old Compton Street. Shoreditch and Dalston for clubs and DJ bars. Camden for live-music pubs. Brixton for Caribbean, Afrobeats and Latin nights."]],
+"Manchester":[["Food","Curry houses on the Curry Mile in Rusholme, dim sum and hotpot in Chinatown, and independent cafes and street food in the Northern Quarter."],["Music","The city behind Joy Division, The Smiths, The Stone Roses and Oasis. Catch gigs at Band on the Wall and Albert Hall, and classical music at the Bridgewater Hall."],["Nightlife","The Northern Quarter for indie bars and live music, Canal Street for LGBTQ+ bars, and the area around Deansgate Locks and Oxford Road for big clubs."]],
+"Liverpool":[["Food","Scouse, a local meat stew, is the classic dish. Bold Street has independent restaurants and cafes, Chinatown has traditional Cantonese places, and the Baltic Triangle has street food."],["Music","Home of the Beatles and Merseybeat. Live bands play around Mathew Street and the Cavern Club, and the Liverpool Philharmonic covers classical music."],["Nightlife","Mathew Street and Concert Square for busy bars, the Baltic Triangle for clubs and DJ nights, and Bold Street for relaxed cocktail bars."]],
+"Birmingham":[["Food","The Balti Triangle around Ladypool Road is famous for balti curries. Try the Chinese Quarter near Hurst Street and street food in Digbeth."],["Music","A birthplace of heavy metal through Black Sabbath, with strong reggae and bhangra roots too. Digbeth has gigs and club nights, and Symphony Hall hosts the City of Birmingham Symphony Orchestra."],["Nightlife","Broad Street for big bars and clubs, Hurst Street for the LGBTQ+ scene, the Jewellery Quarter for cocktail bars and pubs, and Digbeth for warehouse-style club nights."]],
+"Bristol":[["Food","Independent and creative. Cargo at Wapping Wharf has restaurants in shipping containers, St Nicholas Market has street food, and West Country cider is on tap in many pubs."],["Music","Famous for trip-hop from Massive Attack, Portishead and Tricky, plus a strong drum and bass scene. Find gigs at the Bristol Beacon, Thekla on the harbour and venues around Stokes Croft."],["Nightlife","Stokes Croft and St Pauls for alternative bars and clubs, the Harbourside for waterfront bars, Park Street for lively student bars, and the Old Market for late-night clubs."]],
+"York":[["Food","Traditional afternoon tea at Bettys, Sunday roasts with Yorkshire puddings in old pubs, and independent restaurants around Micklegate."],["Music","A smaller scene. Small venues host gigs, York Minster has choral evensong, and folk sessions run in historic pubs."],["Nightlife","Micklegate is famous for its pub crawl, and the centre has historic pubs and cocktail bars. Ghost walks are a popular evening activity. It is lively but compact."]],
+"Newcastle":[["Food","Grainger Market stalls, Chinatown around Stowell Street, and independent restaurants along Osborne Road in Jesmond and in the Ouseburn valley. Try a stottie cake, the local flat bread."],["Music","Strong folk roots, including Northumbrian pipes. Live gigs at the Cluny in the Ouseburn, big shows at the City Hall, and classical and folk at Sage Gateshead."],["Nightlife","Famous for big nights out. Head to the Quayside and Collingwood Street for polished bars, the Ouseburn for live-music pubs, and the Waterloo Street area for LGBTQ+ bars."]],
+"Bath":[["Food","Sally Lunn's is famous for its buns, tea rooms serve afternoon tea, and cosy pubs and independent restaurants fill the centre and Walcot Street."],["Music","A quieter scene of classical, jazz and festivals, plus live shows at the Theatre Royal and Komedia."],["Nightlife","Relaxed and pub-led, with cocktail bars around the centre. It is much quieter than the big cities, and popular restaurants get booked up at weekends."]]
+};
+places["Cities"].forEach(function(c){var x=rain[c[0]];if(x)c[3]=x.map(function(y){return y[0]+(y[1]?" (free)":"")}).join(", ")});
+var notes={"Famous pubs":"Many pubs claim to be the oldest, so treat dates as local tradition.","Themed trails":"Stops can be far apart, so you can do each trail over several trips.","Viewpoints":"Weather changes quickly, so check the forecast and bring layers.","Heritage":"A single combined map is not possible here yet, so use the three finders. Check opening times and booking rules before you go.","Cities":"Free entry can change, so check before you go.","Historic towns":"Many are small, so trains can be limited — check timetables before you go.","Castles":"Some are ruins with uneven ground, so wear sturdy shoes."};
+
+var ua=navigator.userAgent,isIos=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1),isDroid=/Android/.test(ua);
+
+var cities={"London":[51.51,-0.13],"Manchester":[53.48,-2.24],"Liverpool":[53.41,-2.98],"Birmingham":[52.48,-1.9],"Bristol":[51.45,-2.59],"York":[53.96,-1.08],"Newcastle":[54.98,-1.62]};
+var tNow=document.getElementById("tNow"),tLater=document.getElementById("tLater"),tHour=document.getElementById("tHour"),heroH=document.getElementById("heroH"),heroT=document.getElementById("heroT"),heroP=document.getElementById("heroP"),rainBox=document.getElementById("rainBox"),packSrc=document.getElementById("packSrc"),cityBox=document.getElementById("cityBox"),citySel=document.getElementById("citySel"),rainLvl=0;
+function hr(h){return (h%12||12)+(h<12?" AM":" PM")}
+for(var i=0;i<24;i++){var o=el("option","",hr(i));o.value=i;tHour.appendChild(o)}
+tHour.value=18;
+Object.keys(cities).forEach(function(c){var o=el("option","",c);o.value=c;citySel.appendChild(o)});
+["Dry","Maybe rain","Rain likely"].forEach(function(t,i){var b=el("button","",t);b.type="button";b.onclick=function(){packSrc.textContent="Based on the forecast you entered.";setRain(i)};rainBox.appendChild(b)});
+function setRain(i){rainLvl=i;Array.prototype.forEach.call(rainBox.children,function(b,j){b.setAttribute("aria-pressed",i===j)});advise()}
+function look(n,l){var m=Math.min(n,l);if(m<=4)return"Heavy coat, hat and gloves";if(m<=9)return"Warm coat";if(m<=14)return"Jacket or jumper";if(m<=19)return n-l>=3?"Light jacket":"Light layers";return n>=25?"Light, breathable clothes":"T-shirt and a light layer"}
+function advise(){
+var n=+tNow.value,l=+tLater.value,t=hr(+tHour.value),tip,pills=["Comfortable shoes"];
+if(l<=5)tip="Temperature dropping to "+l+"°C at "+t+". Pack a warm coat, hat and gloves.";
+else if(n-l>=3)tip="Temperature dropping at "+t+". Bring a light jacket if you are staying out.";
+else if(n>=24)tip="It will be hot. Wear light clothes and keep cool.";
+else tip="Conditions look mild. A light layer is enough.";
+if(rainLvl===2){pills.push("Waterproof jacket","Umbrella");tip+=" Rain is likely."}
+else if(rainLvl===1){pills.push("Compact umbrella");tip+=" Showers are possible."}
+if(n>=24)pills.push("Water","Sun cream");
+heroH.textContent=look(n,l);heroT.textContent=tip;
+heroP.innerHTML=pills.map(function(x){return"<span>"+x+"</span>"}).join("")}
+[tNow,tLater,tHour].forEach(function(e){e.oninput=function(){packSrc.textContent="Based on the forecast you entered.";advise()}});
+setRain(1);
+function live(city){var c=cities[city];
+fetch("https://api.open-meteo.com/v1/forecast?latitude="+c[0]+"&longitude="+c[1]+"&hourly=temperature_2m,precipitation_probability&timezone=Europe%2FLondon&forecast_days=1")
+.then(function(r){return r.json()}).then(function(d){
+var T=d.hourly.temperature_2m,P=d.hourly.precipitation_probability,h=+new Intl.DateTimeFormat("en-GB",{hour:"numeric",hourCycle:"h23",timeZone:"Europe/London"}).format(new Date());
+var rest=T.slice(h),m=Math.min.apply(null,rest),mh=h+rest.indexOf(m),rp=Math.max.apply(null,P.slice(h));
+tNow.value=Math.round(T[h]);tLater.value=Math.round(m);tHour.value=mh;
+packSrc.textContent="Live forecast for "+city+", refreshed each time you open this page.";
+cityBox.hidden=false;setRain(rp>=60?2:rp>=30?1:0)}).catch(function(){})}
+citySel.onchange=function(){live(citySel.value)};
+live("London");
+
+var sos=document.getElementById("sos"),locMsg=document.getElementById("locMsg");
+document.getElementById("sosBtn").onclick=function(){sos.hidden=false;document.getElementById("sosClose").focus()};
+document.getElementById("sosClose").onclick=function(){sos.hidden=true};
+document.addEventListener("keydown",function(e){if(e.key==="Escape")sos.hidden=true});
+function locFail(){locMsg.textContent="Could not get your location here. Open your phone's Maps app, tap your blue dot, and read out the address or coordinates. Also look for street signs, shop names or a nearby landmark."}
+document.getElementById("locBtn").onclick=function(){
+if(!navigator.geolocation){locFail();return}
+locMsg.textContent="Finding you...";
+navigator.geolocation.getCurrentPosition(function(p){
+var la=p.coords.latitude,lo=p.coords.longitude;
+var spoken=Math.abs(la).toFixed(5)+" "+(la>=0?"North":"South")+", "+Math.abs(lo).toFixed(5)+" "+(lo>=0?"East":"West");
+var plain=la.toFixed(5)+", "+lo.toFixed(5);
+locMsg.textContent="";
+var a=el("p","big");a.textContent=spoken;
+var b=el("p","small");b.textContent="Accurate to about "+Math.round(p.coords.accuracy)+" metres. Read this out to the operator.";
+var c=el("button","ghost","Copy coordinates");c.type="button";
+c.onclick=function(){try{navigator.clipboard.writeText(plain).then(function(){c.textContent="Copied"})}catch(e){}};
+locMsg.append(a,b,c)},locFail,{enableHighAccuracy:true,timeout:15000,maximumAge:0})};
+
+var NL=String.fromCharCode(10);
+function gid(i){return document.getElementById(i)}
+[["Pharmacy","pharmacy"],["Supermarket","supermarket"],["Cash machine","ATM"],["Public toilets","public toilet"]].forEach(function(x){
+var a=el("a","ghost",x[0]);
+a.href=isIos?"https://maps.apple.com/?q="+encodeURIComponent(x[1]):"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(x[1]);
+a.target="_blank";a.rel="noopener";gid("nearBox").appendChild(a)});
+
+var fromIn=gid("fromIn"),startMsg=gid("startMsg");
+gid("useLoc").onclick=function(){
+if(!navigator.geolocation){startMsg.textContent="Location is not available here.";return}
+startMsg.textContent="Finding you...";
+navigator.geolocation.getCurrentPosition(function(p){fromIn.value=p.coords.latitude.toFixed(5)+","+p.coords.longitude.toFixed(5);startMsg.textContent="Using your current location."},function(){startMsg.textContent="Could not get your location here."},{enableHighAccuracy:true,timeout:15000})};
+
+var cat=[],byId={};
+Object.keys(places).forEach(function(k){places[k].forEach(function(p){
+var html=k==="Cities"?("<p><b class='lab'>Highlights</b>"+p[2]+"</p>"+(p[3]?"<p><b class='lab'>If it rains</b>"+p[3]+"</p>":"")+(cityInfo[p[0]]||[]).map(function(x){return"<p><b class='lab'>"+x[0]+"</b>"+x[1]+"</p>"}).join("")):"<p>"+p[2]+"</p>";
+cat.push({id:k+"|"+p[0],name:p[0],kind:k,where:p[1],text:(p[2]+" "+(p[3]||"")).replace(/<[^>]*>/g," "),html:html})})});
+trips.forEach(function(t){if(!cat.some(function(c){return c.name===t[0]}))cat.push({id:"Day trips|"+t[0],name:t[0],kind:"Day trips",where:"From "+t[2],text:t[3],html:"<p>"+t[3]+"</p>"})});
+var rules=[["castles",/castle|fortress/],["cathedrals and abbeys",/cathedral|abbey|minster|chapel/],["museums and galleries",/museum|gallery|library/],["coast",/beach|cliff|coast|harbour|seafront|pier/],["hills and views",/hill|fell|moor|gorge|ridge|views|climb|arch/],["pubs and food",/\bpubs?\b|\binn\b|tavern|curry|restaurant|cafe|tea room|street food|market/],["music",/music|gig|jazz|orchestra|folk/],["roman history",/roman/],["medieval history",/medieval|norman|timber-framed|cobbled/],["books and film",/shakespeare|austen|bronte|dickens|novel|harry potter|hogwarts|film|beatles|wuthering|arthur|treasure island/],["gardens and estates",/garden|national trust|english heritage|estate/],["industrial heritage",/industrial|railway|iron/],["university towns",/college|university/],["rivers and canals",/river|canal|thames|riverside/]];
+cat.forEach(function(c){var t=(c.name+" "+c.text).toLowerCase(),a=[c.kind.toLowerCase()];rules.forEach(function(x){if(x[1].test(t)&&a.indexOf(x[0])<0)a.push(x[0])});c.tags=a;byId[c.id]=c});
+var mine={},curKind="All",W={1:-1.5,2:0.5,3:2};
+try{mine=JSON.parse(localStorage.getItem("mylist")||"{}")}catch(e){mine={}}
+function save(){try{localStorage.setItem("mylist",JSON.stringify(mine))}catch(e){}}
+function info(c,why){var d=el("div","pt");d.innerHTML="<b>"+c.name+"</b><span><span class='tag'>"+c.kind+"</span>"+c.where+"</span>"+(why?"<span class='why'>Because you enjoyed "+why+"</span>":"");return d}
+function tick(c){var on=c.id in mine,b=el("button","tk","\u2713");b.type="button";b.setAttribute("role","checkbox");b.setAttribute("aria-checked",on);b.setAttribute("aria-label",(on?"Remove ":"Add ")+c.name+(on?" from":" to")+" my list");b.onclick=function(){if(c.id in mine)delete mine[c.id];else mine[c.id]=0;save();renderAll()};return b}
+function detail(li,c){
+if(!c.html)return;
+var body=el("div","cbody");body.hidden=true;body.innerHTML=c.html;
+var btn=el("button","dtl","Details");btn.type="button";btn.setAttribute("aria-expanded","false");
+btn.onclick=function(){body.hidden=!body.hidden;btn.setAttribute("aria-expanded",(!body.hidden).toString());btn.textContent=body.hidden?"Details":"Hide details"};
+li.appendChild(btn);li.appendChild(body)}
+function suggest(){var w={},out=[];
+cat.forEach(function(c){var r=mine[c.id];if(r>0)c.tags.forEach(function(t){w[t]=(w[t]||0)+W[r]})});
+cat.forEach(function(c){if(c.id in mine)return;var s=0,why=[];c.tags.forEach(function(t){if(w[t]){s+=w[t];if(w[t]>0)why.push([t,w[t]])}});if(s>0)out.push({c:c,s:s,why:why.sort(function(a,b){return b[1]-a[1]}).slice(0,2).map(function(x){return x[0]}).join(" and ")+"."})});
+out.sort(function(a,b){return b.s-a.s});return out.slice(0,6)}
+var qIn=gid("q"),resEl=gid("results"),mineEl=gid("mine"),recEl=gid("recs");
+function renderResults(){
+var q=qIn.value.trim().toLowerCase(),f=cat.filter(function(c){return(curKind==="All"||c.kind===curKind)&&(!q||(c.name+" "+c.where+" "+c.kind+" "+c.text).toLowerCase().indexOf(q)>-1)});
+resEl.innerHTML="";
+f.slice(0,10).forEach(function(c){var li=el("li"),top=el("div","pl");top.appendChild(info(c));top.appendChild(tick(c));li.appendChild(top);detail(li,c);resEl.appendChild(li)});
+if(!f.length)resEl.innerHTML="<li>No matches. Try another word.</li>";
+var note=curKind!=="All"&&notes[curKind]?notes[curKind]+" ":"";
+gid("resNote").textContent=note+(f.length>10?"Showing 10 of "+f.length+". Type more to narrow it down.":"")}
+function renderMine(){
+var ids=Object.keys(mine);mineEl.innerHTML="";
+gid("cnt").textContent=ids.length?" ("+ids.length+")":"";
+if(!ids.length){mineEl.innerHTML="<li>Nothing ticked yet. Tap Find places to start.</li>";return}
+var labs=["Not rated yet","Not for me","Liked it","Loved it"];
+ids.forEach(function(id){var c=byId[id];if(!c)return;
+var li=el("li"),top=el("div","pl");top.appendChild(info(c));top.appendChild(tick(c));
+var rt=el("div","rate");rt.appendChild(el("span","rlab","Rate:"));
+[1,2,3].forEach(function(n){var b=el("button","rb",n);b.type="button";b.setAttribute("aria-pressed",mine[id]===n);b.setAttribute("aria-label","Rate "+c.name+" "+n+" out of 3");b.onclick=function(){mine[id]=mine[id]===n?0:n;save();renderAll()};rt.appendChild(b)});
+rt.appendChild(el("span","rlab",labs[mine[id]||0]));
+li.appendChild(top);li.appendChild(rt);detail(li,c);mineEl.appendChild(li)})}
+function renderRecs(){
+var rated=Object.keys(mine).some(function(k){return mine[k]>0}),out=suggest();recEl.innerHTML="";
+if(!out.length){recEl.innerHTML="<li>"+(rated?"No new suggestions yet. Add and rate a few more places, giving 2 or 3 to the ones you enjoy.":"Rate a place on your list to get suggestions.")+"</li>";return}
+out.forEach(function(o){var li=el("li"),top=el("div","pl");top.appendChild(info(o.c,o.why));top.appendChild(tick(o.c));li.appendChild(top);detail(li,o.c);recEl.appendChild(li)})}
+function renderAll(){renderResults();renderMine();renderRecs()}
+["All"].concat(Object.keys(places),["Day trips"]).forEach(function(k){var b=el("button","",k);b.type="button";b.onclick=function(){curKind=k;Array.prototype.forEach.call(gid("kindChips").children,function(x){x.setAttribute("aria-pressed",x.textContent===k)});renderResults()};gid("kindChips").appendChild(b)});
+gid("kindChips").firstChild.setAttribute("aria-pressed",true);
+qIn.oninput=renderResults;
+function showV(v){["find","mine","ideas"].forEach(function(x){gid("v-"+x).hidden=x!==v});Array.prototype.forEach.call(document.querySelectorAll(".seg button"),function(b){b.setAttribute("aria-pressed",b.dataset.v===v)})}
+Array.prototype.forEach.call(document.querySelectorAll(".seg button"),function(b){b.onclick=function(){showV(b.dataset.v)}});
+renderAll();
+
+var fl=null,MIN=6e4,TRF=60,PH=["Upcoming","Check-in open","Boarding","In transit","Landed","At hotel"];
+try{fl=JSON.parse(localStorage.getItem("flight")||"null")}catch(e){}
+if(!fl)fl={no:"BA117",from:"LHR",to:"JFK",date:"",time:"",durS:"07:30",dur:450,dep:Date.now()-(450+40)*6e4,gate:"42",ph:-1,log:[],mock:true};
+function saveFl(){if(fl&&fl.mock)return;try{localStorage.setItem("flight",JSON.stringify(fl))}catch(e){}}
+function p2(n){return(n<10?"0":"")+n}
+function hm(ms){var d=new Date(ms);return p2(d.getHours())+":"+p2(d.getMinutes())}
+function hmm(m){m=Math.max(0,Math.round(m));var h=Math.floor(m/60);return h?h+"h "+p2(m%60)+"m":m+"m"}
+function say(t){gid("qrOut").textContent=t;gid("jMsg").textContent=t}
+function parseBcbp(t){
+if(!t||t.length<58||t.charAt(0)!=="M")return null;
+var jd=+t.slice(44,47);if(!(jd>0&&jd<367))return null;
+var y=new Date().getFullYear(),d=new Date(y,0,jd);
+if(d<Date.now()-15552e6)d=new Date(y+1,0,jd);
+return{no:t.slice(36,39).trim()+t.slice(39,44).trim().replace(/^0+/,""),from:t.slice(30,33),to:t.slice(33,36),date:d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())}}
+function openForm(p,note){
+go("live");
+var d=p||(fl?{no:fl.no,from:fl.from,to:fl.to,date:fl.date,time:fl.time,dur:fl.durS,gate:fl.gate}:{});
+gid("inFlight").value=d.no||"";gid("inFrom").value=d.from||"";gid("inTo").value=d.to||"";gid("inDate").value=d.date||"";gid("inTime").value=d.time||"";gid("inDur").value=d.dur||"02:00";gid("inGate").value=d.gate||"";
+gid("fNote").textContent=note||"Use the times shown on your boarding pass or ticket.";gid("fErr").textContent="";gid("fForm").hidden=false}
+function scanFile(f){
+say("Reading boarding pass...");
+if(!("BarcodeDetector" in window)||!window.createImageBitmap){say("");openForm(null,"This browser can't read barcodes yet. Enter the details from your pass.");return}
+createImageBitmap(f).then(function(b){return new BarcodeDetector().detect(b)}).then(function(c){
+var p=null;for(var i=0;i<c.length&&!p;i++)p=parseBcbp(c[i].rawValue);
+say("");
+if(p)openForm(p,"Scanned "+p.no+". Your pass doesn't include times, so add them from the pass.");
+else openForm(null,"Couldn't read a boarding pass barcode. Enter the details instead.")}).catch(function(){say("");openForm(null,"Couldn't read that image. Enter the details instead.")})}
+function flTick(){
+var on=!!fl,seg=gid("journeySeg");
+gid("jEmpty").hidden=on;gid("jFlight").hidden=!on;seg.className=on?"seg auto":"seg";
+if(!on){return}
+var n=Date.now(),d=fl.dep,e=d+fl.dur*MIN,h=e+TRF*MIN,ph=n<d-108e5?0:n<d-36e5?1:n<d?2:n<e?3:n<h?4:5,g=fl.gate;
+if(fl.ph!==ph){fl.ph=ph;
+fl.log.unshift({t:n,x:["Tracking "+fl.no+". Check-in opens at "+hm(d-108e5),"Check-in is open. It closes around "+hm(d-36e5),g?"Boarding. Head to Gate "+g:"Boarding soon. Check the airport screens for your gate","Departed. You are now in transit","Landed"+(fl.to?". Welcome to "+fl.to:"")+". Heading to your hotel","Arrived at your hotel"][ph]});
+fl.log=fl.log.slice(0,6);saveFl()}
+gid("fNo").textContent=fl.no;gid("fRoute").textContent=(fl.from||fl.to)?(fl.from||"?")+" \u2192 "+(fl.to||"?"):"";
+gid("fCheck").textContent="Check in by "+hm(d-36e5)+" (typical)";
+gid("fDep").textContent=new Date(d).toLocaleDateString([],{weekday:"short",day:"numeric",month:"short"})+", "+hm(d)+" \u00b7 "+(g?"Gate "+g:"Gate to be confirmed");
+gid("fArr").textContent=(ph===3?"In the air \u00b7 ":"")+"Flight time "+hmm(fl.dur);
+gid("fHotel").textContent=(ph>=4?"Est. arrival "+hm(h):"Around "+hm(h))+" \u00b7 includes transfer time";
+function S(a){return ph<a?"off":ph===a?"on":"done"}
+gid("d1").className="jDot jDot-"+S(1);gid("d2").className="jDot jDot-"+S(2);gid("d3").className="jDot jDot-"+S(3);gid("d4").className="jDot jDot-"+S(4);
+gid("fStat").textContent=PH[ph];
+gid("fCount").textContent=["Check-in opens in "+hmm((d-108e5-n)/MIN),"Check-in closes in "+hmm((d-36e5-n)/MIN),"Departs in "+hmm((d-n)/MIN),"Lands in "+hmm((e-n)/MIN),"At hotel in "+hmm((h-n)/MIN),"Journey complete"][ph];
+var idx=ph<3?2:ph===3?1:0;
+Array.prototype.forEach.call(seg.children,function(b,i){b.setAttribute("aria-pressed",i===idx)});
+}
+gid("qrBtn").onclick=function(){gid("qrFile").click()};
+gid("qrFile").onchange=function(){var f=this.files&&this.files[0];this.value="";if(f)scanFile(f)};
+(function(){
+var handle=gid("jHandle"),zone=gid("jDropZone"),startY=0,startX=0,dragging=false,moved=false;
+function pt(e){return e.touches&&e.touches[0]?e.touches[0]:e}
+function onDown(e){
+dragging=true;moved=false;var p=pt(e);startY=p.clientY;startX=p.clientX;
+handle.classList.add("dragging");zone.classList.add("show");
+document.addEventListener("pointermove",onMove);
+document.addEventListener("pointerup",onUp);
+document.addEventListener("pointercancel",onUp);
+}
+function onMove(e){
+if(!dragging)return;
+var p=pt(e);
+if(Math.abs(p.clientY-startY)>8||Math.abs(p.clientX-startX)>8)moved=true;
+var r=zone.getBoundingClientRect();
+var over=p.clientY>=r.top-24&&p.clientY<=r.bottom+24;
+zone.classList.toggle("hover",over)}
+function onUp(){
+if(!dragging)return;
+dragging=false;handle.classList.remove("dragging");
+document.removeEventListener("pointermove",onMove);
+document.removeEventListener("pointerup",onUp);
+document.removeEventListener("pointercancel",onUp);
+var wasOverZone=zone.classList.contains("hover");
+zone.classList.remove("show","hover");
+if(!moved||wasOverZone)openForm(null,"")}
+handle.addEventListener("pointerdown",onDown)
+})();
+gid("fCancel").onclick=function(){gid("fForm").hidden=true};
+gid("fSave").onclick=function(){
+var no=gid("inFlight").value.trim().toUpperCase(),dt=gid("inDate").value,tm=gid("inTime").value,du=gid("inDur").value||"02:00";
+if(!no||!dt||!tm){gid("fErr").textContent="Add the flight number, date and departure time.";return}
+var dep=new Date(dt+"T"+tm).getTime(),dd=du.split(":");
+if(isNaN(dep)){gid("fErr").textContent="Check the date and time.";return}
+fl={no:no,from:gid("inFrom").value.trim().toUpperCase(),to:gid("inTo").value.trim().toUpperCase(),date:dt,time:tm,durS:du,dur:Math.max(+dd[0]*60+ +dd[1],1),dep:dep,gate:gid("inGate").value.trim(),ph:-1,log:[]};
+saveFl();gid("fForm").hidden=true;flTick()};
+flTick();setInterval(flTick,15000);
+(function(){
+var hq=gid("hubQ"),hsheet=gid("hubSheet"),hpin=gid("hubPin"),hroute=gid("hubRoute"),htitle=gid("hubTitle");
+function hubSet(name){
+if(name){htitle.innerHTML="Routes to "+name+"<span>3 ways to get there</span>";hsheet.classList.add("open");hpin.classList.add("show");hroute.classList.add("show")}
+else{htitle.innerHTML="Routes<span>3 ways to get there</span>";hsheet.classList.remove("open");hpin.classList.remove("show");hroute.classList.remove("show")}
+}
+Array.prototype.forEach.call(document.querySelectorAll("[data-hubpick]"),function(b){b.onclick=function(){hq.value=b.dataset.hubpick;hubSet(b.dataset.hubpick)}});
+hq.addEventListener("keydown",function(ev){if(ev.key==="Enter"&&hq.value.trim())hubSet(hq.value.trim())});
+gid("hubClose").onclick=function(e){e.stopPropagation();hubSet(null)};
+hsheet.onclick=function(){if(!hsheet.classList.contains("open"))hsheet.classList.add("open")};
+Array.prototype.forEach.call(gid("journeySeg").children,function(b){b.onclick=function(){Array.prototype.forEach.call(gid("journeySeg").children,function(x){x.setAttribute("aria-pressed",x===b)})}});
+
+})();
+var tabs=document.querySelectorAll("nav button[data-p]");
+function go(p){
+tabs.forEach(function(b){b.setAttribute("aria-selected",b.dataset.p===p)});
+["today","list","live","travel","discounts","guide","account"].forEach(function(id){document.getElementById(id).hidden=id!==p});
+try{history.replaceState(null,"","#"+p)}catch(e){}}
+tabs.forEach(function(b){b.onclick=function(){go(b.dataset.p)}});
+document.querySelectorAll("[data-go]").forEach(function(b){b.onclick=function(){go(b.dataset.go);window.scrollTo(0,0)}});
+var h=location.hash.slice(1);if(["today","list","live","travel","discounts","guide","account"].indexOf(h)>-1)go(h);
+
+gid("clearListBtn").onclick=function(){mine={};save();renderAll();gid("acctMsg").textContent="Your list and ratings have been cleared."};
+</script>
+</body>
+</html>
