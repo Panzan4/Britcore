@@ -198,14 +198,14 @@ nav button.nav-sos{flex:none;align-self:center;flex-direction:row;background:#C8
 .jDot-off{border:3px solid var(--mute)}
 .jTxt b{display:block;font-size:14px;font-weight:800;color:var(--navy);line-height:1.25}
 .jTxt small{display:block;font-size:11.5px;color:var(--mute);margin-top:1px}
-.jLine{flex:1;min-height:16px;width:3px;margin-left:6.5px;background:radial-gradient(circle,#9AA5B1 1.3px,transparent 1.9px) center top/3px 9px repeat-y}
+.jLine{flex:1;min-height:16px;width:3px;margin-left:6.5px;background:radial-gradient(circle,#9AA5B1 1.3px,transparent 1.9px) center top/3px 8px repeat-y}
 .jFoot{display:flex;align-items:center;gap:9px;border-top:1.5px solid var(--line);padding-top:8px}
 .jFoot svg{flex:none;width:26px;height:26px;stroke:var(--navy);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .jFoot b{display:block;font-size:14px;font-weight:800;color:var(--navy)}
 .jFoot small{display:block;font-size:11.5px;color:var(--mute)}
 .jBody{flex:1;min-height:0;display:flex;flex-direction:column;overflow-y:auto;overflow-x:visible}
 .jDot{transition:background .5s,box-shadow .5s,border-color .5s}
-.jDot-done{background:var(--navy)}
+.jDot-done{background:var(--navy);border:3px solid var(--navy)}
 #journeySeg.auto{pointer-events:none}
 .jScanBtn{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;border:0;border-radius:999px;background:#F0F4F8;color:#1D3557;font:800 14.5px Nunito,system-ui,sans-serif;padding:11px 16px;cursor:pointer;transition:transform .12s}
 .jScanBtn:active{transform:scale(.98)}
@@ -239,7 +239,8 @@ nav button.nav-sos{flex:none;align-self:center;flex-direction:row;background:#C8
 #landedHandle.dragging{opacity:1;box-shadow:0 10px 22px rgba(29,53,87,.28);background:var(--card)}
 #landedHandle{position:relative;z-index:4;flex:none;margin-top:auto}
 #jFlight .jFlightTop{margin-top:2px}
-#jFlight .jTimeline{flex:none;margin:8px 0 14px}
+#jFlight .jTimeline{flex:1 0 auto;margin:8px 0 14px}
+#jFlight .jLine.jLineTail{flex:1 0 auto;height:auto;min-height:24px}
 #jFlight .jLine{flex:none;height:18px;min-height:18px;transition:height .32s cubic-bezier(.22,.9,.32,1),min-height .32s cubic-bezier(.22,.9,.32,1)}
 #jFlight .jTxt b{font-size:13px;line-height:1.2}
 #jFlight .jTxt small{font-size:11px;margin-top:0}
@@ -248,11 +249,60 @@ nav button.nav-sos{flex:none;align-self:center;flex-direction:row;background:#C8
 .cxBtn{margin-left:auto;flex:none;width:26px;height:26px;border:0;border-radius:50%;background:var(--accent-soft);color:var(--accent);font:800 16px/1 Nunito,system-ui,sans-serif;padding:0;cursor:pointer;transition:transform .12s,background .15s}
 .cxBtn:active{transform:scale(.88)}
 .hubTopo,.hubUserDot,.hubPin,.hubRoute{display:none!important}
-.hubMap{position:absolute;inset:0;z-index:0;background:var(--sky)}
+.hubMap{position:absolute;inset:0;z-index:0;background:#f3efe9}
+.hubMap .leaflet-tile-pane{filter:saturate(1.08) contrast(1.02)}
+.mapPin svg{filter:drop-shadow(0 4px 5px rgba(0,0,0,.35));animation:pinDrop .45s cubic-bezier(.22,1.4,.4,1)}
+@keyframes pinDrop{from{transform:translateY(-26px) scale(.8);opacity:0}to{transform:none;opacity:1}}
+.mapMe span{box-shadow:0 0 0 7px rgba(46,160,90,.18),0 2px 6px rgba(0,0,0,.3)}
+.leaflet-control-attribution{background:rgba(255,255,255,.72)!important;border-radius:10px 0 0 0;padding:1px 7px;backdrop-filter:blur(4px)}
 .mapPin,.mapMe{background:none;border:0}
 .mapMe span{display:block;width:16px;height:16px;border-radius:50%;background:var(--mapdot);border:2px solid #fff;animation:hubPulse 2.2s infinite}
 .leaflet-bottom{bottom:100px}
 .leaflet-control-attribution{font-size:10px}
+#jFlight .jLine.jLineTight{height:8px;min-height:8px}
+#jFlight .jLine.jLineTight.gapHot{height:54px;min-height:54px}
+#jFlight{margin-left:-12px;padding-left:12px;margin-right:-6px;padding-right:6px}
+#nextTile.dragLift,#nextTile.dragLift #jFlight{overflow:visible}
+#nextTile.dragLift #landedHandle{z-index:60}
+#warnWrap{display:flex;flex-direction:column}
+#warnWrap[hidden]{display:none}
+#warnWrap.in{overflow:hidden;animation:warnIn .5s cubic-bezier(.22,.9,.32,1)}
+#warnWrap.out{overflow:hidden;animation:warnOut .38s cubic-bezier(.22,.9,.32,1) forwards}
+@keyframes warnIn{from{opacity:0;max-height:0;transform:translateY(-8px)}to{opacity:1;max-height:140px;transform:none}}
+@keyframes warnOut{from{opacity:1;max-height:140px}to{opacity:0;max-height:0;transform:translateY(-8px)}}
+#jFlight.warnOn .jLine.jLineArr,#warnWrap .jLine{background:radial-gradient(circle,#E8920C 1.3px,transparent 1.9px) center top/3px 8px repeat-y}
+.warnRow{display:flex;align-items:center;gap:10px}
+.jWarnDot{flex:none;position:relative;width:14px;height:14px;box-sizing:border-box;border-radius:50%;border:2px dashed #E8920C;background:#FFF4DB;animation:warnPulse 2.2s infinite}
+@keyframes warnPulse{0%{box-shadow:0 0 0 0 rgba(232,146,12,.55)}70%{box-shadow:0 0 0 6px rgba(232,146,12,0)}100%{box-shadow:0 0 0 0 rgba(232,146,12,0)}}
+.jWarnDot::after{content:"!";position:absolute;inset:0;font:800 9px/10px Nunito,system-ui,sans-serif;color:#B86E00;text-align:center}
+.warnCard{flex:1;min-width:0;display:flex;align-items:center;gap:8px;text-align:left;border:1.5px solid #F4C063;border-radius:12px;padding:6px 6px 6px 11px;background:linear-gradient(135deg,#FFF8E6,#FFEBC2);color:#6B4200;font-family:Nunito,system-ui,sans-serif;cursor:pointer;animation:warnGlow 2.2s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
+.warnCard:active{transform:scale(.98)}
+.warnTxt{flex:1;min-width:0}
+.warnTxt b{display:block;font-size:12px;font-weight:800;color:#8A4B00;line-height:1.2}
+.warnTxt small{display:block;margin-top:1px;font-size:10px;font-weight:600;line-height:1.3;color:#7A5210}
+.warnAdd{flex:none;white-space:nowrap;padding:4px 10px;border-radius:999px;background:#E8920C;color:#fff;font-size:11px;font-weight:800;box-shadow:0 2px 6px rgba(232,146,12,.4)}
+@keyframes warnGlow{0%,100%{box-shadow:0 3px 12px rgba(232,146,12,.2)}50%{box-shadow:0 4px 18px rgba(232,146,12,.45),0 0 0 3px rgba(244,192,99,.22)}}
+#landedHandle.nudge{animation:handleNudge 1.3s cubic-bezier(.22,.9,.32,1)}
+@keyframes handleNudge{0%,100%{transform:none;box-shadow:0 0 0 0 rgba(232,146,12,0)}25%{transform:scale(1.04);box-shadow:0 0 0 6px rgba(232,146,12,.28)}55%{transform:scale(1);box-shadow:0 0 0 10px rgba(232,146,12,0)}}
+#jFlight .jRow:not(.jRowDot){min-height:30px}
+#jFlight .jRow.jRowDot{min-height:14px}
+#jFlight .jLine{height:16px;min-height:16px}
+#jFlight .jLine.jLineTail{min-height:24px}
+#jFlight .jTxt b{line-height:1.25}
+#jFlight .jTxt small{line-height:1.25}
+#jFlight .jTxt{min-width:0}
+.loungeBtn{margin-left:auto;flex:none;border:1px solid var(--line);background:none;color:var(--mute);font:700 11px Nunito,system-ui,sans-serif;padding:4px 10px;border-radius:999px;cursor:pointer;transition:background .15s,color .15s,transform .12s;-webkit-tap-highlight-color:transparent}
+.loungeBtn{display:inline-flex;align-items:center;gap:5px;border-color:rgba(46,204,113,.4);background:rgba(46,204,113,.07)}
+.loungeBtn svg{width:13px;height:13px;flex:none;fill:none;stroke:var(--trim);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.loungeBtn:active{transform:scale(.95);background:#F0F4F8;color:var(--navy)}
+#jFlight .jLine.jLineTail.gapHot{min-height:54px}
+#jFlight .jLine.jLineTail.gapHot::after{top:20px}
+.warnRow{align-items:flex-start}
+.warnRow .jWarnDot{margin-top:8px}
+.warnBody{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.warnBody .warnCard{flex:none;width:100%;box-sizing:border-box}
+.warnDismiss{align-self:flex-start;border:0;background:none;padding:2px 4px 0 11px;font:700 10.5px Nunito,system-ui,sans-serif;color:#A8721A;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.warnDismiss:active{opacity:.6}
 [hidden]{display:none!important}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -318,15 +368,17 @@ nav button.nav-sos{flex:none;align-self:center;flex-direction:row;background:#C8
 <div class="jBody" id="jFlight" hidden>
 <div class="jFlightTop"><b id="fNo"></b><span id="fRoute"></span></div>
 <div class="jTimeline">
-<div class="jRow"><span class="jDot jDot-on"></span><div class="jTxt"><b>Your location</b><small>Live now</small></div></div>
-<div class="jLine"></div>
-<div class="jRow"><span class="jDot jDot-off" id="d1"></span><div class="jTxt"><b>Check-in</b><small id="fCheck"></small></div></div>
-<div class="jLine"></div>
+<div class="jRow"><span class="jDot jDot-done" id="d1"></span><div class="jTxt"><b>Check-in</b><small id="fCheck"></small></div><button type="button" class="loungeBtn" id="loungeBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 11V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3"/><path d="M3 13a2 2 0 0 1 4 0v2h10v-2a2 2 0 0 1 4 0v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M6 18v2M18 18v2"/></svg>Check lounges</button></div>
+<div class="jLine jLineTight"></div>
+<div class="jRow jRowDot"><span class="jDot jDot-on" id="hereDot"></span></div>
+<div class="jLine jLineTight"></div>
 <div class="jRow"><span class="jDot jDot-off" id="d2"></span><div class="jTxt"><b>Departure</b><small id="fDep"></small></div></div>
 <div class="jLine"></div>
 <div class="jRow"><span class="jDot jDot-off" id="d3"></span><div class="jTxt"><b>Arrival</b><small id="fArr"></small></div></div>
-<div class="jLine"></div>
-<div class="jRow"><span class="jDot jDot-off" id="d4"></span><div class="jTxt"><b>Hotel ETA</b><small id="fHotel"></small></div></div>
+<div class="jLine jLineArr"></div>
+<div id="warnWrap" hidden><div class="warnRow"><span class="jWarnDot" aria-hidden="true"></span><div class="warnBody"><button type="button" class="warnCard" id="warnCard"><span class="warnTxt"><b>Hotel transfer missing</b></span><span class="warnAdd">Check options</span></button><button type="button" class="warnDismiss" id="warnDismiss">Got it covered</button></div></div><div class="jLine"></div></div>
+<div class="jRow"><span class="jDot jDot-off" id="d4"></span><div class="jTxt"><b id="fHotelT">Hotel</b><small id="fHotel" hidden></small></div></div>
+<div class="jLine jLineTail"></div>
 </div>
 <button type="button" class="jHandle" id="landedHandle">Add connection</button>
 <div class="jFoot" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b id="fStat"></b><small id="fCount"></small></div></div>
@@ -334,10 +386,11 @@ nav button.nav-sos{flex:none;align-self:center;flex-direction:row;background:#C8
 <div class="fForm" id="fForm" hidden>
 <h3>Flight details</h3>
 <p class="small" id="fNote"></p>
-<label>Flight<input id="inFlight" type="text" maxlength="8" placeholder="For example BA117" autocapitalize="characters"></label>
-<div class="row"><label>From<input id="inFrom" type="text" maxlength="3" placeholder="LHR" autocapitalize="characters"></label><label>To<input id="inTo" type="text" maxlength="3" placeholder="JFK" autocapitalize="characters"></label></div>
+<label>Flight<input id="inFlight" type="text" maxlength="8" placeholder="For example BA112" autocapitalize="characters"></label>
+<div class="row"><label>From<input id="inFrom" type="text" maxlength="3" placeholder="JFK" autocapitalize="characters"></label><label>To<input id="inTo" type="text" maxlength="3" placeholder="LHR" autocapitalize="characters"></label></div>
 <div class="row"><label>Date<input id="inDate" type="date"></label><label>Departs<input id="inTime" type="time"></label></div>
 <div class="row"><label>Flight time<input id="inDur" type="time" value="02:00"></label><label>Gate<input id="inGate" type="text" maxlength="4" placeholder="Optional"></label></div>
+<label>Hotel booked<input id="inHotel" type="text" maxlength="40" placeholder="Optional, hotel name"></label>
 <p class="small" id="fErr" role="alert"></p>
 <button type="button" class="jScanBtn" id="fSave">Save and track</button>
 <button type="button" class="linkBtn" id="fCancel">Cancel</button>
@@ -421,7 +474,7 @@ nav button.nav-sos{flex:none;align-self:center;flex-direction:row;background:#C8
 <div class="hubText"><b>UberX / Bolt</b><p>Standard private hire pickup</p><div class="hubMeta">~22 mins &bull; &pound;18.50</div></div>
 <button type="button" class="hubCta" onclick="event.stopPropagation()">Request Ride</button>
 </div>
-<p class="hubLegal">&#8505;&#65039; BritCore is user-supported. Map data &copy; OpenStreetMap contributors. Transit bookings or app downloads via our tracking links may earn us a small partner commission at no extra cost to you. &#127468;&#127463;</p>
+<p class="hubLegal">&#8505;&#65039; BritCore is user-supported. Map data &copy; OpenStreetMap contributors, &copy; CARTO. Transit bookings or app downloads via our tracking links may earn us a small partner commission at no extra cost to you. &#127468;&#127463;</p>
 </div>
 </section>
 
@@ -727,7 +780,7 @@ renderAll();
 
 var fl=null,MIN=6e4,TRF=60,PH=["Upcoming","Check-in open","Boarding","In transit","Landed","At hotel"];
 try{fl=JSON.parse(localStorage.getItem("flight")||"null")}catch(e){}
-if(!fl)fl={no:"BA117",from:"LHR",to:"JFK",date:"",time:"",durS:"07:30",dur:450,dep:Date.now()-(450+40)*6e4,gate:"42",ph:-1,log:[],mock:true};
+if(!fl)fl={no:"BA112",from:"JFK",to:"LHR",date:"",time:"",durS:"06:50",dur:410,dep:Date.now()-(410+40)*6e4,gate:"42",hotel:"Riverside Hotel",ph:-1,log:[],mock:true};
 function saveFl(){if(fl&&fl.mock)return;try{localStorage.setItem("flight",JSON.stringify(fl))}catch(e){}}
 function p2(n){return(n<10?"0":"")+n}
 function hm(ms){var d=new Date(ms);return p2(d.getHours())+":"+p2(d.getMinutes())}
@@ -742,7 +795,7 @@ return{no:t.slice(36,39).trim()+t.slice(39,44).trim().replace(/^0+/,""),from:t.s
 function openForm(p,note){
 go("live");
 var d=p||(fl?{no:fl.no,from:fl.from,to:fl.to,date:fl.date,time:fl.time,dur:fl.durS,gate:fl.gate}:{});
-gid("inFlight").value=d.no||"";gid("inFrom").value=d.from||"";gid("inTo").value=d.to||"";gid("inDate").value=d.date||"";gid("inTime").value=d.time||"";gid("inDur").value=d.dur||"02:00";gid("inGate").value=d.gate||"";
+gid("inFlight").value=d.no||"";gid("inFrom").value=d.from||"";gid("inTo").value=d.to||"";gid("inDate").value=d.date||"";gid("inTime").value=d.time||"";gid("inDur").value=d.dur||"02:00";gid("inGate").value=d.gate||"";gid("inHotel").value=(fl&&fl.hotel)||"";
 gid("fNote").textContent=note||"Use the times shown on your boarding pass or ticket.";gid("fErr").textContent="";gid("fForm").hidden=false}
 function scanFile(f){
 say("Reading boarding pass...");
@@ -760,13 +813,13 @@ var n=Date.now(),d=fl.dep,e=d+fl.dur*MIN,h=e+TRF*MIN,ph=n<d-108e5?0:n<d-36e5?1:n
 if(fl.ph!==ph){fl.ph=ph;
 fl.log.unshift({t:n,x:["Tracking "+fl.no+". Check-in opens at "+hm(d-108e5),"Check-in is open. It closes around "+hm(d-36e5),g?"Boarding. Head to Gate "+g:"Boarding soon. Check the airport screens for your gate","Departed. You are now in transit","Landed"+(fl.to?". Welcome to "+fl.to:"")+". Heading to your hotel","Arrived at your hotel"][ph]});
 fl.log=fl.log.slice(0,6);saveFl()}
-gid("fNo").textContent=fl.no;gid("fRoute").textContent=(fl.from||fl.to)?(fl.from||"?")+" \u2192 "+(fl.to||"?"):"";
+gid("fNo").textContent=fl.no;gid("fRoute").textContent=((fl.from||fl.to)?(fl.from||"?")+" \u2192 "+(fl.to||"?")+" \u00b7 ":"")+hmm(fl.dur);
 gid("fCheck").textContent="Check in by "+hm(d-36e5)+" (typical)";
 gid("fDep").textContent=new Date(d).toLocaleDateString([],{weekday:"short",day:"numeric",month:"short"})+", "+hm(d)+" \u00b7 "+(g?"Gate "+g:"Gate to be confirmed");
-gid("fArr").textContent=(ph===3?"In the air \u00b7 ":"")+"Flight time "+hmm(fl.dur);
-gid("fHotel").textContent=(ph>=4?"Est. arrival "+hm(h):"Around "+hm(h))+" \u00b7 includes transfer time";
-function S(a){return ph<a?"off":ph===a?"on":"done"}
-gid("d1").className="jDot jDot-"+S(1);gid("d2").className="jDot jDot-"+S(2);gid("d3").className="jDot jDot-"+S(3);gid("d4").className="jDot jDot-"+S(4);
+gid("fArr").textContent="ETA "+hm(e);
+gid("fHotelT").textContent=fl.hotel?"Hotel \u2022 "+fl.hotel:"Hotel";
+function S(a){return ph>a?"done":"off"}
+if(window.paintDots)window.paintDots();if(window.paintWarn)window.paintWarn();
 gid("fStat").textContent=PH[ph];
 gid("fCount").textContent=["Check-in opens in "+hmm((d-108e5-n)/MIN),"Check-in closes in "+hmm((d-36e5-n)/MIN),"Departs in "+hmm((d-n)/MIN),"Lands in "+hmm((e-n)/MIN),"At hotel in "+hmm((h-n)/MIN),"Journey complete"][ph];
 var idx=ph<3?2:ph===3?1:0;
@@ -808,7 +861,7 @@ var no=gid("inFlight").value.trim().toUpperCase(),dt=gid("inDate").value,tm=gid(
 if(!no||!dt||!tm){gid("fErr").textContent="Add the flight number, date and departure time.";return}
 var dep=new Date(dt+"T"+tm).getTime(),dd=du.split(":");
 if(isNaN(dep)){gid("fErr").textContent="Check the date and time.";return}
-fl={no:no,from:gid("inFrom").value.trim().toUpperCase(),to:gid("inTo").value.trim().toUpperCase(),date:dt,time:tm,durS:du,dur:Math.max(+dd[0]*60+ +dd[1],1),dep:dep,gate:gid("inGate").value.trim(),ph:-1,log:[]};
+fl={no:no,from:gid("inFrom").value.trim().toUpperCase(),to:gid("inTo").value.trim().toUpperCase(),date:dt,time:tm,durS:du,dur:Math.max(+dd[0]*60+ +dd[1],1),dep:dep,gate:gid("inGate").value.trim(),hotel:gid("inHotel").value.trim(),ph:-1,log:[]};
 saveFl();gid("fForm").hidden=true;flTick()};
 flTick();setInterval(flTick,15000);
 (function(){
@@ -835,6 +888,30 @@ document.querySelectorAll("[data-go]").forEach(function(b){b.onclick=function(){
 var h=location.hash.slice(1);if(["today","list","live","travel","discounts","guide","account"].indexOf(h)>-1)go(h);
 
 gid("clearListBtn").onclick=function(){mine={};save();renderAll();gid("acctMsg").textContent="Your list and ratings have been cleared."};
+window.paintDots=function(){
+var before=true;
+Array.prototype.forEach.call(document.querySelectorAll("#jFlight .jTimeline .jDot"),function(d){
+if(d.id==="hereDot"){before=false;return}
+d.className="jDot jDot-"+(before?"done":"off")})};
+window.paintDots();
+window.paintWarn=function(){
+var w=gid("warnWrap"),need=!!(fl&&fl.hotel&&!fl.transfer);
+gid("jFlight").classList.toggle("warnOn",need);
+if(need){
+if(w.hidden){w.hidden=false;w.classList.remove("out");w.classList.add("in");setTimeout(function(){w.classList.remove("in")},520)}
+else if(w.classList.contains("out")){w.classList.remove("out")}
+requestAnimationFrame(window.syncPulse)}
+else if(!w.hidden&&!w.classList.contains("out")){
+w.classList.add("out");setTimeout(function(){w.hidden=true;w.classList.remove("out")},400)}};
+window.syncPulse=function(){
+var g=gid("hereDot");if(!g||!g.getAnimations)return;
+var ga=g.getAnimations().filter(function(a){return a.animationName==="jPulse"})[0];if(!ga)return;
+Array.prototype.forEach.call(document.querySelectorAll("#warnWrap .jWarnDot,#warnWrap .warnCard"),function(e){
+e.getAnimations().forEach(function(a){if(a.animationName==="warnPulse"||a.animationName==="warnGlow")a.currentTime=ga.currentTime})})};
+window.paintWarn();
+gid("loungeBtn").onclick=function(){var a=(fl&&fl.from)||"";window.open("https://www.google.com/search?q="+encodeURIComponent((a?a+" airport ":"airport ")+"lounges"),"_blank","noopener")};
+gid("warnDismiss").onclick=function(){if(fl){fl.transfer=true;saveFl()}window.paintWarn()};
+gid("warnCard").onclick=function(){var b=gid("landedHandle");b.scrollIntoView({block:"nearest",behavior:"smooth"});b.classList.remove("nudge");void b.offsetWidth;b.classList.add("nudge");setTimeout(function(){b.classList.remove("nudge")},1400)};
 (function(){
 var h=gid("landedHandle"),sx=0,sy=0,drag=false,hot=null,E="cubic-bezier(.22,.9,.32,1)";
 function setHot(n){if(hot===n)return;if(hot)hot.classList.remove("gapHot");hot=n;if(n)n.classList.add("gapHot")}
@@ -842,30 +919,36 @@ function nearest(y){
 if(hot){var hr=hot.getBoundingClientRect();if(y>=hr.top-10&&y<=hr.bottom+10)return hot}
 var best=null,bd=1e9;
 Array.prototype.forEach.call(document.querySelectorAll("#jFlight .jTimeline .jLine"),function(l){
-var r=l.getBoundingClientRect(),d=Math.abs(y-(r.top+r.height/2));if(d<bd){bd=d;best=l}});return best}
-h.addEventListener("pointerdown",function(e){drag=true;hot=null;sx=e.clientX;sy=e.clientY;h.setPointerCapture(e.pointerId);h.style.transition="none";h.classList.add("dragging")});
+if(l.closest("#warnWrap"))return;
+var r=l.getBoundingClientRect(),c=l.classList.contains("jLineTail")?r.top+18:r.top+r.height/2,d=Math.abs(y-c);if(d<bd){bd=d;best=l}});return best}
+h.addEventListener("pointerdown",function(e){drag=true;hot=null;sx=e.clientX;sy=e.clientY;h.setPointerCapture(e.pointerId);h.style.transition="none";gid("nextTile").classList.add("dragLift");h.classList.add("dragging")});
 h.addEventListener("pointermove",function(e){if(!drag)return;
 h.style.transform="translate("+(e.clientX-sx)+"px,"+(e.clientY-sy)+"px) scale(1.03)";
 setHot(nearest(e.clientY))});
+function pairLine(row){
+var n=row.nextElementSibling;
+if(n&&n.classList.contains("jLine")&&!n.classList.contains("jLineTail"))return n;
+var p=row.previousElementSibling;return p&&p.classList.contains("jLine")?p:null}
 function removeRow(row){
-var ln=row.nextElementSibling;if(ln&&!ln.classList.contains("jLine"))ln=null;
+var ln=pairLine(row);
 row.style.cssText="overflow:hidden;max-height:40px;transition:max-height .35s "+E+",opacity .25s ease,transform .35s "+E;
 void row.offsetHeight;
 row.style.maxHeight="0";row.style.opacity="0";row.style.transform="translateX(12px)";
 if(ln){ln.style.height="0";ln.style.minHeight="0"}
-setTimeout(function(){if(ln)ln.remove();row.remove()},380)}
+setTimeout(function(){if(ln)ln.remove();row.remove();window.paintDots();window.paintWarn()},380)}
 function end(){if(!drag)return;drag=false;h.classList.remove("dragging");
 h.style.transition="transform .35s "+E;h.style.transform="";
-setTimeout(function(){h.style.transition=""},400);
+setTimeout(function(){h.style.transition="";gid("nextTile").classList.remove("dragLift")},420);
 var target=hot;if(!target)return;target.classList.remove("gapHot");hot=null;
 var old=document.getElementById("landedRow");
-if(old){if(target===old.nextElementSibling)return;old.nextElementSibling.remove();old.remove()}
+if(old){if(target===old.nextElementSibling)return;var ol=pairLine(old);if(ol)ol.remove();old.remove()}
 var row=el("div","jRow");row.id="landedRow";
-row.innerHTML='<span class="jDot jDot-done"></span><div class="jTxt"><b>Connection</b><small>Added by you</small></div><button type="button" class="cxBtn" aria-label="Remove connection">&times;</button>';
+row.innerHTML='<span class="jDot jDot-off"></span><div class="jTxt"><b>Connection</b><small>Added by you</small></div><button type="button" class="cxBtn" aria-label="Remove connection">&times;</button>';
 row.querySelector(".cxBtn").onclick=function(){removeRow(row)};
 row.style.cssText="overflow:hidden;max-height:0;opacity:0;transform:translateY(-6px);transition:max-height .4s "+E+",opacity .35s ease .08s,transform .4s "+E;
 var ln=el("div","jLine");ln.style.height="0";ln.style.minHeight="0";
-target.after(row,ln);
+if(target.classList.contains("jLineTail"))target.before(ln,row);else target.after(row,ln);
+window.paintDots();window.paintWarn();
 void row.offsetHeight;
 row.style.maxHeight="40px";row.style.opacity="1";row.style.transform="none";
 ln.style.height="";ln.style.minHeight="";
@@ -882,7 +965,7 @@ function init(){
 if(map)return;
 map=L.map(box,{zoomControl:false,attributionControl:true}).setView([51.5074,-0.1278],11);
 map.attributionControl.setPrefix(false);
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap contributors"}).addTo(map);
+L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",{subdomains:"abcd",maxZoom:20,attribution:"&copy; OpenStreetMap contributors &copy; CARTO"}).addTo(map);
 pinIcon=L.divIcon({className:"mapPin",html:'<svg width="28" height="36" viewBox="0 0 30 38"><path d="M15 0C6.7 0 0 6.6 0 14.8 0 25.9 15 38 15 38S30 25.9 30 14.8C30 6.6 23.3 0 15 0z" fill="#1D3557"/><circle cx="15" cy="14.5" r="5.5" fill="#fff"/></svg>',iconSize:[28,36],iconAnchor:[14,36]});
 locate()}
 function locate(){
@@ -897,7 +980,7 @@ function show(r){
 clear();var ll=[+r.lat,+r.lon];
 dest=L.marker(ll,{icon:pinIcon,keyboard:false}).addTo(map);
 if(meLL){
-line=L.polyline([meLL,ll],{color:"#1D3557",weight:3,dashArray:"6 8"}).addTo(map);
+line=L.layerGroup([L.polyline([meLL,ll],{color:"#fff",weight:9,opacity:.95,lineCap:"round",lineJoin:"round"}),L.polyline([meLL,ll],{color:"#1D3557",weight:5,lineCap:"round",lineJoin:"round"})]).addTo(map);
 map.fitBounds(L.latLngBounds([meLL,ll]),{paddingTopLeft:[40,130],paddingBottomRight:[40,Math.min(380,box.clientHeight*.5)],maxZoom:15})}
 else map.flyTo(ll,15,{duration:.8})}
 function find(q){
