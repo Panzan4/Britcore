@@ -304,6 +304,50 @@ nav button.nav-sos{flex:none;align-self:center;flex-direction:row;background:#C8
 .warnDismiss{align-self:flex-start;border:0;background:none;padding:2px 4px 0 11px;font:700 10.5px Nunito,system-ui,sans-serif;color:#A8721A;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .warnDismiss:active{opacity:.6}
 [hidden]{display:none!important}
+
+.priv{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,var(--navy),var(--slate));color:#fff;border-radius:20px;padding:14px 16px;margin:6px 0 4px;text-align:left;box-shadow:var(--shadow-lg);animation:privIn .7s cubic-bezier(.22,.9,.32,1) both}
+.priv h3{margin:0 0 2px;font:800 18px/1.25 Quicksand,Nunito,sans-serif;color:#fff;text-align:left}
+.priv p{margin:0 0 8px;font-size:14.5px;line-height:1.4;color:#E4F1F2}
+.pico{flex:none;width:42px;height:42px;animation:privPop .8s .15s cubic-bezier(.22,.9,.32,1) both}
+.pbody{min-width:0}
+.ppills{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.ppills span{background:rgba(168,218,220,.2);color:var(--sky);border-radius:999px;padding:3px 10px;font-weight:800;font-size:12.5px}
+.plink{background:none;border:0;color:var(--sky);font:800 13px Nunito,system-ui,sans-serif;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:3px 4px}
+.plink:focus-visible{outline-color:var(--sky)}
+@keyframes privIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes privPop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.priv,.pico{animation:none}}
+.prof{display:flex;align-items:center;gap:14px;background:linear-gradient(160deg,var(--board2),var(--board));color:#fff;border-radius:24px;padding:18px;margin:6px 0 12px}
+.av{flex:none;width:58px;height:58px;border-radius:50%;background:var(--amber);color:var(--navy);display:grid;place-items:center;font:800 25px Quicksand,Nunito,sans-serif}
+.prof b{display:block;font-size:20px;font-weight:800}
+.prof span{font-size:15px;color:var(--boardtxt)}
+.pbtns{display:flex;gap:10px;margin-bottom:6px}
+.pbtns button{flex:1;margin:0}
+.pbtns .solid{background:var(--accent);color:var(--onaccent)}
+.agrp{margin:22px 0 8px 4px;font-size:13px;font-weight:800;color:var(--mute);text-transform:uppercase;letter-spacing:.07em}
+.apanel{background:var(--card);border-radius:18px;border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden}
+.arow{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;background:none;border:0;border-bottom:1px solid var(--line);padding:14px 16px;font:700 17px/1.3 Nunito,system-ui,sans-serif;color:var(--ink);text-align:left;cursor:pointer}
+.apanel>:last-child{border-bottom:0}
+.arow small{display:block;font:400 14px/1.35 Nunito,system-ui,sans-serif;color:var(--mute);margin-top:1px}
+.arow.go::after{content:"\203A";color:var(--mute);font-size:24px;line-height:1;flex:none}
+.arow.danger{color:var(--red)}
+.arow.sw{cursor:pointer}
+.sw i{flex:none;position:relative;width:48px;height:28px;border-radius:999px;background:#C9D2DA;transition:background .2s}
+.sw i::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .2s}
+.sw[aria-checked="true"] i{background:var(--green)}
+.sw[aria-checked="true"] i::after{transform:translateX(20px)}
+.arow.fld{display:block;cursor:default}
+.arow.fld input{margin-top:6px}
+.arow .seg{margin:8px 0 0}
+.ver{text-align:center;color:var(--mute);font-size:14px;margin:22px 0 0}
+.asheet .sos-card h2{text-align:left}
+.asheet p{margin:0 0 10px}
+.asheet h4{margin:14px 0 4px;font-size:17px}
+.asheet .mock{background:var(--amber);color:#4A3B00;border-radius:12px;padding:8px 12px;font-size:14px;font-weight:700;margin:0 0 12px}
+.asheet .ghost.solid{background:var(--accent);color:var(--onaccent);width:100%;margin:4px 0 10px}
+.asheet .ghost.red{background:var(--red);border-color:var(--red);color:#fff;width:100%}
+.asheet .ghost.wide{width:100%;margin:0 0 10px}
+html.bigtext body{font-size:20px}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 </head>
@@ -318,7 +362,7 @@ nav button.nav-sos{flex:none;align-self:center;flex-direction:row;background:#C8
 <button role="tab" id="t-live" aria-selected="false" data-p="live"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5" style="fill:var(--trim);stroke:none"/></svg><span>Live</span></button>
 <button role="tab" id="t-travel" aria-selected="false" data-p="travel"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>Travel</span></button>
 <button role="tab" id="t-discounts" aria-selected="false" data-p="discounts"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l7-7h6v6l-7 7-6-6z"/><circle cx="14.5" cy="9.5" r="1.5"/></svg><span>Discounts</span></button>
-<button role="tab" id="t-account" aria-selected="false" data-p="account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg><span>Account</span></button>
+<button role="tab" id="t-account" aria-selected="false" data-p="account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span>Settings</span></button>
 </nav>
 <button type="button" id="sosBtn" class="sos-fab" aria-haspopup="dialog" aria-label="Emergency help">SOS</button>
 
@@ -390,7 +434,8 @@ nav button.nav-sos{flex:none;align-self:center;flex-direction:row;background:#C8
 <div class="row"><label>From<input id="inFrom" type="text" maxlength="3" placeholder="JFK" autocapitalize="characters"></label><label>To<input id="inTo" type="text" maxlength="3" placeholder="LHR" autocapitalize="characters"></label></div>
 <div class="row"><label>Date<input id="inDate" type="date"></label><label>Departs<input id="inTime" type="time"></label></div>
 <div class="row"><label>Flight time<input id="inDur" type="time" value="02:00"></label><label>Gate<input id="inGate" type="text" maxlength="4" placeholder="Optional"></label></div>
-<label>Hotel booked<input id="inHotel" type="text" maxlength="40" placeholder="Optional, hotel name"></label>
+<div class="row"><label>Departure terminal<input id="inDTerm" type="text" maxlength="12" placeholder="Optional"></label><label>Arrival terminal<input id="inTerm" type="text" maxlength="12" placeholder="Optional"></label></div>
+<label>Hotel booked<input id="inHotel" type="text" maxlength="40" placeholder="Optional"></label>
 <p class="small" id="fErr" role="alert"></p>
 <button type="button" class="jScanBtn" id="fSave">Save and track</button>
 <button type="button" class="linkBtn" id="fCancel">Cancel</button>
@@ -518,14 +563,69 @@ nav button.nav-sos{flex:none;align-self:center;flex-direction:row;background:#C8
 </section>
 
 <section id="account" role="tabpanel" aria-labelledby="t-account" hidden>
-<h2>Account</h2>
-<button type="button" class="ghost" data-go="guide">Guide: how to do England</button>
-<button type="button" class="ghost" data-go="list">My places</button>
-<p class="lead">There's no sign-in yet. Everything you've ticked, rated or typed is saved privately on this phone only, not on a server.</p>
-<button type="button" class="ghost" id="clearListBtn">Clear my list and ratings</button>
+<h2>Settings</h2>
+<div class="priv" role="note">
+<svg class="pico" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 8 10v12c0 10.5 6.8 18.6 16 22 9.2-3.4 16-11.5 16-22V10z" fill="rgba(168,218,220,.18)" stroke="#A8DADC" stroke-width="2.4" stroke-linejoin="round"/><rect x="16.5" y="21" width="15" height="12" rx="2.5" fill="#A8DADC"/><path d="M19.5 21v-3.5a4.5 4.5 0 0 1 9 0V21" fill="none" stroke="#A8DADC" stroke-width="2.4" stroke-linecap="round"/></svg>
+<div class="pbody">
+<h3>Your data stays on your phone</h3>
+<p>Nothing personal is uploaded or stored anywhere else.</p>
+<div class="ppills"><span>No account</span><span>No uploads</span><span>No tracking</span><button type="button" class="plink" data-sheet="privacy">How it works</button></div>
+</div>
+</div>
+
+<div class="agrp">Your stuff</div>
+<div class="apanel">
+<button type="button" class="arow go" data-go="list"><span>My places<small>Ticked, rated and saved spots</small></span></button>
+<button type="button" class="arow go" data-go="guide"><span>Guide: how to do England<small>Tickets, tipping, plugs and more</small></span></button>
+<button type="button" class="arow go" data-sheet="export"><span>Back up my data<small>Save a copy of your list and settings</small></span></button>
+</div>
+
+<div class="agrp">Profile and preferences</div>
+<div class="apanel">
+<label class="arow fld">Home airport or city<input type="text" id="prefHome" maxlength="30" placeholder="e.g. JFK or Sydney" autocomplete="off"></label>
+<div class="arow fld">Distances<div class="seg" id="unitSeg"><button type="button" data-u="mi" aria-pressed="true">Miles</button><button type="button" data-u="km" aria-pressed="false">Kilometres</button></div></div>
+<button type="button" class="arow sw" role="switch" id="swBig" aria-checked="false" data-pref="big"><span>Larger text<small>Easier to read on the move</small></span><i></i></button>
+</div>
+
+<div class="agrp">Notifications</div>
+<div class="apanel">
+<button type="button" class="arow sw" role="switch" aria-checked="true" data-pref="nJourney"><span>Journey reminders<small>Leave-now nudges</small></span><i></i></button>
+<button type="button" class="arow sw" role="switch" aria-checked="false" data-pref="nDeals"><span>Deals and discounts<small>Occasional money-saving tips</small></span><i></i></button>
+<button type="button" class="arow sw" role="switch" aria-checked="false" data-pref="nNews"><span>Product news by email<small>New features, no spam</small></span><i></i></button>
+</div>
+
+<div class="agrp">Help and support</div>
+<div class="apanel">
+<button type="button" class="arow go" data-sheet="help"><span>Help centre</span></button>
+<button type="button" class="arow go" data-sheet="contact"><span>Contact us</span></button>
+<button type="button" class="arow go" data-sheet="report"><span>Report a problem</span></button>
+<button type="button" class="arow go" data-sheet="feedback"><span>Send feedback or suggest a place</span></button>
+<button type="button" class="arow go" id="shareBtn"><span>Share BritCore with a friend</span></button>
+<button type="button" class="arow go" data-sheet="home"><span>Add to your home screen<small>Open it like an app, no download</small></span></button>
+</div>
+
+<div class="agrp">Legal and about</div>
+<div class="apanel">
+<button type="button" class="arow go" data-sheet="terms"><span>Terms of Service</span></button>
+<button type="button" class="arow go" data-sheet="privacy"><span>Privacy Policy</span></button>
+<button type="button" class="arow go" data-sheet="cookies"><span>Cookies and storage</span></button>
+<button type="button" class="arow go" data-sheet="access"><span>Accessibility</span></button>
+<button type="button" class="arow go" data-sheet="credits"><span>Licences and credits</span></button>
+<button type="button" class="arow go" data-sheet="about"><span>About BritCore</span></button>
+</div>
+
+<div class="agrp">Your data</div>
+<div class="apanel">
+<button type="button" class="arow danger" id="clearListBtn"><span>Clear my list and ratings</span></button>
+<button type="button" class="arow danger" data-sheet="delete"><span>Erase all my data<small>Removes everything saved on this phone</small></span></button>
+</div>
 <p class="small" id="acctMsg" role="status" aria-live="polite"></p>
-<p class="note">A real account with sign-in and syncing across devices needs the app to be hosted with its own server, which isn't set up yet.</p>
+<p class="ver">BritCore v0.9 preview<br>Made for visitors to England</p>
 </section>
+
+<div id="asheet" class="sos-wrap asheet" role="dialog" aria-modal="true" aria-labelledby="asTitle" hidden>
+<div class="sos-card"><h2 id="asTitle"></h2><div id="asBody"></div><button type="button" class="ghost wide" id="asClose">Close</button></div>
+</div>
 </div>
 
 <div id="sos" class="sos-wrap" role="dialog" aria-modal="true" aria-label="Emergency help" hidden>
@@ -780,9 +880,10 @@ renderAll();
 
 var fl=null,MIN=6e4,TRF=60,PH=["Upcoming","Check-in open","Boarding","In transit","Landed","At hotel"];
 try{fl=JSON.parse(localStorage.getItem("flight")||"null")}catch(e){}
-if(!fl)fl={no:"BA112",from:"JFK",to:"LHR",date:"",time:"",durS:"06:50",dur:410,dep:Date.now()-(410+40)*6e4,gate:"42",hotel:"Riverside Hotel",ph:-1,log:[],mock:true};
+if(!fl)fl={no:"BA112",from:"JFK",to:"LHR",date:"",time:"",durS:"06:50",dur:410,dep:Date.now()-(410+40)*6e4,gate:"42",hotel:"Riverside Hotel",terminal:"5",dterm:"7",ph:-1,log:[],mock:true};
 function saveFl(){if(fl&&fl.mock)return;try{localStorage.setItem("flight",JSON.stringify(fl))}catch(e){}}
 function p2(n){return(n<10?"0":"")+n}
+function tl(t){t=(t||"").trim();return /^[0-9A-Za-z]$/.test(t)?"Terminal "+t:t}
 function hm(ms){var d=new Date(ms);return p2(d.getHours())+":"+p2(d.getMinutes())}
 function hmm(m){m=Math.max(0,Math.round(m));var h=Math.floor(m/60);return h?h+"h "+p2(m%60)+"m":m+"m"}
 function say(t){gid("qrOut").textContent=t;gid("jMsg").textContent=t}
@@ -795,7 +896,7 @@ return{no:t.slice(36,39).trim()+t.slice(39,44).trim().replace(/^0+/,""),from:t.s
 function openForm(p,note){
 go("live");
 var d=p||(fl?{no:fl.no,from:fl.from,to:fl.to,date:fl.date,time:fl.time,dur:fl.durS,gate:fl.gate}:{});
-gid("inFlight").value=d.no||"";gid("inFrom").value=d.from||"";gid("inTo").value=d.to||"";gid("inDate").value=d.date||"";gid("inTime").value=d.time||"";gid("inDur").value=d.dur||"02:00";gid("inGate").value=d.gate||"";gid("inHotel").value=(fl&&fl.hotel)||"";
+gid("inFlight").value=d.no||"";gid("inFrom").value=d.from||"";gid("inTo").value=d.to||"";gid("inDate").value=d.date||"";gid("inTime").value=d.time||"";gid("inDur").value=d.dur||"02:00";gid("inGate").value=d.gate||"";gid("inHotel").value=(fl&&fl.hotel)||"";gid("inTerm").value=(fl&&fl.terminal)||"";gid("inDTerm").value=(fl&&fl.dterm)||"";
 gid("fNote").textContent=note||"Use the times shown on your boarding pass or ticket.";gid("fErr").textContent="";gid("fForm").hidden=false}
 function scanFile(f){
 say("Reading boarding pass...");
@@ -814,9 +915,9 @@ if(fl.ph!==ph){fl.ph=ph;
 fl.log.unshift({t:n,x:["Tracking "+fl.no+". Check-in opens at "+hm(d-108e5),"Check-in is open. It closes around "+hm(d-36e5),g?"Boarding. Head to Gate "+g:"Boarding soon. Check the airport screens for your gate","Departed. You are now in transit","Landed"+(fl.to?". Welcome to "+fl.to:"")+". Heading to your hotel","Arrived at your hotel"][ph]});
 fl.log=fl.log.slice(0,6);saveFl()}
 gid("fNo").textContent=fl.no;gid("fRoute").textContent=((fl.from||fl.to)?(fl.from||"?")+" \u2192 "+(fl.to||"?")+" \u00b7 ":"")+hmm(fl.dur);
-gid("fCheck").textContent="Check in by "+hm(d-36e5)+" (typical)";
-gid("fDep").textContent=new Date(d).toLocaleDateString([],{weekday:"short",day:"numeric",month:"short"})+", "+hm(d)+" \u00b7 "+(g?"Gate "+g:"Gate to be confirmed");
-gid("fArr").textContent="ETA "+hm(e);
+var dt2=tl(fl.dterm);gid("fCheck").textContent="Check in by "+hm(d-36e5)+(dt2?" \u00b7 "+dt2:" (typical)");
+gid("fDep").textContent=hm(d)+" \u00b7 "+(g?"Gate "+g:"Gate to be confirmed");
+var tm=tl(fl.terminal);gid("fArr").textContent="ETA "+hm(e)+(tm?" \u2022 "+tm:"");
 gid("fHotelT").textContent=fl.hotel?"Hotel \u2022 "+fl.hotel:"Hotel";
 function S(a){return ph>a?"done":"off"}
 if(window.paintDots)window.paintDots();if(window.paintWarn)window.paintWarn();
@@ -861,7 +962,7 @@ var no=gid("inFlight").value.trim().toUpperCase(),dt=gid("inDate").value,tm=gid(
 if(!no||!dt||!tm){gid("fErr").textContent="Add the flight number, date and departure time.";return}
 var dep=new Date(dt+"T"+tm).getTime(),dd=du.split(":");
 if(isNaN(dep)){gid("fErr").textContent="Check the date and time.";return}
-fl={no:no,from:gid("inFrom").value.trim().toUpperCase(),to:gid("inTo").value.trim().toUpperCase(),date:dt,time:tm,durS:du,dur:Math.max(+dd[0]*60+ +dd[1],1),dep:dep,gate:gid("inGate").value.trim(),hotel:gid("inHotel").value.trim(),ph:-1,log:[]};
+fl={no:no,from:gid("inFrom").value.trim().toUpperCase(),to:gid("inTo").value.trim().toUpperCase(),date:dt,time:tm,durS:du,dur:Math.max(+dd[0]*60+ +dd[1],1),dep:dep,gate:gid("inGate").value.trim(),hotel:gid("inHotel").value.trim(),terminal:gid("inTerm").value.trim(),dterm:gid("inDTerm").value.trim(),ph:-1,log:[]};
 saveFl();gid("fForm").hidden=true;flTick()};
 flTick();setInterval(flTick,15000);
 (function(){
@@ -996,6 +1097,63 @@ hq.addEventListener("keydown",function(e){if(e.key==="Enter"&&hq.value.trim())fi
 Array.prototype.forEach.call(document.querySelectorAll("[data-hubpick]"),function(b){b.addEventListener("click",function(){find(b.dataset.hubpick)})});
 gid("hubClose").addEventListener("click",function(){if(map)clear()});
 if(!gid("travel").hidden)window.hubMapShow()}
+})();
+
+(function(){
+var K="acctPrefs",P={};
+try{P=JSON.parse(localStorage.getItem(K)||"{}")}catch(e){P={}}
+function sv(){try{localStorage.setItem(K,JSON.stringify(P))}catch(e){}}
+function say(m){gid("acctMsg").textContent=m}
+var hm=gid("prefHome");
+hm.value=P.home||"";
+hm.oninput=function(){P.home=hm.value;sv()};
+Array.prototype.forEach.call(document.querySelectorAll("#unitSeg button"),function(b){
+b.setAttribute("aria-pressed",String(b.dataset.u===(P.unit||"mi")));
+b.onclick=function(){P.unit=b.dataset.u;sv();Array.prototype.forEach.call(document.querySelectorAll("#unitSeg button"),function(x){x.setAttribute("aria-pressed",String(x===b))})}});
+Array.prototype.forEach.call(document.querySelectorAll("[data-pref]"),function(b){
+var k=b.dataset.pref;
+if(k in P)b.setAttribute("aria-checked",String(!!P[k]));
+function ap(){if(k==="big")document.documentElement.classList.toggle("bigtext",b.getAttribute("aria-checked")==="true")}
+ap();
+b.onclick=function(){var on=b.getAttribute("aria-checked")!=="true";b.setAttribute("aria-checked",String(on));P[k]=on;sv();ap()}});
+
+var sh=gid("asheet"),last=null;
+var MOCK='<p class="mock">Preview only: this button doesn\'t do anything real yet.</p>';
+function form(fields,btn){return fields.map(function(f){return '<label>'+f[0]+(f[2]==="area"?'<textarea placeholder="'+f[1]+'"></textarea>':'<input type="'+(f[2]||"text")+'" placeholder="'+f[1]+'">')+'</label>'}).join("")+'<button type="button" class="ghost solid" data-mockdone="'+btn[1]+'">'+btn[0]+'</button>'}
+var S={
+export:["Back up my data",'<p>BritCore has no accounts, so your list lives only on this phone. Save a copy of your list, ratings, flight and settings as a small file in case you clear your browser.</p><button type="button" class="ghost solid" id="doExport">Save a copy</button>'],
+help:["Help centre",MOCK+'<h4>Getting started</h4><p>Tick places in My places, rate them, and BritCore suggests more you might like.</p><h4>Using journeys</h4><p>Open the map, search a place and pick how to get there.</p><h4>Flights</h4><p>Add your flight on the Today tab to see your timeline and the landed section.</p><h4>Still stuck?</h4><p>Use Contact us.</p>'],
+contact:["Contact us",MOCK+'<p>We usually reply within two working days.</p>'+form([["Your email","you@example.com","email"],["Message","How can we help?","area"]],["Send message","Message sending isn't connected yet."])],
+report:["Report a problem",MOCK+'<label>What went wrong?<select><option>Wrong or outdated information</option><option>Map or journey problem</option><option>Flight timeline problem</option><option>Something looks broken</option><option>Other</option></select></label>'+form([["Details","Tell us what happened","area"]],["Send report","Reporting isn't connected yet."])],
+feedback:["Feedback and suggestions",MOCK+form([["Your idea","A feature, a place we missed, anything","area"]],["Send feedback","Feedback isn't connected yet."])],
+home:["Add to your home screen",'<p>BritCore is a free web app, so there\'s nothing to download. For one-tap access, add it to your home screen.</p><h4>iPhone (Safari)</h4><p>Tap the Share button, then Add to Home Screen.</p><h4>Android (Chrome)</h4><p>Tap the menu, then Add to Home screen or Install app.</p>'],
+terms:["Terms of Service",MOCK+'<p class="small">Last updated: placeholder date</p><h4>1. Using BritCore</h4><p>BritCore is a travel companion for visitors to England. You agree to use it lawfully and not to misuse, copy or disrupt it.</p><h4>2. Information only</h4><p>Guides, prices, opening hours, transport times and discounts are for general information and can change. Check with the provider before you rely on them.</p><h4>3. Emergencies</h4><p>The SOS button gives quick access to emergency numbers but is not an emergency service. If it is urgent, call 999.</p><h4>4. Your content</h4><p>Anything you add, such as ratings or notes, stays yours. You allow us to store it so the app can work for you.</p><h4>5. Third-party services</h4><p>Maps, journey and flight information come from other providers. We are not responsible for their content or availability.</p><h4>6. Liability</h4><p>To the extent the law allows, BritCore is provided as is, and we are not liable for losses from missed transport, closures or inaccurate information.</p><h4>7. Changes and contact</h4><p>We may update these terms. Continued use means you accept the changes.</p>'],
+privacy:["Privacy Policy",MOCK+'<p class="small">Last updated: placeholder date</p><h4>What we store</h4><p>Your list, ratings, flight details and settings are saved on this phone in the browser. They are not sent to a server.</p><h4>Location</h4><p>If you allow it, your location is used on your device to centre the map and work out routes. We don\'t keep it.</p><h4>Searches</h4><p>Place searches are sent to the OpenStreetMap Nominatim service, and map tiles load from CARTO and OpenStreetMap. Those services see your IP address and what you search.</p><h4>Your choices</h4><p>You can back up or erase your data any time from the Settings tab. There are no accounts and nothing to sign up for.</p><h4>Contact</h4><p>Questions about privacy? Use Contact us.</p>'],
+cookies:["Cookies and storage",'<p>BritCore does not use advertising or tracking cookies. It uses your browser\'s local storage to remember your list, ratings, flight and settings on this phone.</p><p>Clearing your browser data, or using Erase all my data, removes it.</p>'],
+access:["Accessibility",'<p>We want BritCore to be easy for everyone to use.</p><p>You can turn on Larger text in Profile and preferences. Buttons are sized for touch, and the app works with screen readers.</p><p>If something is hard to use, tell us through Report a problem.</p>'],
+credits:["Licences and credits",'<h4>Map</h4><p>Map data &copy; OpenStreetMap contributors. Tiles &copy; CARTO.</p><h4>Search</h4><p>Place search by Nominatim (OpenStreetMap).</p><h4>Libraries</h4><p>Leaflet, used under the BSD 2-Clause licence.</p><h4>Fonts</h4><p>Nunito and Quicksand from Google Fonts, under the SIL Open Font Licence.</p>'],
+about:["About BritCore",'<p>BritCore is a free web app with no accounts or sign-up. It helps visitors find their feet in England: places to go, how to get around, what things cost and what to do when you land.</p><p>Version 0.9 preview.</p>'],
+delete:["Erase all my data",'<p>This permanently removes your list, ratings, flight and settings from this phone. It can\'t be undone.</p><button type="button" class="ghost red" id="doDelete">Erase everything</button>']
+};
+function open(k,from){var d=S[k];if(!d)return;last=from;gid("asTitle").textContent=d[0];gid("asBody").innerHTML=d[1];sh.hidden=false;sh.querySelector(".sos-card").scrollTop=0;gid("asClose").focus()}
+function close(){sh.hidden=true;if(last&&last.focus)last.focus()}
+gid("asClose").onclick=close;
+sh.onclick=function(e){if(e.target===sh)close()};
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!sh.hidden)close()});
+Array.prototype.forEach.call(document.querySelectorAll("[data-sheet]"),function(b){b.onclick=function(){open(b.dataset.sheet,b)}});
+gid("asBody").onclick=function(e){
+var t=e.target.closest("[data-mockdone]");if(t){var m=t.dataset.mockdone;close();say(m);return}
+if(e.target.id==="doExport"){
+var o={exported:new Date().toISOString(),settings:P,list:mine,flight:fl||null};
+try{var u=URL.createObjectURL(new Blob([JSON.stringify(o,null,2)],{type:"application/json"})),a=document.createElement("a");a.href=u;a.download="britcore-data.json";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},1000);close();say("Backup saved.")}catch(x){close();say("Couldn't create the file on this browser.")}}
+if(e.target.id==="doDelete"){
+try{["mylist","flight",K].forEach(function(k){localStorage.removeItem(k)})}catch(x){}
+mine={};fl=null;P={};close();say("Everything has been erased. Reloading...");setTimeout(function(){location.reload()},900)}};
+gid("shareBtn").onclick=function(){
+var u=location.href.split("#")[0];
+if(navigator.share){navigator.share({title:"BritCore",text:"A travel companion for visiting England",url:u}).catch(function(){})}
+else if(navigator.clipboard){navigator.clipboard.writeText(u).then(function(){say("Link copied.")},function(){say("Couldn't copy the link.")})}
+else say("Sharing isn't supported on this browser.")};
 })();
 </script>
 </body>
