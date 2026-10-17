@@ -24,8 +24,18 @@ button:focus-visible,summary:focus-visible,a:focus-visible,input:focus-visible,s
 h2{font-size:22px;font-weight:800;margin:0 0 2px;text-align:center}
 h3{margin:14px 0 8px;font-size:19px;text-align:center}
 .lead{margin:0 0 10px;color:var(--mute)}
-.hero{background:linear-gradient(160deg,var(--board2),var(--board));color:var(--boardtxt);border-radius:24px;padding:24px 20px;margin-bottom:16px}
+.hero{background:linear-gradient(160deg,var(--slate),var(--navy));box-shadow:0 10px 24px rgba(29,53,87,.28);color:var(--boardtxt);border-radius:24px;padding:24px 20px;margin-bottom:16px}
+.heroTop{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .hero-k{margin:0;font-size:17px}
+.hero-k span{opacity:.8}
+.liveTag{display:inline-flex;align-items:center;gap:6px;background:rgba(168,218,220,.2);color:var(--sky);border-radius:999px;padding:3px 10px;font-weight:800;font-size:12.5px}
+.liveTag i{width:8px;height:8px;border-radius:50%;background:#2ECC71;animation:liveP 2s infinite}
+@keyframes liveP{0%{box-shadow:0 0 0 0 rgba(46,204,113,.6)}70%{box-shadow:0 0 0 7px rgba(46,204,113,0)}100%{box-shadow:0 0 0 0 rgba(46,204,113,0)}}
+.heroWx{display:flex;align-items:center;gap:14px;margin:10px 0 6px}
+.wxIcon{flex:none;width:76px;height:76px}
+.wxTemp b{display:block;font-size:58px;line-height:1;font-weight:800;color:#fff;letter-spacing:-1px}
+.wxTemp small{display:block;margin-top:4px;font-size:16px;font-weight:700;color:var(--sky)}
+@media (prefers-reduced-motion:reduce){.liveTag i{animation:none}}
 .hero-h{margin:4px 0 10px;font-size:36px;line-height:1.1;font-weight:800;color:var(--amber)}
 .hero-t{margin:0 0 14px;font-size:20px;line-height:1.45;color:#fff}
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
@@ -91,7 +101,6 @@ input,select,textarea{display:block;width:100%;margin-top:4px;font:400 17px Nuni
 textarea{min-height:170px;margin:8px 0;font-size:16px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .capout{margin:8px 0}
-.sos-fab{position:fixed;right:16px;bottom:calc(104px + env(safe-area-inset-bottom,0px));z-index:20;background:#C8102E;color:#fff;border:3px solid #fff;border-radius:999px;font:800 17px Nunito,system-ui,sans-serif;min-width:60px;height:60px;box-shadow:0 2px 10px rgba(0,0,0,.35);cursor:pointer}
 .sos-wrap{position:fixed;inset:0;z-index:30;background:rgba(20,18,45,.7);display:flex;align-items:flex-end;justify-content:center}
 .sos-card{background:var(--bg);color:var(--ink);width:100%;max-width:640px;max-height:100%;overflow-y:auto;padding:20px 18px calc(18px + env(safe-area-inset-bottom,0px));border-radius:24px 24px 0 0}
 .call{display:block;text-decoration:none;color:#fff;border-radius:18px;padding:16px;margin-bottom:10px}
@@ -179,7 +188,8 @@ nav button.nav-sos{flex:none;align-self:center;flex-direction:row;background:#C8
 #startCard p.small:empty{margin:0;display:none}
 #qrBtn{position:relative;border:2px solid var(--trim)}
 #startTitle{color:var(--navy)}
-#today [data-go="guide"]{background:#FFFFFF;box-shadow:var(--shadow);color:#1D3557;border:0;display:flex;align-items:center;justify-content:center;gap:9px;width:100%;margin:16px 0 0;padding:18px 20px;font-size:17px}
+#today [data-go="guide"]{background:var(--navy);box-shadow:0 8px 18px rgba(29,53,87,.28);color:#fff;border:0;border-radius:24px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;box-sizing:border-box;margin:16px 0 0;padding:20px;font-size:17px;font-weight:800}
+#today [data-go="guide"]:active{transform:scale(.98)}
 .discGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
 .discTile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:var(--navy);border-radius:20px;box-shadow:0 8px 18px rgba(29,53,87,.28);border:0;padding:18px 10px;min-height:94px;text-align:center;color:#fff;text-decoration:none}
 .discTile svg{width:26px;height:26px}
@@ -250,6 +260,11 @@ nav button.nav-sos{flex:none;align-self:center;flex-direction:row;background:#C8
 .cxBtn:active{transform:scale(.88)}
 .hubTopo,.hubUserDot,.hubPin,.hubRoute{display:none!important}
 .hubMap{position:absolute;inset:0;z-index:0;background:#f3efe9}
+.mapMsg{position:absolute;left:24px;right:24px;top:34%;z-index:1;background:#fff;border-radius:18px;box-shadow:0 8px 28px rgba(29,53,87,.18);padding:16px 18px;text-align:center;font-family:Nunito,system-ui,sans-serif;color:var(--navy,#1D3557)}
+.mapMsg[hidden]{display:none}
+.mapMsg b{display:block;font-size:16px;font-weight:800;margin-bottom:2px}
+.mapMsg span{display:block;font-size:14px;color:#5B6B7B;margin-bottom:10px}
+.mapMsg button{border:0;border-radius:999px;background:#1D3557;color:#fff;font:800 14px Nunito,system-ui,sans-serif;padding:8px 18px;cursor:pointer}
 .hubMap .leaflet-tile-pane{filter:saturate(1.08) contrast(1.02)}
 .mapPin svg{filter:drop-shadow(0 4px 5px rgba(0,0,0,.35));animation:pinDrop .45s cubic-bezier(.22,1.4,.4,1)}
 @keyframes pinDrop{from{transform:translateY(-26px) scale(.8);opacity:0}to{transform:none;opacity:1}}
@@ -297,12 +312,12 @@ nav button.nav-sos{flex:none;align-self:center;flex-direction:row;background:#C8
 .loungeBtn:active{transform:scale(.95);background:#F0F4F8;color:var(--navy)}
 #jFlight .jLine.jLineTail.gapHot{min-height:54px}
 #jFlight .jLine.jLineTail.gapHot::after{top:20px}
-.warnRow{align-items:flex-start}
-.warnRow .jWarnDot{margin-top:8px}
-.warnBody{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
-.warnBody .warnCard{flex:none;width:100%;box-sizing:border-box}
-.warnDismiss{align-self:flex-start;border:0;background:none;padding:2px 4px 0 11px;font:700 10.5px Nunito,system-ui,sans-serif;color:#A8721A;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.warnDismiss:active{opacity:.6}
+.warnRow{align-items:center}
+.warnBody{flex:1;min-width:0;display:flex;flex-direction:row;align-items:stretch;gap:6px}
+.warnBody .warnCard{flex:1;min-width:0;box-sizing:border-box}
+.warnDismiss{flex:none;align-self:center;display:grid;place-items:center;width:30px;height:30px;padding:0;border:1.5px solid #F4C063;border-radius:50%;background:#FFF8E6;color:#B86E00;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.warnDismiss svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.warnDismiss:active{transform:scale(.92);background:#FFEBC2}
 [hidden]{display:none!important}
 
 .priv{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,var(--navy),var(--slate));color:#fff;border-radius:20px;padding:14px 16px;margin:6px 0 4px;text-align:left;box-shadow:var(--shadow-lg);animation:privIn .7s cubic-bezier(.22,.9,.32,1) both}
@@ -348,8 +363,14 @@ nav button.nav-sos{flex:none;align-self:center;flex-direction:row;background:#C8
 .asheet .ghost.red{background:var(--red);border-color:var(--red);color:#fff;width:100%}
 .asheet .ghost.wide{width:100%;margin:0 0 10px}
 html.bigtext body{font-size:20px}
+.sosTile{display:flex;align-items:center;gap:14px;width:100%;box-sizing:border-box;text-align:left;background:#C8102E;color:#fff;border:0;border-radius:24px;padding:14px 16px;margin:6px 0 12px;box-shadow:0 8px 18px rgba(200,16,46,.3);cursor:pointer;font-family:Nunito,system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+.sosTile:active{transform:scale(.98)}
+.sosMark{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#fff;color:#C8102E;font:800 16px Nunito,system-ui,sans-serif}
+.sosTxt b{display:block;font-size:18px;font-weight:800;line-height:1.2}
+.sosTxt small{display:block;margin-top:2px;font-size:14px;line-height:1.35;color:#FFE3E7}
+
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css'">
 </head>
 <body>
 <div class="wrap">
@@ -364,7 +385,6 @@ html.bigtext body{font-size:20px}
 <button role="tab" id="t-discounts" aria-selected="false" data-p="discounts"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l7-7h6v6l-7 7-6-6z"/><circle cx="14.5" cy="9.5" r="1.5"/></svg><span>Discounts</span></button>
 <button role="tab" id="t-account" aria-selected="false" data-p="account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span>Settings</span></button>
 </nav>
-<button type="button" id="sosBtn" class="sos-fab" aria-haspopup="dialog" aria-label="Emergency help">SOS</button>
 
 <section id="today" role="tabpanel" aria-labelledby="t-today">
 <div class="start" id="startCard">
@@ -377,7 +397,8 @@ html.bigtext body{font-size:20px}
 <p class="small" id="startMsg" role="status" aria-live="polite"></p>
 </div>
 <div class="hero">
-<p class="hero-k">What to wear today</p>
+<div class="heroTop"><p class="hero-k">What to wear today<span id="heroCity"></span></p><span class="liveTag" id="liveTag" hidden><i></i>Live</span></div>
+<div class="heroWx"><svg class="wxIcon" id="wxIcon" viewBox="0 0 64 64" aria-hidden="true"></svg><div class="wxTemp"><b id="wxNow">--&deg;</b><small id="wxLow">Getting the forecast</small></div></div>
 <p class="hero-h" id="heroH"></p>
 <p class="hero-t" id="heroT" role="status" aria-live="polite"></p>
 <div class="pills" id="heroP"></div>
@@ -420,7 +441,7 @@ html.bigtext body{font-size:20px}
 <div class="jLine"></div>
 <div class="jRow"><span class="jDot jDot-off" id="d3"></span><div class="jTxt"><b>Arrival</b><small id="fArr"></small></div></div>
 <div class="jLine jLineArr"></div>
-<div id="warnWrap" hidden><div class="warnRow"><span class="jWarnDot" aria-hidden="true"></span><div class="warnBody"><button type="button" class="warnCard" id="warnCard"><span class="warnTxt"><b>Hotel transfer missing</b></span><span class="warnAdd">Check options</span></button><button type="button" class="warnDismiss" id="warnDismiss">Got it covered</button></div></div><div class="jLine"></div></div>
+<div id="warnWrap" hidden><div class="warnRow"><span class="jWarnDot" aria-hidden="true"></span><div class="warnBody"><button type="button" class="warnCard" id="warnCard"><span class="warnTxt"><b>Hotel transfer missing</b></span><span class="warnAdd">Check options</span></button><button type="button" class="warnDismiss" id="warnDismiss" aria-label="Got it covered, dismiss" title="Got it covered"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button></div></div><div class="jLine"></div></div>
 <div class="jRow"><span class="jDot jDot-off" id="d4"></span><div class="jTxt"><b id="fHotelT">Hotel</b><small id="fHotel" hidden></small></div></div>
 <div class="jLine jLineTail"></div>
 </div>
@@ -467,6 +488,7 @@ html.bigtext body{font-size:20px}
 
 <section id="travel" role="tabpanel" aria-labelledby="t-travel" hidden>
 <div class="hubMap" id="hubMap"></div>
+<div class="mapMsg" id="mapMsg" role="status" hidden><b>The map couldn't load</b><span>Check your connection and try again.</span><button type="button" id="mapRetry">Try again</button></div>
 <svg class="hubTopo" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true">
 <path d="M-10 60 Q100 10 210 55 T430 40" fill="none" stroke="var(--slate)" stroke-width="2"/>
 <path d="M-10 140 Q120 90 230 135 T430 120" fill="none" stroke="var(--slate)" stroke-width="2"/>
@@ -519,7 +541,7 @@ html.bigtext body{font-size:20px}
 <div class="hubText"><b>UberX / Bolt</b><p>Standard private hire pickup</p><div class="hubMeta">~22 mins &bull; &pound;18.50</div></div>
 <button type="button" class="hubCta" onclick="event.stopPropagation()">Request Ride</button>
 </div>
-<p class="hubLegal">&#8505;&#65039; BritCore is user-supported. Map data &copy; OpenStreetMap contributors, &copy; CARTO. Transit bookings or app downloads via our tracking links may earn us a small partner commission at no extra cost to you. &#127468;&#127463;</p>
+<p class="hubLegal">&#8505;&#65039; BritCore is user-supported. Map data &copy; OpenStreetMap contributors. Transit bookings or app downloads via our tracking links may earn us a small partner commission at no extra cost to you. &#127468;&#127463;</p>
 </div>
 </section>
 
@@ -564,6 +586,7 @@ html.bigtext body{font-size:20px}
 
 <section id="account" role="tabpanel" aria-labelledby="t-account" hidden>
 <h2>Settings</h2>
+<button type="button" class="sosTile" data-sos aria-haspopup="dialog"><span class="sosMark" aria-hidden="true">SOS</span><span class="sosTxt"><b>Emergency help</b></span></button>
 <div class="priv" role="note">
 <svg class="pico" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 8 10v12c0 10.5 6.8 18.6 16 22 9.2-3.4 16-11.5 16-22V10z" fill="rgba(168,218,220,.18)" stroke="#A8DADC" stroke-width="2.4" stroke-linejoin="round"/><rect x="16.5" y="21" width="15" height="12" rx="2.5" fill="#A8DADC"/><path d="M19.5 21v-3.5a4.5 4.5 0 0 1 9 0V21" fill="none" stroke="#A8DADC" stroke-width="2.4" stroke-linecap="round"/></svg>
 <div class="pbody">
@@ -769,6 +792,13 @@ Object.keys(cities).forEach(function(c){var o=el("option","",c);o.value=c;citySe
 ["Dry","Maybe rain","Rain likely"].forEach(function(t,i){var b=el("button","",t);b.type="button";b.onclick=function(){packSrc.textContent="Based on the forecast you entered.";setRain(i)};rainBox.appendChild(b)});
 function setRain(i){rainLvl=i;Array.prototype.forEach.call(rainBox.children,function(b,j){b.setAttribute("aria-pressed",i===j)});advise()}
 function look(n,l){var m=Math.min(n,l);if(m<=4)return"Heavy coat, hat and gloves";if(m<=9)return"Warm coat";if(m<=14)return"Jacket or jumper";if(m<=19)return n-l>=3?"Light jacket":"Light layers";return n>=25?"Light, breathable clothes":"T-shirt and a light layer"}
+function wxArt(k){
+var C='<path d="M20 48a9 9 0 0 1 0-18 13 13 0 0 1 25 2 8 8 0 0 1 0 16z" fill="#fff"/>',
+S=function(x,y,r){var o='<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="#F5C04A"/>';for(var i=0;i<8;i++){var a=i*Math.PI/4,c=Math.cos(a),d=Math.sin(a);o+='<line x1="'+(x+c*(r+4))+'" y1="'+(y+d*(r+4))+'" x2="'+(x+c*(r+9))+'" y2="'+(y+d*(r+9))+'" stroke="#F5C04A" stroke-width="3" stroke-linecap="round"/>'}return o};
+if(k==="sun")return S(32,32,11);
+if(k==="part")return S(24,24,8)+C.replace("M20 48","M24 52").replace("a9 9 0 0 1 0-18","a9 9 0 0 1 0-18");
+if(k==="rain")return C+'<g stroke="#A8DADC" stroke-width="3.2" stroke-linecap="round"><line x1="24" y1="54" x2="21" y2="60"/><line x1="34" y1="54" x2="31" y2="60"/><line x1="44" y1="54" x2="41" y2="60"/></g>';
+return '<g stroke="#A8DADC" stroke-width="3.2" stroke-linecap="round"><line x1="32" y1="8" x2="32" y2="56"/><line x1="11" y1="20" x2="53" y2="44"/><line x1="11" y1="44" x2="53" y2="20"/></g>'}
 function advise(){
 var n=+tNow.value,l=+tLater.value,t=hr(+tHour.value),tip,pills=["Comfortable shoes"];
 if(l<=5)tip="Temperature dropping to "+l+"°C at "+t+". Pack a warm coat, hat and gloves.";
@@ -779,8 +809,11 @@ if(rainLvl===2){pills.push("Waterproof jacket","Umbrella");tip+=" Rain is likely
 else if(rainLvl===1){pills.push("Compact umbrella");tip+=" Showers are possible."}
 if(n>=24)pills.push("Water","Sun cream");
 heroH.textContent=look(n,l);heroT.textContent=tip;
+gid("wxNow").textContent=n+"\u00B0";
+gid("wxLow").textContent=n-l>=1?"Down to "+l+"\u00B0 at "+t:"Steady through the day";
+gid("wxIcon").innerHTML=wxArt(rainLvl===2?"rain":rainLvl===1?"part":n>=24?"sun":Math.min(n,l)<=5?"snow":"sun");
 heroP.innerHTML=pills.map(function(x){return"<span>"+x+"</span>"}).join("")}
-[tNow,tLater,tHour].forEach(function(e){e.oninput=function(){packSrc.textContent="Based on the forecast you entered.";advise()}});
+[tNow,tLater,tHour].forEach(function(e){e.oninput=function(){packSrc.textContent="Based on the forecast you entered.";gid("liveTag").hidden=true;advise()}});
 setRain(1);
 function live(city){var c=cities[city];
 fetch("https://api.open-meteo.com/v1/forecast?latitude="+c[0]+"&longitude="+c[1]+"&hourly=temperature_2m,precipitation_probability&timezone=Europe%2FLondon&forecast_days=1")
@@ -788,13 +821,14 @@ fetch("https://api.open-meteo.com/v1/forecast?latitude="+c[0]+"&longitude="+c[1]
 var T=d.hourly.temperature_2m,P=d.hourly.precipitation_probability,h=+new Intl.DateTimeFormat("en-GB",{hour:"numeric",hourCycle:"h23",timeZone:"Europe/London"}).format(new Date());
 var rest=T.slice(h),m=Math.min.apply(null,rest),mh=h+rest.indexOf(m),rp=Math.max.apply(null,P.slice(h));
 tNow.value=Math.round(T[h]);tLater.value=Math.round(m);tHour.value=mh;
-packSrc.textContent="Live forecast for "+city+", refreshed each time you open this page.";
-cityBox.hidden=false;setRain(rp>=60?2:rp>=30?1:0)}).catch(function(){})}
+var nw=new Date();packSrc.textContent="Live forecast for "+city+", refreshed each time you open this page. Updated "+new Intl.DateTimeFormat("en-GB",{hour:"2-digit",minute:"2-digit",timeZone:"Europe/London"}).format(nw)+".";
+gid("heroCity").textContent=" \u00B7 "+city;gid("liveTag").hidden=false;
+cityBox.hidden=false;setRain(rp>=60?2:rp>=30?1:0)}).catch(function(){packSrc.textContent="Couldn't get the live forecast, so this is a typical day. Open the app again to retry.";gid("liveTag").hidden=true})}
 citySel.onchange=function(){live(citySel.value)};
 live("London");
 
 var sos=document.getElementById("sos"),locMsg=document.getElementById("locMsg");
-document.getElementById("sosBtn").onclick=function(){sos.hidden=false;document.getElementById("sosClose").focus()};
+Array.prototype.forEach.call(document.querySelectorAll("[data-sos]"),function(b){b.onclick=function(){sos.hidden=false;document.getElementById("sosClose").focus()}});
 document.getElementById("sosClose").onclick=function(){sos.hidden=true};
 document.addEventListener("keydown",function(e){if(e.key==="Escape")sos.hidden=true});
 function locFail(){locMsg.textContent="Could not get your location here. Open your phone's Maps app, tap your blue dot, and read out the address or coordinates. Also look for street signs, shop names or a nearby landmark."}
@@ -1057,8 +1091,17 @@ setTimeout(function(){row.style.cssText=""},500)}
 h.addEventListener("pointerup",end);h.addEventListener("pointercancel",end);
 })();
 (function(){
-var s=document.createElement("script");s.src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
-s.onload=setup;document.head.appendChild(s);
+var urls=["https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js","https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js","https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"],ui=0;
+function load(){var s=document.createElement("script");s.src=urls[ui];s.onload=setup;s.onerror=function(){ui++;if(ui<urls.length)load();else fail()};document.head.appendChild(s)}
+function ext(q){window.open("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q+", England"),"_blank","noopener")}
+function fail(){
+var m=gid("mapMsg");
+window.hubMapShow=function(){m.hidden=false};
+gid("mapRetry").onclick=function(){location.reload()};
+gid("hubQ").addEventListener("keydown",function(e){if(e.key==="Enter"&&this.value.trim())ext(this.value.trim())});
+Array.prototype.forEach.call(document.querySelectorAll("[data-hubpick]"),function(b){b.addEventListener("click",function(){ext(b.dataset.hubpick)})});
+if(!gid("travel").hidden)m.hidden=false}
+load();
 function setup(){
 if(!window.L)return;
 var box=gid("hubMap"),hq=gid("hubQ"),map=null,me=null,meLL=null,dest=null,line=null,pinIcon=null;
@@ -1066,7 +1109,12 @@ function init(){
 if(map)return;
 map=L.map(box,{zoomControl:false,attributionControl:true}).setView([51.5074,-0.1278],11);
 map.attributionControl.setPrefix(false);
-L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",{subdomains:"abcd",maxZoom:20,attribution:"&copy; OpenStreetMap contributors &copy; CARTO"}).addTo(map);
+var SRC=[{u:"https://tile.openstreetmap.org/{z}/{x}/{y}.png",o:{maxZoom:19,attribution:"&copy; OpenStreetMap contributors"}},{u:"https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",o:{maxZoom:19,attribution:"Tiles &copy; Esri"}}],si=0,tl=null,tOk=0,tBad=0,mm=gid("mapMsg");
+function addTiles(){if(tl)map.removeLayer(tl);tOk=0;tBad=0;tl=L.tileLayer(SRC[si].u,SRC[si].o).addTo(map);
+tl.on("tileload",function(){tOk++;mm.hidden=true});
+tl.on("tileerror",function(){tBad++;if(!tOk&&tBad>=3){if(si<SRC.length-1){si++;addTiles()}else mm.hidden=false}})}
+addTiles();
+gid("mapRetry").onclick=function(){mm.hidden=true;si=0;addTiles();map.invalidateSize()};
 pinIcon=L.divIcon({className:"mapPin",html:'<svg width="28" height="36" viewBox="0 0 30 38"><path d="M15 0C6.7 0 0 6.6 0 14.8 0 25.9 15 38 15 38S30 25.9 30 14.8C30 6.6 23.3 0 15 0z" fill="#1D3557"/><circle cx="15" cy="14.5" r="5.5" fill="#fff"/></svg>',iconSize:[28,36],iconAnchor:[14,36]});
 locate()}
 function locate(){
@@ -1128,10 +1176,10 @@ report:["Report a problem",MOCK+'<label>What went wrong?<select><option>Wrong or
 feedback:["Feedback and suggestions",MOCK+form([["Your idea","A feature, a place we missed, anything","area"]],["Send feedback","Feedback isn't connected yet."])],
 home:["Add to your home screen",'<p>BritCore is a free web app, so there\'s nothing to download. For one-tap access, add it to your home screen.</p><h4>iPhone (Safari)</h4><p>Tap the Share button, then Add to Home Screen.</p><h4>Android (Chrome)</h4><p>Tap the menu, then Add to Home screen or Install app.</p>'],
 terms:["Terms of Service",MOCK+'<p class="small">Last updated: placeholder date</p><h4>1. Using BritCore</h4><p>BritCore is a travel companion for visitors to England. You agree to use it lawfully and not to misuse, copy or disrupt it.</p><h4>2. Information only</h4><p>Guides, prices, opening hours, transport times and discounts are for general information and can change. Check with the provider before you rely on them.</p><h4>3. Emergencies</h4><p>The SOS button gives quick access to emergency numbers but is not an emergency service. If it is urgent, call 999.</p><h4>4. Your content</h4><p>Anything you add, such as ratings or notes, stays yours. You allow us to store it so the app can work for you.</p><h4>5. Third-party services</h4><p>Maps, journey and flight information come from other providers. We are not responsible for their content or availability.</p><h4>6. Liability</h4><p>To the extent the law allows, BritCore is provided as is, and we are not liable for losses from missed transport, closures or inaccurate information.</p><h4>7. Changes and contact</h4><p>We may update these terms. Continued use means you accept the changes.</p>'],
-privacy:["Privacy Policy",MOCK+'<p class="small">Last updated: placeholder date</p><h4>What we store</h4><p>Your list, ratings, flight details and settings are saved on this phone in the browser. They are not sent to a server.</p><h4>Location</h4><p>If you allow it, your location is used on your device to centre the map and work out routes. We don\'t keep it.</p><h4>Searches</h4><p>Place searches are sent to the OpenStreetMap Nominatim service, and map tiles load from CARTO and OpenStreetMap. Those services see your IP address and what you search.</p><h4>Your choices</h4><p>You can back up or erase your data any time from the Settings tab. There are no accounts and nothing to sign up for.</p><h4>Contact</h4><p>Questions about privacy? Use Contact us.</p>'],
+privacy:["Privacy Policy",MOCK+'<p class="small">Last updated: placeholder date</p><h4>What we store</h4><p>Your list, ratings, flight details and settings are saved on this phone in the browser. They are not sent to a server.</p><h4>Location</h4><p>If you allow it, your location is used on your device to centre the map and work out routes. We don\'t keep it.</p><h4>Searches</h4><p>Place searches are sent to the OpenStreetMap Nominatim service, and map tiles load from OpenStreetMap (or Esri as a backup). Those services see your IP address and what you search.</p><h4>Your choices</h4><p>You can back up or erase your data any time from the Settings tab. There are no accounts and nothing to sign up for.</p><h4>Contact</h4><p>Questions about privacy? Use Contact us.</p>'],
 cookies:["Cookies and storage",'<p>BritCore does not use advertising or tracking cookies. It uses your browser\'s local storage to remember your list, ratings, flight and settings on this phone.</p><p>Clearing your browser data, or using Erase all my data, removes it.</p>'],
 access:["Accessibility",'<p>We want BritCore to be easy for everyone to use.</p><p>You can turn on Larger text in Profile and preferences. Buttons are sized for touch, and the app works with screen readers.</p><p>If something is hard to use, tell us through Report a problem.</p>'],
-credits:["Licences and credits",'<h4>Map</h4><p>Map data &copy; OpenStreetMap contributors. Tiles &copy; CARTO.</p><h4>Search</h4><p>Place search by Nominatim (OpenStreetMap).</p><h4>Libraries</h4><p>Leaflet, used under the BSD 2-Clause licence.</p><h4>Fonts</h4><p>Nunito and Quicksand from Google Fonts, under the SIL Open Font Licence.</p>'],
+credits:["Licences and credits",'<h4>Map</h4><p>Map data and tiles &copy; OpenStreetMap contributors, with Esri as a backup.</p><h4>Search</h4><p>Place search by Nominatim (OpenStreetMap).</p><h4>Libraries</h4><p>Leaflet, used under the BSD 2-Clause licence.</p><h4>Fonts</h4><p>Nunito and Quicksand from Google Fonts, under the SIL Open Font Licence.</p>'],
 about:["About BritCore",'<p>BritCore is a free web app with no accounts or sign-up. It helps visitors find their feet in England: places to go, how to get around, what things cost and what to do when you land.</p><p>Version 0.9 preview.</p>'],
 delete:["Erase all my data",'<p>This permanently removes your list, ratings, flight and settings from this phone. It can\'t be undone.</p><button type="button" class="ghost red" id="doDelete">Erase everything</button>']
 };
