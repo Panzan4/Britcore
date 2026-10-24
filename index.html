@@ -562,6 +562,66 @@ h1{color:#F6F1E7}
 }
 #live{position:static;display:block;padding:0;max-width:none;margin:0}
 #live .nextTile{min-height:420px}
+
+/* ===== refresh: calmer green, editorial lists instead of tiles ===== */
+:root{--mint:#9BDFBF}
+.cover::after{opacity:.07}
+.cover .eyebrow,.hero-k{color:var(--mint)}
+.hero-h{color:#F6F1E7}
+.wxTemp small{color:#F6F1E7;opacity:.7}
+.liveTag{color:var(--mint);border-color:rgba(155,223,191,.45)}
+.ppills span{color:var(--mint);border-color:rgba(155,223,191,.4)}
+.plink{color:var(--mint)}
+.pico path,.pico rect{stroke:var(--mint)}
+.pico rect{fill:var(--mint)}
+nav button[aria-selected="true"]{color:var(--mint);background:rgba(155,223,191,.12)}
+.guide details[open] .gIco{color:var(--mint)}
+/* start card: flat, left-aligned, two clear actions */
+.start{background:none;border:0;box-shadow:none;border-radius:0;padding:0;margin:0 0 22px;text-align:left}
+.start h2{font:800 28px/1.1 Archivo,DM Sans,system-ui,sans-serif;letter-spacing:-.03em;text-align:left;margin:0 0 14px;color:var(--navy)}
+.start .ghost{position:relative;display:flex;align-items:center;justify-content:space-between;width:100%;margin:0 0 10px;padding:17px 18px;border-radius:16px;font:800 17px DM Sans,system-ui,sans-serif;text-align:left}
+.start #qrBtn{background:var(--navy);color:#F6F1E7;border:1.5px solid var(--navy)}
+.start #useLoc{background:none;color:var(--navy);border:1.5px solid var(--navy)}
+.start .recBadge{top:-9px;left:auto;right:16px;transform:none;background:var(--trim);color:var(--navy)}
+.start .small:empty{display:none}
+.startNote{margin:4px 0 0;text-align:left}
+/* guide button: outline row */
+#today [data-go="guide"]{background:none;color:var(--navy);border:1.5px solid var(--navy);box-shadow:none;border-radius:16px;justify-content:space-between;padding:17px 18px}
+#today [data-go="guide"]::after{content:"\2192";font-size:22px;font-weight:700;line-height:1}
+/* quick facts: editorial stats */
+.qf{gap:6px 22px;margin:0 0 20px}
+.qf div{background:none;border-radius:0;border-top:3px solid var(--navy);padding:10px 0 12px}
+.qf b{color:var(--navy);font-size:30px}
+.qf span{color:var(--mute);opacity:1;font-weight:700;margin-top:4px}
+/* discounts: list rows instead of tiles */
+.discGrid{display:block}
+.discTile,a.discTile{display:grid;grid-template-columns:48px 1fr 24px;align-items:center;column-gap:14px;min-height:0;padding:16px 2px;background:none;border-radius:0;border:0;border-bottom:1px solid var(--line);text-align:left}
+.discGrid .discTile:first-child{border-top:1px solid var(--line)}
+.dtIco{grid-row:1/3;width:48px;height:48px;margin:0;border:1.5px solid var(--navy);border-radius:50%;background:none;color:var(--navy)}
+.dtIco svg{width:22px;height:22px}
+.discTile b{grid-column:2;align-self:end;font:800 21px/1.1 Archivo,DM Sans,system-ui,sans-serif;letter-spacing:-.02em;color:var(--navy)}
+.discTile small{grid-column:2;align-self:start;margin-top:3px;color:var(--mute);font-weight:600;font-size:14.5px}
+a.discTile::after{content:"\2192";grid-column:3;grid-row:1/3;font-size:22px;font-weight:700;color:var(--navy);text-align:right}
+.discTile-empty{display:flex;border:0;border-bottom:1px dashed var(--line);padding:16px 2px;color:var(--mute);justify-content:flex-start;gap:14px}
+.discTile-empty .dtIco{border-style:dashed;border-color:var(--mute);color:var(--mute);margin:0}
+.discTile-empty b{color:var(--mute);font-size:17px}
+/* guide, settings, my places: flat rows */
+.guide details,.guide details[open]{background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none}
+.guide details:first-child{border-top:1px solid var(--line)}
+.guide summary{padding:16px 2px}
+.guide .body{margin:0 2px;border-top:0;padding-top:0}
+.gIco{background:none;border:1.5px solid var(--navy);color:var(--navy);border-radius:50%}
+.guide details[open] .gIco{background:var(--navy)}
+.apanel{background:none;border:0;border-radius:0;border-top:1px solid var(--line);box-shadow:none;overflow:visible}
+.arow{border-bottom:1px solid var(--line);padding:15px 2px}
+.apanel .gIco{width:38px;height:38px;border-radius:50%;background:none}
+.arow.danger .gIco{background:none;border-color:var(--red)}
+.list>li{background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none;padding-left:2px;padding-right:2px}
+.kIco{border-radius:50%}
+.list .gIco{background:none;color:var(--navy)}
+.upd{border-radius:16px}
+#today [data-go="guide"]{justify-content:flex-start;text-align:left}
+#today [data-go="guide"]::after{margin-left:auto}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css'">
 </head>
