@@ -754,6 +754,14 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 .hubText b{font-size:15px}
 .hubCta{background:var(--trim)!important;color:var(--navy)!important;border-radius:14px!important;width:98px;padding:12px 8px}
 .hubCta svg{stroke:var(--navy)!important}
+
+/* ===== branding on the map ===== */
+.hubSearchBar svg.brandMark{width:30px;height:30px;stroke:none;fill:none;border-radius:9px;margin-left:-4px}
+.mapBrand{position:absolute;left:14px;bottom:106px;z-index:1;display:flex;align-items:center;gap:8px;padding:6px 12px 6px 7px;border-radius:999px;background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.7);box-shadow:0 4px 14px rgba(20,20,43,.14);pointer-events:none}
+.mapBrand .brandMark.sm{width:26px;height:26px}
+.mapBrand span{display:block;line-height:1}
+.mapBrand b{display:block;font:800 15px/1 Archivo,DM Sans,system-ui,sans-serif;letter-spacing:-.02em;color:var(--navy)}
+.mapBrand i{display:block;margin-top:3px;font:800 8px/1 DM Sans,system-ui,sans-serif;font-style:normal;letter-spacing:.38em;color:var(--mute)}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.css" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css'">
 </head>
@@ -884,6 +892,7 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 
 <section id="travel" role="tabpanel" aria-labelledby="t-travel" hidden>
 <div class="hubMap" id="hubMap"></div>
+<div class="mapBrand" aria-hidden="true"><svg class="brandMark sm" viewBox="0 0 100 100" ><rect width="100" height="100" rx="24" fill="#2FE38A"/><rect x="43" y="19" width="14" height="30" rx="4" fill="#14142B"/><rect x="19" y="60" width="26" height="13" rx="4" fill="#14142B"/><rect x="55" y="60" width="26" height="13" rx="4" fill="#14142B"/></svg><span><b>PlugIn</b><i>ENGLAND</i></span></div>
 <div class="mapMsg" id="mapMsg" role="status" hidden><b>The map couldn't load</b><span>Check your connection and try again.</span><small id="mapWhy"></small><button type="button" id="mapRetry">Try again</button></div>
 <svg class="hubTopo" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true">
 <path d="M-10 60 Q100 10 210 55 T430 40" fill="none" stroke="var(--slate)" stroke-width="2"/>
@@ -906,7 +915,7 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 </div>
 <div class="mapSearchFloat">
 <div class="hubSearchBar">
-<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.2" y2="16.2"/></svg>
+<svg class="brandMark" viewBox="0 0 100 100" role="img" aria-label="PlugIn England"><rect width="100" height="100" rx="24" fill="#2FE38A"/><rect x="43" y="19" width="14" height="30" rx="4" fill="#14142B"/><rect x="19" y="60" width="26" height="13" rx="4" fill="#14142B"/><rect x="55" y="60" width="26" height="13" rx="4" fill="#14142B"/></svg>
 <input id="hubQ" type="text" placeholder="Where to in England?">
 </div>
 <div class="hubChipsRow">
