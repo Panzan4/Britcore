@@ -1590,7 +1590,7 @@ Ctl.prototype.onAdd=function(m){
 var c=document.createElement("div");c.className="maplibregl-ctrl mapCtl";
 var t=document.createElement("button");t.type="button";t.className="ctlBtn";t.setAttribute("aria-label","Switch between 2D and 3D");
 function lab(){t.textContent=m.getPitch()>10?"2D":"3D"}lab();
-t.onclick=function(){var on=m.getPitch()>10;m.easeTo({pitch:on?0:60,bearing:on?0:-14,duration:700})};
+t.onclick=function(){var on=m.getPitch()>10;m.easeTo({pitch:on?0:56,bearing:on?0:-14,duration:700})};
 m.on("pitchend",lab);
 var l=document.createElement("button");l.type="button";l.className="ctlBtn";l.setAttribute("aria-label","Show my location");
 l.innerHTML='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 11.5L21 3l-8.5 18-2-7.5z" fill="none" stroke="#2D74FF" stroke-width="2" stroke-linejoin="round"/></svg>';
@@ -1645,7 +1645,7 @@ L.push({id:"water-label",type:"symbol",source:S,"source-layer":"water_name",layo
 L.push({id:"poi-label",type:"symbol",source:S,"source-layer":"poi",minzoom:15.5,filter:["<=",["coalesce",["get","rank"],99],14],layout:{"text-field":["coalesce",["get","name:latin"],["get","name"]],"text-font":[reg],"text-size":11,"text-anchor":"top","text-max-width":7},paint:P({"text-color":"#7A8795"})});
 L.push({id:"place-small",type:"symbol",source:S,"source-layer":"place",minzoom:11,filter:cls(["suburb","neighbourhood","quarter","hamlet","village","isolated_dwelling"]),layout:{"text-field":["coalesce",["get","name:latin"],["get","name"]],"text-font":[reg],"text-size":Ln(11,10,16,13),"text-transform":"uppercase","text-letter-spacing":.1,"text-max-width":8},paint:P({"text-color":"#8E939B"})});
 L.push({id:"place-big",type:"symbol",source:S,"source-layer":"place",filter:cls(["city","town","capital"]),layout:{"text-field":["coalesce",["get","name:latin"],["get","name"]],"text-font":[bold],"text-size":Ln(5,12,12,17,16,22),"text-max-width":8},paint:P({"text-color":"#3F4452"})});
-return {version:8,name:"PlugIn",sources:st.sources,glyphs:st.glyphs,light:{anchor:"viewport",color:"#ffffff",intensity:0},layers:L}}
+return {version:8,name:"PlugIn",sources:st.sources,glyphs:st.glyphs,light:{anchor:"viewport",color:"#ffffff",intensity:.26,position:[1.4,215,38]},layers:L}}
 function init(){
 if(map||noGL)return;
 mm.hidden=true;ready=false;
@@ -1657,7 +1657,7 @@ map.addControl(new Ctl(),"top-right");
 var custom=false;
 function syncBld(){try{
 var on=map.getPitch()>10,has=!!map.getLayer("bld-3d");
-if(on&&!has&&vecSrc)map.addLayer({id:"bld-3d",type:"fill-extrusion",source:vecSrc,"source-layer":"building",minzoom:15,paint:{"fill-extrusion-color":"#EDEBE5","fill-extrusion-height":["coalesce",["get","render_height"],8],"fill-extrusion-base":["coalesce",["get","render_min_height"],0],"fill-extrusion-opacity":.96,"fill-extrusion-vertical-gradient":false}},"road-label");
+if(on&&!has&&vecSrc)map.addLayer({id:"bld-3d",type:"fill-extrusion",source:vecSrc,"source-layer":"building",minzoom:14.5,paint:{"fill-extrusion-color":["interpolate",["linear"],["coalesce",["get","render_height"],0],0,"#EFEBE2",30,"#E7E2D7",90,"#DAD5C8"],"fill-extrusion-height":["coalesce",["get","render_height"],8],"fill-extrusion-base":["coalesce",["get","render_min_height"],0],"fill-extrusion-opacity":.97,"fill-extrusion-vertical-gradient":true}},"road-label");
 else if(!on&&has)map.removeLayer("bld-3d")}catch(e){}}
 map.on("pitchend",syncBld);
 map.on("style.load",function(){if(!(custom||usedRaster))return;syncBld();ready=true;mm.hidden=true;why("");pending.splice(0).forEach(function(f){f()})});
