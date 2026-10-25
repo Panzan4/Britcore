@@ -718,17 +718,22 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 #jEmpty .jHandle{margin-top:12px}
 
 /* ===== MapLibre map ===== */
-.maplibregl-ctrl-top-right{top:118px}
-.maplibregl-ctrl-bottom-right,.maplibregl-ctrl-bottom-left{bottom:104px}
-.maplibregl-ctrl-attrib{background:rgba(255,255,255,.72)!important;border-radius:10px 0 0 0;font-size:10px;backdrop-filter:blur(4px)}
+#hubMap .maplibregl-ctrl-top-right{top:112px}
+#hubMap .maplibregl-ctrl-bottom-right,#hubMap .maplibregl-ctrl-bottom-left{bottom:104px}
+#hubMap .maplibregl-ctrl-attrib{background:rgba(255,255,255,.72)!important;border-radius:10px 0 0 0;font-size:10px;backdrop-filter:blur(4px)}
 .maplibregl-ctrl-group{border-radius:14px!important;box-shadow:0 4px 14px rgba(20,20,43,.18)!important;overflow:hidden}
+#hubMap.flat .maplibregl-ctrl-top-right{display:none}
 .tiltBtn{width:38px!important;height:38px!important;font:800 13px DM Sans,system-ui,sans-serif;color:var(--navy);letter-spacing:.02em}
 .mkWrap{display:flex;flex-direction:column;align-items:center;pointer-events:none}
 .mkLabel{margin-bottom:3px;background:#14142B;color:#fff;border-radius:999px;font:800 12px DM Sans,system-ui,sans-serif;padding:3px 10px;white-space:nowrap;box-shadow:0 3px 8px rgba(20,20,43,.3)}
 .mkWrap svg{display:block;filter:drop-shadow(0 4px 5px rgba(0,0,0,.35));animation:pinDrop .45s cubic-bezier(.22,1.4,.4,1)}
 .mkStart{display:block;width:18px;height:18px;border-radius:50%;background:#14142B;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.mapMsg small{display:block;margin:-4px 0 10px;font-size:12px;color:var(--mute);line-height:1.35}
+.mapMsg small:empty{display:none}
+/* MapLibre sets position:relative on its container, which collapsed the map to zero height */
+#hubMap.maplibregl-map,#hubMap.maplibregl-map.maplibregl-map{position:absolute;inset:0;width:100%;height:100%}
 </style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css" onerror="this.onerror=null;this.href='https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css'">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.css" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css'">
 </head>
 <body>
 <div class="wrap">
@@ -857,7 +862,7 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 
 <section id="travel" role="tabpanel" aria-labelledby="t-travel" hidden>
 <div class="hubMap" id="hubMap"></div>
-<div class="mapMsg" id="mapMsg" role="status" hidden><b>The map couldn't load</b><span>Check your connection and try again.</span><button type="button" id="mapRetry">Try again</button></div>
+<div class="mapMsg" id="mapMsg" role="status" hidden><b>The map couldn't load</b><span>Check your connection and try again.</span><small id="mapWhy"></small><button type="button" id="mapRetry">Try again</button></div>
 <svg class="hubTopo" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true">
 <path d="M-10 60 Q100 10 210 55 T430 40" fill="none" stroke="var(--slate)" stroke-width="2"/>
 <path d="M-10 140 Q120 90 230 135 T430 120" fill="none" stroke="var(--slate)" stroke-width="2"/>
@@ -1505,13 +1510,15 @@ setTimeout(function(){row.style.cssText=""},500)}
 h.addEventListener("pointerup",end);h.addEventListener("pointercancel",end);
 })();
 (function(){
-var urls=["https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js","https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"],ui=0;
-var STYLE="https://tiles.openfreemap.org/styles/liberty",noGL=false;
+var urls=["https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.js","https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js","https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"],ui=0;
+var STYLE="https://tiles.openfreemap.org/styles/liberty",noGL=false,usedRaster=false;
+var RASTER={version:8,sources:{osm:{type:"raster",tiles:["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],tileSize:256,maxzoom:19,attribution:"&copy; OpenStreetMap contributors"}},layers:[{id:"osm",type:"raster",source:"osm"}]};
 function load(){var s=document.createElement("script");s.src=urls[ui];s.onload=setup;s.onerror=function(){ui++;if(ui<urls.length)load();else fail()};document.head.appendChild(s)}
 function ext(q){window.open("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q+", England"),"_blank","noopener")}
-function fail(skip){
+function why(t){var w=gid("mapWhy");if(w)w.textContent=t}
+function fail(skip,reason){
 noGL=true;
-var m=gid("mapMsg");
+var m=gid("mapMsg");why(reason||"The map software didn't load. It may be blocked on this network.");
 window.hubMapShow=function(){m.hidden=false};
 gid("mapRetry").onclick=function(){location.reload()};
 window.hubTrip=function(o,d,sub){gid("hubQ").value=d.label;if(window.hubSet)window.hubSet(d.label,sub);window.open("https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(o.q)+"&destination="+encodeURIComponent(d.q)+"&travelmode=transit","_blank","noopener")};
@@ -1539,13 +1546,19 @@ if(map||noGL)return;
 mm.hidden=true;ready=false;
 try{
 map=new maplibregl.Map({container:box,style:STYLE,center:[-0.1278,51.5074],zoom:11.6,pitch:55,bearing:-14,maxPitch:75,attributionControl:false,cooperativeGestures:false});
-}catch(e){map=null;fail(true);return}
+}catch(e){map=null;fail(true,"This browser can't draw the 3D map ("+(e&&e.message?e.message:"WebGL unavailable")+").");return}
 map.addControl(new maplibregl.AttributionControl({compact:true}));
 map.addControl(new maplibregl.NavigationControl({showZoom:false,visualizePitch:true}),"top-right");
 map.addControl(new tilt(),"top-right");
-map.on("load",function(){ready=true;mm.hidden=true;pending.splice(0).forEach(function(f){f()})});
-map.on("error",function(){if(!ready)mm.hidden=false});
-setTimeout(function(){if(!ready&&map)mm.hidden=false},12000);
+map.on("load",function(){ready=true;mm.hidden=true;why("");pending.splice(0).forEach(function(f){f()})});
+map.on("idle",function(){if(usedRaster&&!ready){ready=true;mm.hidden=true;pending.splice(0).forEach(function(f){f()})}});
+map.on("error",function(e){
+if(ready)return;
+var msg=e&&e.error&&e.error.message?e.error.message:"unknown error";
+if(!usedRaster){usedRaster=true;why("The 3D map style didn't load ("+msg+"). Showing a flat map instead.");try{map.setStyle(RASTER);map.easeTo({pitch:0,bearing:0,duration:0});box.classList.add("flat")}catch(x){mm.hidden=false}}
+else{why("Map error: "+msg);mm.hidden=false}});
+setTimeout(function(){if(!ready&&map&&!usedRaster){usedRaster=true;why("The 3D map is slow here, so this is a flat map for now.");try{map.setStyle(RASTER);map.easeTo({pitch:0,bearing:0,duration:0});box.classList.add("flat")}catch(x){}}},7000);
+setTimeout(function(){if(!ready&&map){var w=gid("mapWhy");if(!w||!w.textContent)why("The map is taking too long to load. Check your connection.");mm.hidden=false}},17000);
 locate()}
 function locate(){
 if(!navigator.geolocation)return;
