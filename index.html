@@ -732,6 +732,28 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 .mapMsg small:empty{display:none}
 /* MapLibre sets position:relative on its container, which collapsed the map to zero height */
 #hubMap.maplibregl-map,#hubMap.maplibregl-map.maplibregl-map{position:absolute;inset:0;width:100%;height:100%}
+
+/* ===== map UI: frosted glass, soft cards ===== */
+.hubSearchBar{background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(18px) saturate(1.5);backdrop-filter:blur(18px) saturate(1.5);border:1px solid rgba(255,255,255,.7);box-shadow:0 6px 20px rgba(20,20,43,.12)}
+.hubChip{background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.7);color:var(--navy)}
+#hubMap .maplibregl-ctrl-top-right{top:112px;right:12px}
+.mapCtl{display:flex;flex-direction:column;border-radius:24px;overflow:hidden;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 6px 18px rgba(20,20,43,.16)!important;border:1px solid rgba(255,255,255,.7);margin:0!important}
+.ctlBtn{display:grid;place-items:center;width:48px;height:48px;border:0;background:none;color:var(--navy);font:800 13px DM Sans,system-ui,sans-serif;cursor:pointer;padding:0}
+.ctlBtn+.ctlBtn{border-top:1px solid rgba(20,20,43,.1)}
+.ctlBtn:active{background:rgba(20,20,43,.06)}
+.rtLabel{background:#2D74FF;color:#fff;border-radius:12px;padding:5px 11px;font:800 13px DM Sans,system-ui,sans-serif;box-shadow:0 4px 12px rgba(45,116,255,.4);white-space:nowrap;pointer-events:none}
+.hubSheet{background:rgba(250,250,247,.78);-webkit-backdrop-filter:blur(26px) saturate(1.6);backdrop-filter:blur(26px) saturate(1.6);border:1px solid rgba(255,255,255,.7);box-shadow:0 -10px 40px rgba(20,20,43,.14)}
+.hubFT{background:rgba(255,255,255,.7);border-radius:18px;padding:4px 14px;margin:6px 0 12px}
+.hubFTrow{display:flex;align-items:center;gap:12px;padding:12px 0;font:700 16px DM Sans,system-ui,sans-serif;color:var(--ink)}
+.hubFTrow+.hubFTrow{border-top:1px solid rgba(20,20,43,.08)}
+.ftDot{flex:none;width:14px;height:14px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1.5px rgba(20,20,43,.15)}
+.ftDot.a{background:#2D74FF}.ftDot.b{background:#FF5C35}
+.hubRow{background:rgba(255,255,255,.78);border:0!important;border-radius:18px;padding:12px 12px;margin:0 0 10px}
+.hubTime{font:800 26px/1 Archivo,DM Sans,system-ui,sans-serif;letter-spacing:-.035em;color:var(--navy);margin-bottom:5px}
+.hubTime small{margin-left:8px;font:800 14px DM Sans,system-ui,sans-serif;letter-spacing:0;color:var(--mute)}
+.hubText b{font-size:15px}
+.hubCta{background:var(--trim)!important;color:var(--navy)!important;border-radius:14px!important;width:98px;padding:12px 8px}
+.hubCta svg{stroke:var(--navy)!important}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.css" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css'">
 </head>
@@ -898,19 +920,20 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 <h3 id="hubTitle">Routes<span>3 ways to get there</span></h3>
 <button type="button" class="hubClose" id="hubClose" aria-label="Close">&times;</button>
 </div>
+<div class="hubFT"><div class="hubFTrow"><i class="ftDot a"></i><span id="hubFrom">Your location</span></div><div class="hubFTrow"><i class="ftDot b"></i><span id="hubTo">Choose a destination</span></div></div>
 <div class="hubRow">
 <span class="gIco"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3.5" width="14" height="14" rx="3"/><path d="M5 11h14M9 21l2-3.5M15 21l-2-3.5"/><circle cx="9" cy="14.2" r=".6"/><circle cx="15" cy="14.2" r=".6"/></svg></span>
-<div class="hubText"><b>National Rail / Tube</b><p>Fastest route via King's Cross</p><div class="hubMeta">~35 mins &bull; &pound;12.50</div></div>
+<div class="hubText"><div class="hubTime">35 min<small>&pound;12.50</small></div><b>National Rail / Tube</b><p>Fastest route via King's Cross</p></div>
 <button type="button" class="hubCta" onclick="event.stopPropagation()">Book<svg width="11" height="11" viewBox="0 0 24 24" style="stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></button>
 </div>
 <div class="hubRow">
 <span class="gIco"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 15l1.6-5.2A2 2 0 0 1 8.5 8.5h7a2 2 0 0 1 1.9 1.3L19 15"/><rect x="3.5" y="15" width="17" height="4.5" rx="1.5"/><circle cx="7.5" cy="17.2" r=".7"/><circle cx="16.5" cy="17.2" r=".7"/><path d="M10.5 6h3"/></svg></span>
-<div class="hubText"><b>London Black Cab</b><p>Iconic city route via bus lanes</p><div class="hubMeta">~20 mins &bull; &pound;24.00 (Est)</div></div>
+<div class="hubText"><div class="hubTime">20 min<small>&pound;24.00</small></div><b>London Black Cab</b><p>Iconic city route via bus lanes</p></div>
 <button type="button" class="hubCta" onclick="event.stopPropagation()">Hail<svg width="11" height="11" viewBox="0 0 24 24" style="stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></button>
 </div>
 <div class="hubRow">
 <span class="gIco"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/></svg></span>
-<div class="hubText"><b>UberX / Bolt</b><p>Standard private hire pickup</p><div class="hubMeta">~22 mins &bull; &pound;18.50</div></div>
+<div class="hubText"><div class="hubTime">22 min<small>&pound;18.50</small></div><b>UberX / Bolt</b><p>Standard private hire pickup</p></div>
 <button type="button" class="hubCta" onclick="event.stopPropagation()">Request<svg width="11" height="11" viewBox="0 0 24 24" style="stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></button>
 </div>
 <p class="discNote hubNote"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".8"/></svg><span>Some links may earn us a commission, at no extra cost to you. Map data &copy; OpenStreetMap contributors.</span></p>
@@ -1408,7 +1431,7 @@ flTick();setInterval(flTick,15000);
 (function(){
 var hq=gid("hubQ"),hsheet=gid("hubSheet"),hpin=gid("hubPin"),hroute=gid("hubRoute"),htitle=gid("hubTitle");
 function hubSet(name,sub){
-if(name){htitle.innerHTML="Routes to "+name+"<span>"+(sub||"3 ways to get there")+"</span>";hsheet.classList.add("shown","open");hpin.classList.add("show");hroute.classList.add("show")}
+if(name){htitle.innerHTML="Routes to "+name+"<span>"+(sub||"3 ways to get there")+"</span>";gid("hubFrom").textContent=(sub&&/^From /.test(sub))?sub.replace(/^From /,""):"Your location";gid("hubTo").textContent=name;hsheet.classList.add("shown","open");hpin.classList.add("show");hroute.classList.add("show")}
 else{htitle.innerHTML="Routes<span>3 ways to get there</span>";hsheet.classList.remove("shown","open");hpin.classList.remove("show");hroute.classList.remove("show")}
 }
 window.hubSet=hubSet;
@@ -1537,7 +1560,7 @@ return d}
 function tint(){
 var st;try{st=map.getStyle()}catch(e){return}
 if(!st||!st.layers)return;
-var LAND="#F3F0E8",PARK="#C9E7B2",WOOD="#B7DB9F",WATER="#A5D3F5",BLDG="#ECE7DC";
+var LAND="#F4F3EF",PARK="#D2EBB9",WOOD="#C2E2A8",WATER="#A8DAFA",BLDG="#EAE8E3";
 st.layers.forEach(function(l){
 var id=l.id,t=l.type;
 function P(k,v){try{map.setPaintProperty(id,k,v)}catch(e){}}
@@ -1552,27 +1575,86 @@ else if(t==="line"){
 var cas=/casing|case/.test(id);
 if(/waterway|river|stream|canal/.test(id))P("line-color",WATER);
 else if(/rail/.test(id)&&!/station/.test(id))P("line-color","#CFCABF");
-else if(/motorway/.test(id))P("line-color",cas?"#E39B1E":"#FFC24D");
-else if(/trunk|primary/.test(id))P("line-color",cas?"#E2C060":"#FFE08A");
-else if(/secondary|tertiary|minor|service|street|residential|link/.test(id)&&!/path/.test(id))P("line-color",cas?"#D9D3C5":"#FFFFFF")}
-else if(t==="symbol"){P("text-halo-color","rgba(255,255,255,.92)");P("text-halo-width",1.4)}})}
+else if(/motorway/.test(id))P("line-color",cas?"#E8B24A":"#FFD27A");
+else if(/trunk|primary/.test(id))P("line-color",cas?"#EBC878":"#FFE3A3");
+else if(/secondary|tertiary|minor|service|street|residential|link/.test(id)&&!/path/.test(id))P("line-color",cas?"#DAD7D0":"#FFFFFF")}
+else if(t==="symbol"){
+function Lo(k,v){try{map.setLayoutProperty(id,k,v)}catch(e){}}
+P("text-halo-color","rgba(255,255,255,.95)");P("text-halo-width",1.5);
+if(/road|street|highway|motorway|trunk|primary|secondary|tertiary|minor|path|link|transit|rail/.test(id)){Lo("text-transform","uppercase");Lo("text-letter-spacing",.06);P("text-color","#8E939B")}
+else if(/suburb|neighbo|quarter|hamlet|village|town/.test(id)){Lo("text-transform","uppercase");Lo("text-letter-spacing",.1);P("text-color","#8E939B")}
+else if(/city|capital|country|state/.test(id)){P("text-color","#3F4452")}}})}
 function whenReady(f){if(ready)f();else pending.push(f)}
-function tilt(){}
-tilt.prototype.onAdd=function(m){var c=document.createElement("div");c.className="maplibregl-ctrl maplibregl-ctrl-group";var b=document.createElement("button");b.type="button";b.className="tiltBtn";b.setAttribute("aria-label","Switch between 2D and 3D");
-function lab(){b.textContent=m.getPitch()>10?"2D":"3D"}lab();
-b.onclick=function(){var on=m.getPitch()>10;m.easeTo({pitch:on?0:55,bearing:on?0:-14,duration:700})};
-m.on("pitchend",lab);c.appendChild(b);this._c=c;return c};
-tilt.prototype.onRemove=function(){if(this._c&&this._c.parentNode)this._c.parentNode.removeChild(this._c)};
+function Ctl(){}
+Ctl.prototype.onAdd=function(m){
+var c=document.createElement("div");c.className="maplibregl-ctrl mapCtl";
+var t=document.createElement("button");t.type="button";t.className="ctlBtn";t.setAttribute("aria-label","Switch between 2D and 3D");
+function lab(){t.textContent=m.getPitch()>10?"2D":"3D"}lab();
+t.onclick=function(){var on=m.getPitch()>10;m.easeTo({pitch:on?0:60,bearing:on?0:-14,duration:700})};
+m.on("pitchend",lab);
+var l=document.createElement("button");l.type="button";l.className="ctlBtn";l.setAttribute("aria-label","Show my location");
+l.innerHTML='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 11.5L21 3l-8.5 18-2-7.5z" fill="none" stroke="#2D74FF" stroke-width="2" stroke-linejoin="round"/></svg>';
+l.onclick=function(){locate(true)};
+c.appendChild(t);c.appendChild(l);this._c=c;return c};
+Ctl.prototype.onRemove=function(){if(this._c&&this._c.parentNode)this._c.parentNode.removeChild(this._c)};
+function dist(A,B){var R=6371,r=Math.PI/180,dL=(B[1]-A[1])*r,dN=(B[0]-A[0])*r,a=Math.sin(dL/2)*Math.sin(dL/2)+Math.cos(A[1]*r)*Math.cos(B[1]*r)*Math.sin(dN/2)*Math.sin(dN/2),k=2*R*Math.asin(Math.sqrt(a));
+var u="mi";try{u=(JSON.parse(localStorage.getItem("acctPrefs")||"{}").unit)||"mi"}catch(e){}
+var v=u==="km"?k:k*0.621371;return (v<10?v.toFixed(1):Math.round(v))+" "+u}
+function routeLabel(A,B){var d=document.createElement("div");d.className="rtLabel";d.textContent=dist(A,B)+" direct";
+marks.push(new maplibregl.Marker({element:d,anchor:"center"}).setLngLat([(A[0]+B[0])/2,(A[1]+B[1])/2]).addTo(map))}
+var EMPTY={version:8,sources:{},layers:[{id:"bg",type:"background",paint:{"background-color":"#F4F3EF"}}]};
+function buildStyle(st){
+var S="openmaptiles";
+Object.keys(st.sources||{}).forEach(function(k){if(st.sources[k].type==="vector")S=k});
+var fonts=[];(st.layers||[]).forEach(function(l){var f=l.layout&&l.layout["text-font"];if(f&&f.length)fonts.push(f[0])});
+var reg=fonts.filter(function(f){return /Regular/i.test(f)})[0]||fonts[0]||"Noto Sans Regular";
+var bold=fonts.filter(function(f){return /Bold/i.test(f)})[0]||reg;
+var ital=fonts.filter(function(f){return /Italic/i.test(f)})[0]||reg;
+function Wd(){return ["interpolate",["exponential",1.5],["zoom"]].concat([].slice.call(arguments))}
+function Ln(){return ["interpolate",["linear"],["zoom"]].concat([].slice.call(arguments))}
+function cls(a){return ["in",["get","class"],["literal",a]]}
+var LAND="#F4F3EF",WATER="#A8DAFA",L=[];
+L.push({id:"bg",type:"background",paint:{"background-color":LAND}});
+L.push({id:"lc-grass",type:"fill",source:S,"source-layer":"landcover",filter:cls(["grass"]),paint:{"fill-color":"#DDEFC6"}});
+L.push({id:"lc-wood",type:"fill",source:S,"source-layer":"landcover",filter:cls(["wood"]),paint:{"fill-color":"#CDE6B1"}});
+L.push({id:"lu-park",type:"fill",source:S,"source-layer":"landuse",filter:cls(["park","garden","pitch","playground","cemetery","golf_course","zoo","stadium"]),paint:{"fill-color":"#D3EBBA"}});
+L.push({id:"lu-other",type:"fill",source:S,"source-layer":"landuse",filter:cls(["hospital","school","university","college","kindergarten"]),paint:{"fill-color":"#EFEBE2"}});
+L.push({id:"park",type:"fill",source:S,"source-layer":"park",paint:{"fill-color":"#CFE8B3","fill-opacity":.45}});
+L.push({id:"water",type:"fill",source:S,"source-layer":"water",paint:{"fill-color":WATER}});
+L.push({id:"waterway",type:"line",source:S,"source-layer":"waterway",paint:{"line-color":WATER,"line-width":Wd(8,.5,16,5)}});
+L.push({id:"aero-fill",type:"fill",source:S,"source-layer":"aeroway",filter:["==",["geometry-type"],"Polygon"],paint:{"fill-color":"#E7E5DF"}});
+L.push({id:"aero-line",type:"line",source:S,"source-layer":"aeroway",filter:["all",["==",["geometry-type"],"LineString"],cls(["runway","taxiway"])],paint:{"line-color":"#E7E5DF","line-width":Wd(10,1,16,24)}});
+L.push({id:"bld",type:"fill",source:S,"source-layer":"building",minzoom:13,paint:{"fill-color":"#E9E7E1","fill-opacity":Ln(13,0,14,.9)}});
+L.push({id:"rail",type:"line",source:S,"source-layer":"transportation",minzoom:12,filter:cls(["rail","transit"]),paint:{"line-color":"#CFCABF","line-width":Wd(12,.5,16,1.8),"line-dasharray":[3,2]}});
+L.push({id:"path",type:"line",source:S,"source-layer":"transportation",minzoom:15,filter:cls(["path","pedestrian"]),paint:{"line-color":"#E1DED6","line-width":Wd(15,.6,18,2.2),"line-dasharray":[1,1.4]}});
+var R=[
+{c:["minor","service","track"],f:"#FFFFFF",k:"#DAD7D0",fw:Wd(12,.3,14,1.6,16,5,19,22),kw:Wd(12,.9,14,2.8,16,6.6,19,24)},
+{c:["tertiary","secondary"],f:"#FFFFFF",k:"#D6D3CB",fw:Wd(10,.4,13,1.6,15,5.5,19,30),kw:Wd(10,1,13,2.8,15,7,19,32)},
+{c:["primary","trunk"],f:"#FFEFC2",k:"#E9D096",fw:Wd(8,.4,12,1.8,15,6.5,19,34),kw:Wd(8,1,12,3,15,8,19,36)},
+{c:["motorway"],f:"#FFD98A",k:"#E5B04A",fw:Wd(6,.5,12,2.2,15,7.5,19,38),kw:Wd(6,1.2,12,3.4,15,9,19,40)}];
+var lay={"line-cap":"round","line-join":"round"};
+R.forEach(function(r,i){L.push({id:"road-case-"+i,type:"line",source:S,"source-layer":"transportation",filter:cls(r.c),layout:lay,paint:{"line-color":r.k,"line-width":r.kw}})});
+R.forEach(function(r,i){L.push({id:"road-fill-"+i,type:"line",source:S,"source-layer":"transportation",filter:cls(r.c),layout:lay,paint:{"line-color":r.f,"line-width":r.fw}})});
+L.push({id:"bld-3d",type:"fill-extrusion",source:S,"source-layer":"building",minzoom:15,paint:{"fill-extrusion-color":["interpolate",["linear"],["coalesce",["get","render_height"],0],0,"#F1EFEA",60,"#E5E2DB",200,"#D8D5CE"],"fill-extrusion-height":["coalesce",["get","render_height"],8],"fill-extrusion-base":["coalesce",["get","render_min_height"],0],"fill-extrusion-opacity":.93,"fill-extrusion-vertical-gradient":true}});
+var halo={"text-halo-color":"rgba(255,255,255,.95)","text-halo-width":1.6};
+function P(o){for(var k in halo)o[k]=halo[k];return o}
+L.push({id:"road-label",type:"symbol",source:S,"source-layer":"transportation_name",minzoom:13,layout:{"symbol-placement":"line","text-field":["coalesce",["get","name:latin"],["get","name"]],"text-font":[reg],"text-size":Ln(13,10,17,13),"text-transform":"uppercase","text-letter-spacing":.06,"text-max-angle":30},paint:P({"text-color":"#8E939B"})});
+L.push({id:"water-label",type:"symbol",source:S,"source-layer":"water_name",layout:{"text-field":["coalesce",["get","name:latin"],["get","name"]],"text-font":[ital],"text-size":12},paint:P({"text-color":"#5E9FD6"})});
+L.push({id:"poi-label",type:"symbol",source:S,"source-layer":"poi",minzoom:15.5,filter:["<=",["coalesce",["get","rank"],99],14],layout:{"text-field":["coalesce",["get","name:latin"],["get","name"]],"text-font":[reg],"text-size":11,"text-anchor":"top","text-max-width":7},paint:P({"text-color":"#7A8795"})});
+L.push({id:"place-small",type:"symbol",source:S,"source-layer":"place",minzoom:11,filter:cls(["suburb","neighbourhood","quarter","hamlet","village","isolated_dwelling"]),layout:{"text-field":["coalesce",["get","name:latin"],["get","name"]],"text-font":[reg],"text-size":Ln(11,10,16,13),"text-transform":"uppercase","text-letter-spacing":.1,"text-max-width":8},paint:P({"text-color":"#8E939B"})});
+L.push({id:"place-big",type:"symbol",source:S,"source-layer":"place",filter:cls(["city","town","capital"]),layout:{"text-field":["coalesce",["get","name:latin"],["get","name"]],"text-font":[bold],"text-size":Ln(5,12,12,17,16,22),"text-max-width":8},paint:P({"text-color":"#3F4452"})});
+return {version:8,name:"PlugIn",sources:st.sources,glyphs:st.glyphs,layers:L}}
 function init(){
 if(map||noGL)return;
 mm.hidden=true;ready=false;
 try{
-map=new maplibregl.Map({container:box,style:STYLE,center:[-0.1278,51.5074],zoom:11.6,pitch:58,bearing:-14,maxPitch:75,attributionControl:false,cooperativeGestures:false});
+map=new maplibregl.Map({container:box,style:EMPTY,center:[-0.1278,51.5074],zoom:11.6,pitch:30,bearing:-10,maxPitch:75,attributionControl:false,cooperativeGestures:false});
 }catch(e){map=null;fail(true,"This browser can't draw the 3D map ("+(e&&e.message?e.message:"WebGL unavailable")+").");return}
 map.addControl(new maplibregl.AttributionControl({compact:true}));
-map.addControl(new maplibregl.NavigationControl({showZoom:false,visualizePitch:true}),"top-right");
-map.addControl(new tilt(),"top-right");
-map.on("load",function(){ready=true;mm.hidden=true;why("");if(!usedRaster)tint();pending.splice(0).forEach(function(f){f()})});
+map.addControl(new Ctl(),"top-right");
+var custom=false;
+map.on("style.load",function(){if(!(custom||usedRaster))return;ready=true;mm.hidden=true;why("");pending.splice(0).forEach(function(f){f()})});
+fetch(STYLE).then(function(r){return r.json()}).then(function(st){if(!map||usedRaster)return;custom=true;map.setStyle(buildStyle(st),{diff:false})}).catch(function(e){if(!usedRaster){usedRaster=true;why("The map style didn't download ("+(e&&e.message?e.message:"error")+"). Showing a flat map instead.");try{map.setStyle(RASTER);map.easeTo({pitch:0,bearing:0,duration:0});box.classList.add("flat")}catch(x){}}});
 map.on("idle",function(){if(usedRaster&&!ready){ready=true;mm.hidden=true;pending.splice(0).forEach(function(f){f()})}});
 map.on("error",function(e){
 if(ready)return;
@@ -1582,32 +1664,33 @@ else{why("Map error: "+msg);mm.hidden=false}});
 setTimeout(function(){if(!ready&&map&&!usedRaster){usedRaster=true;why("The 3D map is slow here, so this is a flat map for now.");try{map.setStyle(RASTER);map.easeTo({pitch:0,bearing:0,duration:0});box.classList.add("flat")}catch(x){}}},7000);
 setTimeout(function(){if(!ready&&map){var w=gid("mapWhy");if(!w||!w.textContent)why("The map is taking too long to load. Check your connection.");mm.hidden=false}},17000);
 locate()}
-function locate(){
+function locate(force){
 if(!navigator.geolocation)return;
 navigator.geolocation.getCurrentPosition(function(p){
 meLL=[p.coords.longitude,p.coords.latitude];
 if(!map)return;
 if(meMk)meMk.setLngLat(meLL);
 else{var d=document.createElement("div");d.className="mapMe";d.innerHTML="<span></span>";meMk=new maplibregl.Marker({element:d}).setLngLat(meLL).addTo(map)}
-if(!marks.length)map.easeTo({center:meLL,zoom:15.8,pitch:60,duration:1100})},function(){},{enableHighAccuracy:true,timeout:15000,maximumAge:60000})}
+if(force||!marks.length)map.easeTo({center:meLL,zoom:15.6,pitch:force?45:50,duration:1100})},function(){},{enableHighAccuracy:true,timeout:15000,maximumAge:60000})}
 function clear(){
 marks.forEach(function(m){m.remove()});marks=[];
 if(!map)return;
 ["rt-line","rt-case"].forEach(function(id){if(map.getLayer(id))map.removeLayer(id)});
 if(map.getSource("rt"))map.removeSource("rt")}
 function line(A,B){
+routeLabel(A,B);
 whenReady(function(){
 if(map.getSource("rt"))return;
 map.addSource("rt",{type:"geojson",data:{type:"Feature",geometry:{type:"LineString",coordinates:[A,B]}}});
-map.addLayer({id:"rt-case",type:"line",source:"rt",layout:{"line-cap":"round","line-join":"round"},paint:{"line-color":"#ffffff","line-width":9,"line-opacity":.95}});
-map.addLayer({id:"rt-line",type:"line",source:"rt",layout:{"line-cap":"round","line-join":"round"},paint:{"line-color":"#2D74FF","line-width":6}})})}
+map.addLayer({id:"rt-case",type:"line",source:"rt",layout:{"line-cap":"round","line-join":"round"},paint:{"line-color":"#ffffff","line-width":11,"line-opacity":.95}});
+map.addLayer({id:"rt-line",type:"line",source:"rt",layout:{"line-cap":"round","line-join":"round"},paint:{"line-color":"#2D74FF","line-width":7}})})}
 function fit(A,B,top,bottom){
 map.fitBounds([[Math.min(A[0],B[0]),Math.min(A[1],B[1])],[Math.max(A[0],B[0]),Math.max(A[1],B[1])]],{padding:{top:top,bottom:bottom,left:50,right:50},maxZoom:15,duration:1100})}
 function show(r){
 clear();var ll=[+r.lon,+r.lat];
 marks.push(new maplibregl.Marker({element:mk("",false),anchor:"bottom"}).setLngLat(ll).addTo(map));
 if(meLL){line(meLL,ll);fit(meLL,ll,130,Math.min(380,box.clientHeight*.5))}
-else map.flyTo({center:ll,zoom:16.2,pitch:60,bearing:-17,duration:1400})}
+else map.flyTo({center:ll,zoom:16,pitch:45,bearing:-12,duration:1400})}
 function geo(q,vb){
 return fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=gb&q="+encodeURIComponent(q)+(vb?"&viewbox="+vb+"&bounded=1":""))
 .then(function(r){return r.json()}).then(function(a){return a&&a.length?a[0]:null}).catch(function(){return null})}
