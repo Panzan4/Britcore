@@ -344,17 +344,11 @@ a.discTile:active{transform:scale(.97)}
 .mapMsg b{display:block;font-size:16px;font-weight:800;margin-bottom:2px}
 .mapMsg span{display:block;font-size:14px;color:#5E5E73;margin-bottom:10px}
 .mapMsg button{border:0;border-radius:999px;background:#14142B;color:#fff;font:800 14px DM Sans,system-ui,sans-serif;padding:8px 18px;cursor:pointer}
-.hubMap .leaflet-tile-pane{filter:saturate(1.08) contrast(1.02)}
 .mapPin svg{filter:drop-shadow(0 4px 5px rgba(0,0,0,.35));animation:pinDrop .45s cubic-bezier(.22,1.4,.4,1)}
 @keyframes pinDrop{from{transform:translateY(-26px) scale(.8);opacity:0}to{transform:none;opacity:1}}
 .mapMe span{box-shadow:0 0 0 7px rgba(46,160,90,.18),0 2px 6px rgba(0,0,0,.3)}
-.leaflet-control-attribution{background:rgba(255,255,255,.72)!important;border-radius:10px 0 0 0;padding:1px 7px;backdrop-filter:blur(4px)}
 .mapPin,.mapMe{background:none;border:0}
-.mapTip{background:#14142B;color:#fff;border:0;border-radius:999px;font:800 12px DM Sans,system-ui,sans-serif;padding:3px 10px;box-shadow:0 3px 8px rgba(20,20,43,.3)}
-.mapTip::before{display:none}
 .mapMe span{display:block;width:16px;height:16px;border-radius:50%;background:var(--mapdot);border:2px solid #fff;animation:hubPulse 2.2s infinite}
-.leaflet-bottom{bottom:100px}
-.leaflet-control-attribution{font-size:10px}
 #jFlight .jLine.jLineTight{height:8px;min-height:8px}
 #jFlight .jLine.jLineTight.gapHot{height:54px;min-height:54px}
 #jFlight{margin-left:-12px;padding-left:12px;margin-right:-6px;padding-right:6px}
@@ -685,8 +679,56 @@ nav button span{display:block;max-width:0;opacity:0;overflow:hidden;white-space:
 nav button[aria-selected="true"]{flex-grow:2.7;background:rgba(155,223,191,.14);color:var(--mint)}
 nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;transition:max-width .45s cubic-bezier(.22,.9,.32,1),opacity .3s .12s,margin-left .45s cubic-bezier(.22,.9,.32,1)}
 @media (prefers-reduced-motion:reduce){nav button,nav button span{transition:none}}
+
+/* ===== Live: flight strip, compact timeline ===== */
+.nextTile{background:none;border:0;box-shadow:none;border-radius:0;padding:0;overflow:visible}
+.nextTile::before{display:none}
+.jHero{background:var(--navy);color:#F6F1E7;border-radius:20px;padding:16px 16px 14px;margin:0 0 12px}
+.jHeroTop{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.jChip{border:1px solid rgba(246,241,231,.28);border-radius:999px;padding:3px 11px;font:800 12.5px DM Sans,system-ui,sans-serif;letter-spacing:.04em;color:#F6F1E7}
+.jCodes{display:flex;align-items:center;gap:14px}
+.jCodes b{font:800 46px/1 Archivo,DM Sans,system-ui,sans-serif;letter-spacing:-.045em;color:#F6F1E7}
+.jTrack{position:relative;flex:1;height:2px;border-radius:2px;background:rgba(246,241,231,.22)}
+.jTrack::before{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--p,0%);background:var(--mint);transition:width 1s}
+.jPlane{position:absolute;top:50%;left:0;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;background:var(--mint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 11.5L21 4l-5 16-4-6.5z' fill='%2314142B'/%3E%3C/svg%3E") center/14px no-repeat;transition:left 1s}
+.jStatus{display:flex;justify-content:space-between;gap:12px;margin-top:16px;padding-top:12px;border-top:1px solid rgba(246,241,231,.14)}
+.jStatus small{display:block;margin-bottom:4px;font:800 10.5px/1 DM Sans,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(246,241,231,.6)}
+.jStatus b{display:block;font:800 17px/1.15 Archivo,DM Sans,system-ui,sans-serif;letter-spacing:-.01em;color:#F6F1E7}
+.jStatus .r{text-align:right}
+#jFlight .jTimeline{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px 10px;margin:0 0 12px}
+#jFlight .jRow{gap:14px;min-height:46px}
+.jTxt{flex:1;min-width:0}
+.jTxt b{font:800 18px/1.15 Archivo,DM Sans,system-ui,sans-serif;letter-spacing:-.015em}
+.jTxt small{font-size:14px;margin-top:3px}
+.jT{flex:none;text-align:right;font:800 24px/1 Archivo,DM Sans,system-ui,sans-serif;letter-spacing:-.035em;color:var(--navy);font-variant-numeric:tabular-nums}
+.jT small{display:block;margin-bottom:4px;font:800 10px/1 DM Sans,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+#jFlight .jRow:has(.jDot-done) .jT,#jFlight .jRow:has(.jDot-done) .jTxt b{opacity:.55}
+.loungeBtn{margin:8px 0 0;font-size:12px;padding:5px 12px}
+#jFlight .jHandle{border-radius:16px;padding:15px 14px;font:800 15px DM Sans,system-ui,sans-serif;margin-top:0}
+.jEmptyHero{background:var(--navy);color:#F6F1E7;border-radius:20px;padding:20px 18px;margin:0 0 14px}
+.jEmptyHero b{display:block;font:800 26px/1.05 Archivo,DM Sans,system-ui,sans-serif;letter-spacing:-.035em}
+.jEmptyHero p{margin:8px 0 16px;color:#F6F1E7;opacity:.72;font-size:15.5px;line-height:1.45}
+.jEmptyHero .psBtnMain{background:var(--mint);color:var(--navy);margin:0}
+#jEmpty .jTimeline{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px 6px}
+.fForm{position:absolute;inset:0;padding:6px 2px 18px;background:var(--bg);border-radius:20px}
+.nextTile:has(#fForm:not([hidden])){min-height:640px}
+@media (prefers-reduced-motion:reduce){.jTrack::before,.jPlane{transition:none}}
+#jEmpty .jTimeline{flex:none}
+#jEmpty .jLine{flex:none;min-height:28px}
+#jEmpty .jHandle{margin-top:12px}
+
+/* ===== MapLibre map ===== */
+.maplibregl-ctrl-top-right{top:118px}
+.maplibregl-ctrl-bottom-right,.maplibregl-ctrl-bottom-left{bottom:104px}
+.maplibregl-ctrl-attrib{background:rgba(255,255,255,.72)!important;border-radius:10px 0 0 0;font-size:10px;backdrop-filter:blur(4px)}
+.maplibregl-ctrl-group{border-radius:14px!important;box-shadow:0 4px 14px rgba(20,20,43,.18)!important;overflow:hidden}
+.tiltBtn{width:38px!important;height:38px!important;font:800 13px DM Sans,system-ui,sans-serif;color:var(--navy);letter-spacing:.02em}
+.mkWrap{display:flex;flex-direction:column;align-items:center;pointer-events:none}
+.mkLabel{margin-bottom:3px;background:#14142B;color:#fff;border-radius:999px;font:800 12px DM Sans,system-ui,sans-serif;padding:3px 10px;white-space:nowrap;box-shadow:0 3px 8px rgba(20,20,43,.3)}
+.mkWrap svg{display:block;filter:drop-shadow(0 4px 5px rgba(0,0,0,.35));animation:pinDrop .45s cubic-bezier(.22,1.4,.4,1)}
+.mkStart{display:block;width:18px;height:18px;border-radius:50%;background:#14142B;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css" onerror="this.onerror=null;this.href='https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css'">
 </head>
 <body>
 <div class="wrap">
@@ -744,6 +786,7 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 </div>
 <div class="nextTile" id="nextTile" aria-live="polite">
 <div class="jBody" id="jEmpty">
+<div class="jEmptyHero"><b>Add your flight</b><p>Track check-in, gate and landing, and plan the way to your hotel.</p><button type="button" class="psBtnMain" id="addFlightBtn">Enter flight details</button></div>
 <div class="jTimeline jTimeline-solo">
 <div class="jRow"><span class="jDot jDot-on"></span><div class="jTxt"><b>Your location</b><small>Now</small></div></div>
 <div class="jLine"></div>
@@ -753,22 +796,25 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 <p class="small jMsg" id="jMsg" role="status"></p>
 </div>
 <div class="jBody" id="jFlight" hidden>
-<div class="jFlightTop"><b id="fNo"></b><span id="fRoute"></span></div>
+<div class="jHero">
+<div class="jHeroTop"><span class="jChip" id="fNo"></span><span class="jChip" id="fDur"></span><span id="fRoute" hidden></span></div>
+<div class="jCodes"><b id="fFrom">---</b><div class="jTrack" id="fTrack"><i class="jPlane" id="fPlane"></i></div><b id="fTo">---</b></div>
+<div class="jStatus"><div><small>Status</small><b id="fStat"></b></div><div class="r"><small>Next</small><b id="fCount"></b></div></div>
+</div>
 <div class="jTimeline">
-<div class="jRow"><span class="jDot jDot-done" id="d1"></span><div class="jTxt"><b>Check-in</b><small id="fCheck"></small></div><button type="button" class="loungeBtn" id="loungeBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 11V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3"/><path d="M3 13a2 2 0 0 1 4 0v2h10v-2a2 2 0 0 1 4 0v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M6 18v2M18 18v2"/></svg>Check lounges</button></div>
+<div class="jRow"><span class="jDot jDot-done" id="d1"></span><div class="jTxt"><b>Check-in</b><small id="fCheck"></small><button type="button" class="loungeBtn" id="loungeBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 11V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3"/><path d="M3 13a2 2 0 0 1 4 0v2h10v-2a2 2 0 0 1 4 0v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M6 18v2M18 18v2"/></svg>Check lounges</button></div><span class="jT" id="tCheck"></span></div>
 <div class="jLine jLineTight"></div>
 <div class="jRow jRowDot"><span class="jDot jDot-on" id="hereDot"></span></div>
 <div class="jLine jLineTight"></div>
-<div class="jRow"><span class="jDot jDot-off" id="d2"></span><div class="jTxt"><b>Departure</b><small id="fDep"></small></div></div>
+<div class="jRow"><span class="jDot jDot-off" id="d2"></span><div class="jTxt"><b>Departure</b><small id="fDep"></small></div><span class="jT" id="tDep"></span></div>
 <div class="jLine"></div>
-<div class="jRow"><span class="jDot jDot-off" id="d3"></span><div class="jTxt"><b>Arrival</b><small id="fArr"></small></div></div>
+<div class="jRow"><span class="jDot jDot-off" id="d3"></span><div class="jTxt"><b>Arrival</b><small id="fArr"></small></div><span class="jT" id="tArr"></span></div>
 <div class="jLine jLineArr"></div>
 <div id="warnWrap" hidden><div class="warnRow"><span class="jWarnDot" aria-hidden="true"></span><div class="warnBody"><button type="button" class="warnCard" id="warnCard"><span class="warnTxt"><b>Hotel transfer missing</b></span><span class="warnAdd">Check options</span></button><button type="button" class="warnDismiss" id="warnDismiss" aria-label="Got it covered, dismiss" title="Got it covered"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button></div></div><div class="jLine"></div></div>
-<div class="jRow"><span class="jDot jDot-off" id="d4"></span><div class="jTxt"><b id="fHotelT">Hotel</b><small id="fHotel" hidden></small></div></div>
+<div class="jRow"><span class="jDot jDot-off" id="d4"></span><div class="jTxt"><b id="fHotelT">Hotel</b><small id="fHotel"></small></div><span class="jT" id="tHotel"></span></div>
 <div class="jLine jLineTail"></div>
 </div>
 <button type="button" class="jHandle" id="landedHandle">Add connection</button>
-<div class="jFoot" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b id="fStat"></b><small id="fCount"></small></div></div>
 </div>
 <div class="fForm" id="fForm" hidden>
 <h3>Flight details</h3>
@@ -1300,11 +1346,13 @@ var n=Date.now(),d=fl.dep,e=d+fl.dur*MIN,h=e+TRF*MIN,ph=n<d-108e5?0:n<d-36e5?1:n
 if(fl.ph!==ph){fl.ph=ph;
 fl.log.unshift({t:n,x:["Tracking "+fl.no+". Check-in opens at "+hm(d-108e5),"Check-in is open. It closes around "+hm(d-36e5),g?"Boarding. Head to Gate "+g:"Boarding soon. Check the airport screens for your gate","Departed. You are now in transit","Landed"+(fl.to?". Welcome to "+fl.to:"")+". Heading to your hotel","Arrived at your hotel"][ph]});
 fl.log=fl.log.slice(0,6);saveFl()}
-gid("fNo").textContent=fl.no;gid("fRoute").textContent=((fl.from||fl.to)?(fl.from||"?")+" \u2192 "+(fl.to||"?")+" \u00b7 ":"")+hmm(fl.dur);
-var dt2=tl(fl.dterm);gid("fCheck").textContent="Check in by "+hm(d-36e5)+(dt2?" \u00b7 "+dt2:" (typical)");
-gid("fDep").textContent=hm(d)+" \u00b7 "+(g?"Gate "+g:"Gate to be confirmed");
-var tm=tl(fl.terminal);gid("fArr").textContent="ETA "+hm(e)+(tm?" \u2022 "+tm:"");
-gid("fHotelT").textContent=fl.hotel?"Hotel \u2022 "+fl.hotel:"Hotel";
+gid("fNo").textContent=fl.no;gid("fFrom").textContent=fl.from||"\u2014";gid("fTo").textContent=fl.to||"\u2014";gid("fDur").textContent=hmm(fl.dur);
+(function(){var p0=d-108e5,pr=Math.max(0,Math.min(1,(n-p0)/(h-p0)));gid("fPlane").style.left=(pr*100)+"%";gid("fTrack").style.setProperty("--p",(pr*100)+"%")})();
+gid("fRoute").textContent=((fl.from||fl.to)?(fl.from||"?")+" \u2192 "+(fl.to||"?")+" \u00b7 ":"")+hmm(fl.dur);
+var dt2=tl(fl.dterm);gid("fCheck").textContent=dt2||"Terminal to be confirmed";gid("tCheck").innerHTML="<small>by</small>"+hm(d-36e5);
+gid("fDep").textContent=g?"Gate "+g:"Gate to be confirmed";gid("tDep").innerHTML="<small>Departs</small>"+hm(d);
+var tm=tl(fl.terminal);gid("fArr").textContent=tm||"Terminal to be confirmed";gid("tArr").innerHTML="<small>ETA</small>"+hm(e);
+gid("fHotelT").textContent="Hotel";gid("fHotel").textContent=fl.hotel||"Add one in flight details";gid("fHotel").hidden=false;gid("tHotel").innerHTML="<small>ETA</small>"+hm(h);
 function S(a){return ph>a?"done":"off"}
 if(window.paintDots)window.paintDots();if(window.paintWarn)window.paintWarn();
 gid("fStat").textContent=PH[ph];
@@ -1313,6 +1361,7 @@ var idx=ph<3?2:ph===3?1:0;
 Array.prototype.forEach.call(seg.children,function(b,i){b.setAttribute("aria-pressed",i===idx)});
 }
 gid("qrBtn").onclick=function(){gid("qrFile").click()};
+gid("addFlightBtn").onclick=function(){openForm()};
 gid("qrFile").onchange=function(){var f=this.files&&this.files[0];this.value="";if(f)scanFile(f)};
 (function(){
 var handle=gid("jHandle"),zone=gid("jDropZone"),startY=0,startX=0,dragging=false,moved=false;
@@ -1456,75 +1505,101 @@ setTimeout(function(){row.style.cssText=""},500)}
 h.addEventListener("pointerup",end);h.addEventListener("pointercancel",end);
 })();
 (function(){
-var urls=["https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js","https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js","https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"],ui=0;
+var urls=["https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js","https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"],ui=0;
+var STYLE="https://tiles.openfreemap.org/styles/liberty",noGL=false;
 function load(){var s=document.createElement("script");s.src=urls[ui];s.onload=setup;s.onerror=function(){ui++;if(ui<urls.length)load();else fail()};document.head.appendChild(s)}
 function ext(q){window.open("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q+", England"),"_blank","noopener")}
-function fail(){
+function fail(skip){
+noGL=true;
 var m=gid("mapMsg");
 window.hubMapShow=function(){m.hidden=false};
 gid("mapRetry").onclick=function(){location.reload()};
 window.hubTrip=function(o,d,sub){gid("hubQ").value=d.label;if(window.hubSet)window.hubSet(d.label,sub);window.open("https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(o.q)+"&destination="+encodeURIComponent(d.q)+"&travelmode=transit","_blank","noopener")};
-gid("hubQ").addEventListener("keydown",function(e){if(e.key==="Enter"&&this.value.trim())ext(this.value.trim())});
-Array.prototype.forEach.call(document.querySelectorAll("[data-hubpick]"),function(b){b.addEventListener("click",function(){ext(b.dataset.hubpick)})});
+if(!skip){gid("hubQ").addEventListener("keydown",function(e){if(e.key==="Enter"&&this.value.trim())ext(this.value.trim())});
+Array.prototype.forEach.call(document.querySelectorAll("[data-hubpick]"),function(b){b.addEventListener("click",function(){ext(b.dataset.hubpick)})})}
 if(!gid("travel").hidden)m.hidden=false}
 load();
 function setup(){
-if(!window.L)return;
-var box=gid("hubMap"),hq=gid("hubQ"),map=null,me=null,meLL=null,dest=null,line=null,pinIcon=null;
+if(!window.maplibregl)return fail();
+var box=gid("hubMap"),hq=gid("hubQ"),mm=gid("mapMsg"),map=null,ready=false,meLL=null,meMk=null,marks=[],pending=[];
+var PIN='<svg width="30" height="38" viewBox="0 0 30 38" aria-hidden="true"><path d="M15 0C6.7 0 0 6.6 0 14.8 0 25.9 15 38 15 38S30 25.9 30 14.8C30 6.6 23.3 0 15 0z" fill="#14142B"/><circle cx="15" cy="14.5" r="5.5" fill="#fff"/></svg>';
+function mk(label,start){var d=document.createElement("div");d.className="mkWrap";
+if(label){var l=document.createElement("span");l.className="mkLabel";l.textContent=label;d.appendChild(l)}
+if(start){var c=document.createElement("span");c.className="mkStart";d.appendChild(c)}else d.insertAdjacentHTML("beforeend",PIN);
+return d}
+function whenReady(f){if(ready)f();else pending.push(f)}
+function tilt(){}
+tilt.prototype.onAdd=function(m){var c=document.createElement("div");c.className="maplibregl-ctrl maplibregl-ctrl-group";var b=document.createElement("button");b.type="button";b.className="tiltBtn";b.setAttribute("aria-label","Switch between 2D and 3D");
+function lab(){b.textContent=m.getPitch()>10?"2D":"3D"}lab();
+b.onclick=function(){var on=m.getPitch()>10;m.easeTo({pitch:on?0:55,bearing:on?0:-14,duration:700})};
+m.on("pitchend",lab);c.appendChild(b);this._c=c;return c};
+tilt.prototype.onRemove=function(){if(this._c&&this._c.parentNode)this._c.parentNode.removeChild(this._c)};
 function init(){
-if(map)return;
-map=L.map(box,{zoomControl:false,attributionControl:true}).setView([51.5074,-0.1278],11);
-map.attributionControl.setPrefix(false);
-var SRC=[{u:"https://tile.openstreetmap.org/{z}/{x}/{y}.png",o:{maxZoom:19,attribution:"&copy; OpenStreetMap contributors"}},{u:"https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",o:{maxZoom:19,attribution:"Tiles &copy; Esri"}}],si=0,tl=null,tOk=0,tBad=0,mm=gid("mapMsg");
-function addTiles(){if(tl)map.removeLayer(tl);tOk=0;tBad=0;tl=L.tileLayer(SRC[si].u,SRC[si].o).addTo(map);
-tl.on("tileload",function(){tOk++;mm.hidden=true});
-tl.on("tileerror",function(){tBad++;if(!tOk&&tBad>=3){if(si<SRC.length-1){si++;addTiles()}else mm.hidden=false}})}
-addTiles();
-gid("mapRetry").onclick=function(){mm.hidden=true;si=0;addTiles();map.invalidateSize()};
-pinIcon=L.divIcon({className:"mapPin",html:'<svg width="28" height="36" viewBox="0 0 30 38"><path d="M15 0C6.7 0 0 6.6 0 14.8 0 25.9 15 38 15 38S30 25.9 30 14.8C30 6.6 23.3 0 15 0z" fill="#14142B"/><circle cx="15" cy="14.5" r="5.5" fill="#fff"/></svg>',iconSize:[28,36],iconAnchor:[14,36]});
+if(map||noGL)return;
+mm.hidden=true;ready=false;
+try{
+map=new maplibregl.Map({container:box,style:STYLE,center:[-0.1278,51.5074],zoom:11.6,pitch:55,bearing:-14,maxPitch:75,attributionControl:false,cooperativeGestures:false});
+}catch(e){map=null;fail(true);return}
+map.addControl(new maplibregl.AttributionControl({compact:true}));
+map.addControl(new maplibregl.NavigationControl({showZoom:false,visualizePitch:true}),"top-right");
+map.addControl(new tilt(),"top-right");
+map.on("load",function(){ready=true;mm.hidden=true;pending.splice(0).forEach(function(f){f()})});
+map.on("error",function(){if(!ready)mm.hidden=false});
+setTimeout(function(){if(!ready&&map)mm.hidden=false},12000);
 locate()}
 function locate(){
 if(!navigator.geolocation)return;
 navigator.geolocation.getCurrentPosition(function(p){
-meLL=[p.coords.latitude,p.coords.longitude];
-if(me)me.setLatLng(meLL);
-else me=L.marker(meLL,{icon:L.divIcon({className:"mapMe",html:"<span></span>",iconSize:[18,18],iconAnchor:[9,9]}),interactive:false,keyboard:false}).addTo(map);
-if(!dest)map.setView(meLL,14)},function(){},{enableHighAccuracy:true,timeout:15000,maximumAge:60000})}
-function clear(){if(dest){map.removeLayer(dest);dest=null}if(line){map.removeLayer(line);line=null}}
+meLL=[p.coords.longitude,p.coords.latitude];
+if(!map)return;
+if(meMk)meMk.setLngLat(meLL);
+else{var d=document.createElement("div");d.className="mapMe";d.innerHTML="<span></span>";meMk=new maplibregl.Marker({element:d}).setLngLat(meLL).addTo(map)}
+if(!marks.length)map.easeTo({center:meLL,zoom:14.5,duration:900})},function(){},{enableHighAccuracy:true,timeout:15000,maximumAge:60000})}
+function clear(){
+marks.forEach(function(m){m.remove()});marks=[];
+if(!map)return;
+["rt-line","rt-case"].forEach(function(id){if(map.getLayer(id))map.removeLayer(id)});
+if(map.getSource("rt"))map.removeSource("rt")}
+function line(A,B){
+whenReady(function(){
+if(map.getSource("rt"))return;
+map.addSource("rt",{type:"geojson",data:{type:"Feature",geometry:{type:"LineString",coordinates:[A,B]}}});
+map.addLayer({id:"rt-case",type:"line",source:"rt",layout:{"line-cap":"round","line-join":"round"},paint:{"line-color":"#ffffff","line-width":9,"line-opacity":.95}});
+map.addLayer({id:"rt-line",type:"line",source:"rt",layout:{"line-cap":"round","line-join":"round"},paint:{"line-color":"#14142B","line-width":5}})})}
+function fit(A,B,top,bottom){
+map.fitBounds([[Math.min(A[0],B[0]),Math.min(A[1],B[1])],[Math.max(A[0],B[0]),Math.max(A[1],B[1])]],{padding:{top:top,bottom:bottom,left:50,right:50},maxZoom:15,duration:1100})}
 function show(r){
-clear();var ll=[+r.lat,+r.lon];
-dest=L.marker(ll,{icon:pinIcon,keyboard:false}).addTo(map);
-if(meLL){
-line=L.layerGroup([L.polyline([meLL,ll],{color:"#fff",weight:9,opacity:.95,lineCap:"round",lineJoin:"round"}),L.polyline([meLL,ll],{color:"#14142B",weight:5,lineCap:"round",lineJoin:"round"})]).addTo(map);
-map.fitBounds(L.latLngBounds([meLL,ll]),{paddingTopLeft:[40,130],paddingBottomRight:[40,Math.min(380,box.clientHeight*.5)],maxZoom:15})}
-else map.flyTo(ll,15,{duration:.8})}
+clear();var ll=[+r.lon,+r.lat];
+marks.push(new maplibregl.Marker({element:mk("",false),anchor:"bottom"}).setLngLat(ll).addTo(map));
+if(meLL){line(meLL,ll);fit(meLL,ll,130,Math.min(380,box.clientHeight*.5))}
+else map.flyTo({center:ll,zoom:15.4,duration:1100})}
 function geo(q,vb){
 return fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=gb&q="+encodeURIComponent(q)+(vb?"&viewbox="+vb+"&bounded=1":""))
 .then(function(r){return r.json()}).then(function(a){return a&&a.length?a[0]:null}).catch(function(){return null})}
-function tip(m,t){m.bindTooltip(t,{permanent:true,direction:"top",offset:[0,-4],className:"mapTip"});return m}
 window.hubTrip=function(o,d,sub){
-init();clear();hq.value=d.label;
+init();if(noGL)return window.hubTrip(o,d,sub);
+clear();hq.value=d.label;
 if(window.hubSet)window.hubSet(d.label,sub);
 geo(o.q).then(function(a){return a||geo(o.q2)}).then(function(a){
 if(!a){hq.placeholder="Couldn't find the start of this journey.";return}
-var A=[+a.lat,+a.lon],vb=(A[1]-.6)+","+(A[0]+.5)+","+(A[1]+.6)+","+(A[0]-.5);
+var A=[+a.lon,+a.lat],vb=(A[0]-.6)+","+(A[1]+.5)+","+(A[0]+.6)+","+(A[1]-.5);
 return geo(d.q,vb).then(function(b){return b||geo(d.q)}).then(function(b){
-map.invalidateSize();
-var start=tip(L.circleMarker(A,{radius:8,color:"#fff",weight:3,fillColor:"#14142B",fillOpacity:1}),o.label);
-if(!b){dest=L.layerGroup([start]).addTo(map);map.flyTo(A,14,{duration:.8});hq.placeholder="Couldn't find "+d.label+" on the map.";return}
-var B=[+b.lat,+b.lon];
-dest=L.layerGroup([start,tip(L.marker(B,{icon:pinIcon,keyboard:false}),d.label)]).addTo(map);
-line=L.layerGroup([L.polyline([A,B],{color:"#fff",weight:9,opacity:.95,lineCap:"round",lineJoin:"round"}),L.polyline([A,B],{color:"#14142B",weight:5,lineCap:"round",lineJoin:"round"})]).addTo(map);
-map.fitBounds(L.latLngBounds([A,B]),{paddingTopLeft:[50,130],paddingBottomRight:[50,Math.min(300,box.clientHeight*.45)],maxZoom:15})})})};
+map.resize();
+marks.push(new maplibregl.Marker({element:mk(o.label,true),anchor:"center"}).setLngLat(A).addTo(map));
+if(!b){map.flyTo({center:A,zoom:14.5,duration:900});hq.placeholder="Couldn't find "+d.label+" on the map.";return}
+var B=[+b.lon,+b.lat];
+marks.push(new maplibregl.Marker({element:mk(d.label,false),anchor:"bottom"}).setLngLat(B).addTo(map));
+line(A,B);fit(A,B,130,Math.min(300,box.clientHeight*.45))})})};
 function find(q){
-if(!q)return;init();
+if(!q)return;init();if(noGL)return ext(q);
 fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=gb&q="+encodeURIComponent(q))
 .then(function(r){return r.json()}).then(function(a){
 if(a&&a.length)show(a[0]);
 else{gid("hubClose").click();hq.value="";hq.placeholder="Couldn't find that place. Try another."}})
 .catch(function(){gid("hubClose").click();hq.placeholder="Couldn't load the map search. Check your connection."})}
-window.hubMapShow=function(){init();setTimeout(function(){map.invalidateSize()},50)};
-window.addEventListener("resize",function(){if(map)map.invalidateSize()});
+window.hubMapShow=function(){init();if(map)setTimeout(function(){map.resize()},50)};
+window.addEventListener("resize",function(){if(map)map.resize()});
+gid("mapRetry").onclick=function(){mm.hidden=true;if(map){try{map.remove()}catch(e){}map=null;meMk=null;marks=[]}init()};
 hq.addEventListener("keydown",function(e){if(e.key==="Enter"&&hq.value.trim())find(hq.value.trim())});
 Array.prototype.forEach.call(document.querySelectorAll("[data-hubpick]"),function(b){b.addEventListener("click",function(){find(b.dataset.hubpick)})});
 gid("hubClose").addEventListener("click",function(){if(map)clear()});
@@ -1560,10 +1635,10 @@ report:["Report a problem",MOCK+'<label>What went wrong?<select><option>Wrong or
 feedback:["Feedback and suggestions",MOCK+form([["Your idea","A feature, a place we missed, anything","area"]],["Send feedback","Feedback isn't connected yet."])],
 home:["Add to your home screen",'<p>PlugIn England is a free web app, so there\'s nothing to download. For one-tap access, add it to your home screen.</p><h4>iPhone (Safari)</h4><p>Tap the Share button, then Add to Home Screen.</p><h4>Android (Chrome)</h4><p>Tap the menu, then Add to Home screen or Install app.</p>'],
 terms:["Terms of Service",MOCK+'<p class="small">Last updated: placeholder date</p><h4>1. Using PlugIn England</h4><p>PlugIn England is a travel companion for visitors to England. You agree to use it lawfully and not to misuse, copy or disrupt it.</p><h4>2. Information only</h4><p>Guides, prices, opening hours, transport times and discounts are for general information and can change. Check with the provider before you rely on them.</p><h4>3. Emergencies</h4><p>The SOS button gives quick access to emergency numbers but is not an emergency service. If it is urgent, call 999.</p><h4>4. Your content</h4><p>Anything you add, such as ratings or notes, stays yours. You allow us to store it so the app can work for you.</p><h4>5. Third-party services and partner links</h4><p>Maps, weather and journey information come from other providers, and discount links lead to other companies. We are not responsible for their content, prices or availability. Some links may earn us a commission.</p><h4>6. Liability</h4><p>To the extent the law allows, PlugIn England is provided as is, and we are not liable for losses from missed transport, closures or inaccurate information.</p><h4>7. Changes and contact</h4><p>We may update these terms. Continued use means you accept the changes.</p>'],
-privacy:["Privacy Policy",MOCK+'<p class="small">Last updated: add date before launch</p><h4>Who we are</h4><p>PlugIn England is a free web app for visitors to England. There are no accounts. Contact: add your contact email here.</p><h4>What stays on your phone</h4><p>Your list, ratings, flight details, passes and settings are saved in your browser on this phone. We don\'t receive them and can\'t see them.</p><h4>Location and camera</h4><p>If you allow your location, it is used on your phone to centre the map and show where you are. If you scan a boarding pass or ticket, the photo is read on your phone and is not uploaded. We don\'t send either to a server.</p><h4>Services that receive requests</h4><p>To work, the app asks other services for things. Each one can see your IP address and device details, as any website does:</p><p><b>OpenStreetMap</b> for map tiles and place search. It sees the map areas you view and the places you search for.</p><p><b>Esri</b> for backup map tiles.</p><p><b>Open-Meteo</b> for the weather forecast. It receives the coordinates of the city used for the forecast.</p><p><b>Google Fonts</b> for the text style.</p><p><b>cdnjs, jsDelivr and unpkg</b> for the map software.</p><p>We don\'t control these services. Please see their own privacy policies.</p><h4>Links to other sites</h4><p>Maps, partner and discount links open other websites that have their own privacy practices and may use cookies. Some partner links may earn us a commission at no extra cost to you.</p><h4>Cookies</h4><p>PlugIn England sets no advertising or analytics cookies. It uses your browser\'s local storage to remember your choices.</p><h4>Your rights</h4><p>You can erase everything saved on your phone any time with Erase all my data in Settings. Under UK data protection law you can ask how any personal data about you is used. If you are unhappy, you can complain to the Information Commissioner\'s Office at ico.org.uk.</p>'],
+privacy:["Privacy Policy",MOCK+'<p class="small">Last updated: add date before launch</p><h4>Who we are</h4><p>PlugIn England is a free web app for visitors to England. There are no accounts. Contact: add your contact email here.</p><h4>What stays on your phone</h4><p>Your list, ratings, flight details, passes and settings are saved in your browser on this phone. We don\'t receive them and can\'t see them.</p><h4>Location and camera</h4><p>If you allow your location, it is used on your phone to centre the map and show where you are. If you scan a boarding pass or ticket, the photo is read on your phone and is not uploaded. We don\'t send either to a server.</p><h4>Services that receive requests</h4><p>To work, the app asks other services for things. Each one can see your IP address and device details, as any website does:</p><p><b>OpenFreeMap</b> for the map. It sees the map areas you view.</p><p><b>OpenStreetMap (Nominatim)</b> for place search. It sees the places you search for.</p><p><b>Open-Meteo</b> for the weather forecast. It receives the coordinates of the city used for the forecast.</p><p><b>Google Fonts</b> for the text style.</p><p><b>jsDelivr and unpkg</b> for the map software.</p><p>We don\'t control these services. Please see their own privacy policies.</p><h4>Links to other sites</h4><p>Maps, partner and discount links open other websites that have their own privacy practices and may use cookies. Some partner links may earn us a commission at no extra cost to you.</p><h4>Cookies</h4><p>PlugIn England sets no advertising or analytics cookies. It uses your browser\'s local storage to remember your choices.</p><h4>Your rights</h4><p>You can erase everything saved on your phone any time with Erase all my data in Settings. Under UK data protection law you can ask how any personal data about you is used. If you are unhappy, you can complain to the Information Commissioner\'s Office at ico.org.uk.</p>'],
 cookies:["Cookies and storage",'<p>PlugIn England sets no advertising or analytics cookies. It uses your browser\'s local storage to remember your list, ratings, flight and settings on this phone.</p><p>Clearing your browser data, or using Erase all my data, removes it.</p><p>Partner and map links open other websites, which may use their own cookies.</p>'],
 access:["Accessibility",'<p>We want PlugIn England to be easy for everyone to use.</p><p>You can turn on Larger text in Profile and preferences. Buttons are sized for touch, and the app works with screen readers.</p><p>If something is hard to use, tell us through Report a problem.</p>'],
-credits:["Licences and credits",'<h4>Map</h4><p>Map data and tiles &copy; OpenStreetMap contributors, with Esri as a backup.</p><h4>Search</h4><p>Place search by Nominatim (OpenStreetMap).</p><h4>Libraries</h4><p>Leaflet, used under the BSD 2-Clause licence.</p><h4>Fonts</h4><p>Archivo and DM Sans from Google Fonts, under the SIL Open Font Licence.</p>'],
+credits:["Licences and credits",'<h4>Map</h4><p>Map by OpenFreeMap, using OpenMapTiles and data &copy; OpenStreetMap contributors.</p><h4>Search</h4><p>Place search by Nominatim (OpenStreetMap).</p><h4>Libraries</h4><p>MapLibre GL JS, used under the BSD 3-Clause licence.</p><h4>Fonts</h4><p>Archivo and DM Sans from Google Fonts, under the SIL Open Font Licence.</p>'],
 about:["About PlugIn England",'<p>PlugIn England is a free web app with no accounts or sign-up. It helps visitors find their feet in England: places to go, how to get around, what things cost and what to do when you land.</p><p>Version 0.9 preview.</p>'],
 delete:["Erase all my data",'<p>This permanently removes your list, ratings, flight and settings from this phone. It can\'t be undone.</p><button type="button" class="ghost red" id="doDelete">Erase everything</button>']
 };
