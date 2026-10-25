@@ -1602,10 +1602,12 @@ var u="mi";try{u=(JSON.parse(localStorage.getItem("acctPrefs")||"{}").unit)||"mi
 var v=u==="km"?k:k*0.621371;return (v<10?v.toFixed(1):Math.round(v))+" "+u}
 function routeLabel(A,B){var d=document.createElement("div");d.className="rtLabel";d.textContent=dist(A,B)+" direct";
 marks.push(new maplibregl.Marker({element:d,anchor:"center"}).setLngLat([(A[0]+B[0])/2,(A[1]+B[1])/2]).addTo(map))}
+var vecSrc=null;
 var EMPTY={version:8,sources:{},layers:[{id:"bg",type:"background",paint:{"background-color":"#F4F3EF"}}]};
 function buildStyle(st){
 var S="openmaptiles";
 Object.keys(st.sources||{}).forEach(function(k){if(st.sources[k].type==="vector")S=k});
+vecSrc=S;
 var fonts=[];(st.layers||[]).forEach(function(l){var f=l.layout&&l.layout["text-font"];if(f&&f.length)fonts.push(f[0])});
 var reg=fonts.filter(function(f){return /Regular/i.test(f)})[0]||fonts[0]||"Noto Sans Regular";
 var bold=fonts.filter(function(f){return /Bold/i.test(f)})[0]||reg;
@@ -1624,18 +1626,18 @@ L.push({id:"water",type:"fill",source:S,"source-layer":"water",paint:{"fill-colo
 L.push({id:"waterway",type:"line",source:S,"source-layer":"waterway",paint:{"line-color":WATER,"line-width":Wd(8,.5,16,5)}});
 L.push({id:"aero-fill",type:"fill",source:S,"source-layer":"aeroway",filter:["==",["geometry-type"],"Polygon"],paint:{"fill-color":"#E7E5DF"}});
 L.push({id:"aero-line",type:"line",source:S,"source-layer":"aeroway",filter:["all",["==",["geometry-type"],"LineString"],cls(["runway","taxiway"])],paint:{"line-color":"#E7E5DF","line-width":Wd(10,1,16,24)}});
-L.push({id:"bld",type:"fill",source:S,"source-layer":"building",minzoom:13,paint:{"fill-color":"#ECEAE4","fill-opacity":Ln(13,0,14.5,.95)}});
+L.push({id:"bld",type:"fill",source:S,"source-layer":"building",minzoom:13,paint:{"fill-color":"#E9E5DB","fill-antialias":false,"fill-opacity":Ln(13,0,14.5,.95)}});
+L.push({id:"bld-line",type:"line",source:S,"source-layer":"building",minzoom:15.5,paint:{"line-color":"#D9D4C8","line-width":Wd(15.5,.4,19,1.3)}});
 L.push({id:"rail",type:"line",source:S,"source-layer":"transportation",minzoom:12,filter:cls(["rail","transit"]),paint:{"line-color":"#CFCABF","line-width":Wd(12,.5,16,1.8),"line-dasharray":[3,2]}});
 L.push({id:"path",type:"line",source:S,"source-layer":"transportation",minzoom:15,filter:cls(["path","pedestrian"]),paint:{"line-color":"#E1DED6","line-width":Wd(15,.6,18,2.2),"line-dasharray":[1,1.4]}});
 var R=[
-{c:["minor","service","track"],f:"#FFFFFF",k:"#DAD7D0",fw:Wd(12,.3,14,1.6,16,5,19,22),kw:Wd(12,.9,14,2.8,16,6.6,19,24)},
-{c:["tertiary","secondary"],f:"#FFFFFF",k:"#D6D3CB",fw:Wd(10,.4,13,1.6,15,5.5,19,30),kw:Wd(10,1,13,2.8,15,7,19,32)},
+{c:["minor","service","track"],f:"#FFFFFF",k:"#CFCBC1",fw:Wd(12,.3,14,1.6,16,5,19,22),kw:Wd(12,.9,14,2.8,16,6.6,19,24)},
+{c:["tertiary","secondary"],f:"#FFFFFF",k:"#CCC8BE",fw:Wd(10,.4,13,1.6,15,5.5,19,30),kw:Wd(10,1,13,2.8,15,7,19,32)},
 {c:["primary","trunk"],f:"#FFEFC2",k:"#E9D096",fw:Wd(8,.4,12,1.8,15,6.5,19,34),kw:Wd(8,1,12,3,15,8,19,36)},
 {c:["motorway"],f:"#FFD98A",k:"#E5B04A",fw:Wd(6,.5,12,2.2,15,7.5,19,38),kw:Wd(6,1.2,12,3.4,15,9,19,40)}];
 var lay={"line-cap":"round","line-join":"round"};
 R.forEach(function(r,i){L.push({id:"road-case-"+i,type:"line",source:S,"source-layer":"transportation",filter:cls(r.c),layout:lay,paint:{"line-color":r.k,"line-width":r.kw}})});
 R.forEach(function(r,i){L.push({id:"road-fill-"+i,type:"line",source:S,"source-layer":"transportation",filter:cls(r.c),layout:lay,paint:{"line-color":r.f,"line-width":r.fw}})});
-L.push({id:"bld-3d",type:"fill-extrusion",source:S,"source-layer":"building",minzoom:15,layout:{visibility:"none"},paint:{"fill-extrusion-color":"#EDEBE5","fill-extrusion-height":["coalesce",["get","render_height"],8],"fill-extrusion-base":["coalesce",["get","render_min_height"],0],"fill-extrusion-opacity":.96,"fill-extrusion-vertical-gradient":false}});
 var halo={"text-halo-color":"rgba(255,255,255,.95)","text-halo-width":1.6};
 function P(o){for(var k in halo)o[k]=halo[k];return o}
 L.push({id:"road-label",type:"symbol",source:S,"source-layer":"transportation_name",minzoom:13,layout:{"symbol-placement":"line","text-field":["coalesce",["get","name:latin"],["get","name"]],"text-font":[reg],"text-size":Ln(13,10,17,13),"text-transform":"uppercase","text-letter-spacing":.06,"text-max-angle":30},paint:P({"text-color":"#8E939B"})});
@@ -1653,7 +1655,10 @@ map=new maplibregl.Map({container:box,style:EMPTY,center:[-0.1278,51.5074],zoom:
 map.addControl(new maplibregl.AttributionControl({compact:true}));
 map.addControl(new Ctl(),"top-right");
 var custom=false;
-function syncBld(){try{if(map.getLayer("bld-3d"))map.setLayoutProperty("bld-3d","visibility",map.getPitch()>10?"visible":"none")}catch(e){}}
+function syncBld(){try{
+var on=map.getPitch()>10,has=!!map.getLayer("bld-3d");
+if(on&&!has&&vecSrc)map.addLayer({id:"bld-3d",type:"fill-extrusion",source:vecSrc,"source-layer":"building",minzoom:15,paint:{"fill-extrusion-color":"#EDEBE5","fill-extrusion-height":["coalesce",["get","render_height"],8],"fill-extrusion-base":["coalesce",["get","render_min_height"],0],"fill-extrusion-opacity":.96,"fill-extrusion-vertical-gradient":false}},"road-label");
+else if(!on&&has)map.removeLayer("bld-3d")}catch(e){}}
 map.on("pitchend",syncBld);
 map.on("style.load",function(){if(!(custom||usedRaster))return;syncBld();ready=true;mm.hidden=true;why("");pending.splice(0).forEach(function(f){f()})});
 fetch(STYLE).then(function(r){return r.json()}).then(function(st){if(!map||usedRaster)return;custom=true;map.setStyle(buildStyle(st),{diff:false})}).catch(function(e){if(!usedRaster){usedRaster=true;why("The map style didn't download ("+(e&&e.message?e.message:"error")+"). Showing a flat map instead.");try{map.setStyle(RASTER);map.easeTo({pitch:0,bearing:0,duration:0});box.classList.add("flat")}catch(x){}}});
