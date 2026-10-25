@@ -1529,11 +1529,33 @@ load();
 function setup(){
 if(!window.maplibregl)return fail();
 var box=gid("hubMap"),hq=gid("hubQ"),mm=gid("mapMsg"),map=null,ready=false,meLL=null,meMk=null,marks=[],pending=[];
-var PIN='<svg width="30" height="38" viewBox="0 0 30 38" aria-hidden="true"><path d="M15 0C6.7 0 0 6.6 0 14.8 0 25.9 15 38 15 38S30 25.9 30 14.8C30 6.6 23.3 0 15 0z" fill="#14142B"/><circle cx="15" cy="14.5" r="5.5" fill="#fff"/></svg>';
+var PIN='<svg width="30" height="38" viewBox="0 0 30 38" aria-hidden="true"><path d="M15 0C6.7 0 0 6.6 0 14.8 0 25.9 15 38 15 38S30 25.9 30 14.8C30 6.6 23.3 0 15 0z" fill="#FF5C35"/><circle cx="15" cy="14.5" r="5.5" fill="#fff"/></svg>';
 function mk(label,start){var d=document.createElement("div");d.className="mkWrap";
 if(label){var l=document.createElement("span");l.className="mkLabel";l.textContent=label;d.appendChild(l)}
 if(start){var c=document.createElement("span");c.className="mkStart";d.appendChild(c)}else d.insertAdjacentHTML("beforeend",PIN);
 return d}
+function tint(){
+var st;try{st=map.getStyle()}catch(e){return}
+if(!st||!st.layers)return;
+var LAND="#F3F0E8",PARK="#C9E7B2",WOOD="#B7DB9F",WATER="#A5D3F5",BLDG="#ECE7DC";
+st.layers.forEach(function(l){
+var id=l.id,t=l.type;
+function P(k,v){try{map.setPaintProperty(id,k,v)}catch(e){}}
+if(t==="background")P("background-color",LAND);
+else if(t==="fill-extrusion"){P("fill-extrusion-color",BLDG);P("fill-extrusion-opacity",.96);P("fill-extrusion-vertical-gradient",true)}
+else if(t==="fill"){
+if(/water/.test(id))P("fill-color",WATER);
+else if(/wood|forest/.test(id))P("fill-color",WOOD);
+else if(/park|garden|grass|meadow|recreation|pitch|golf|cemetery|green|nature|scrub|wetland/.test(id))P("fill-color",PARK);
+else if(/building/.test(id))P("fill-color",BLDG)}
+else if(t==="line"){
+var cas=/casing|case/.test(id);
+if(/waterway|river|stream|canal/.test(id))P("line-color",WATER);
+else if(/rail/.test(id)&&!/station/.test(id))P("line-color","#CFCABF");
+else if(/motorway/.test(id))P("line-color",cas?"#E39B1E":"#FFC24D");
+else if(/trunk|primary/.test(id))P("line-color",cas?"#E2C060":"#FFE08A");
+else if(/secondary|tertiary|minor|service|street|residential|link/.test(id)&&!/path/.test(id))P("line-color",cas?"#D9D3C5":"#FFFFFF")}
+else if(t==="symbol"){P("text-halo-color","rgba(255,255,255,.92)");P("text-halo-width",1.4)}})}
 function whenReady(f){if(ready)f();else pending.push(f)}
 function tilt(){}
 tilt.prototype.onAdd=function(m){var c=document.createElement("div");c.className="maplibregl-ctrl maplibregl-ctrl-group";var b=document.createElement("button");b.type="button";b.className="tiltBtn";b.setAttribute("aria-label","Switch between 2D and 3D");
@@ -1545,12 +1567,12 @@ function init(){
 if(map||noGL)return;
 mm.hidden=true;ready=false;
 try{
-map=new maplibregl.Map({container:box,style:STYLE,center:[-0.1278,51.5074],zoom:11.6,pitch:55,bearing:-14,maxPitch:75,attributionControl:false,cooperativeGestures:false});
+map=new maplibregl.Map({container:box,style:STYLE,center:[-0.1278,51.5074],zoom:11.6,pitch:58,bearing:-14,maxPitch:75,attributionControl:false,cooperativeGestures:false});
 }catch(e){map=null;fail(true,"This browser can't draw the 3D map ("+(e&&e.message?e.message:"WebGL unavailable")+").");return}
 map.addControl(new maplibregl.AttributionControl({compact:true}));
 map.addControl(new maplibregl.NavigationControl({showZoom:false,visualizePitch:true}),"top-right");
 map.addControl(new tilt(),"top-right");
-map.on("load",function(){ready=true;mm.hidden=true;why("");pending.splice(0).forEach(function(f){f()})});
+map.on("load",function(){ready=true;mm.hidden=true;why("");if(!usedRaster)tint();pending.splice(0).forEach(function(f){f()})});
 map.on("idle",function(){if(usedRaster&&!ready){ready=true;mm.hidden=true;pending.splice(0).forEach(function(f){f()})}});
 map.on("error",function(e){
 if(ready)return;
@@ -1567,7 +1589,7 @@ meLL=[p.coords.longitude,p.coords.latitude];
 if(!map)return;
 if(meMk)meMk.setLngLat(meLL);
 else{var d=document.createElement("div");d.className="mapMe";d.innerHTML="<span></span>";meMk=new maplibregl.Marker({element:d}).setLngLat(meLL).addTo(map)}
-if(!marks.length)map.easeTo({center:meLL,zoom:14.5,duration:900})},function(){},{enableHighAccuracy:true,timeout:15000,maximumAge:60000})}
+if(!marks.length)map.easeTo({center:meLL,zoom:15.8,pitch:60,duration:1100})},function(){},{enableHighAccuracy:true,timeout:15000,maximumAge:60000})}
 function clear(){
 marks.forEach(function(m){m.remove()});marks=[];
 if(!map)return;
@@ -1578,14 +1600,14 @@ whenReady(function(){
 if(map.getSource("rt"))return;
 map.addSource("rt",{type:"geojson",data:{type:"Feature",geometry:{type:"LineString",coordinates:[A,B]}}});
 map.addLayer({id:"rt-case",type:"line",source:"rt",layout:{"line-cap":"round","line-join":"round"},paint:{"line-color":"#ffffff","line-width":9,"line-opacity":.95}});
-map.addLayer({id:"rt-line",type:"line",source:"rt",layout:{"line-cap":"round","line-join":"round"},paint:{"line-color":"#14142B","line-width":5}})})}
+map.addLayer({id:"rt-line",type:"line",source:"rt",layout:{"line-cap":"round","line-join":"round"},paint:{"line-color":"#2D74FF","line-width":6}})})}
 function fit(A,B,top,bottom){
 map.fitBounds([[Math.min(A[0],B[0]),Math.min(A[1],B[1])],[Math.max(A[0],B[0]),Math.max(A[1],B[1])]],{padding:{top:top,bottom:bottom,left:50,right:50},maxZoom:15,duration:1100})}
 function show(r){
 clear();var ll=[+r.lon,+r.lat];
 marks.push(new maplibregl.Marker({element:mk("",false),anchor:"bottom"}).setLngLat(ll).addTo(map));
 if(meLL){line(meLL,ll);fit(meLL,ll,130,Math.min(380,box.clientHeight*.5))}
-else map.flyTo({center:ll,zoom:15.4,duration:1100})}
+else map.flyTo({center:ll,zoom:16.2,pitch:60,bearing:-17,duration:1400})}
 function geo(q,vb){
 return fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=gb&q="+encodeURIComponent(q)+(vb?"&viewbox="+vb+"&bounded=1":""))
 .then(function(r){return r.json()}).then(function(a){return a&&a.length?a[0]:null}).catch(function(){return null})}
