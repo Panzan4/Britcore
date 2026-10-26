@@ -768,6 +768,7 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 .hubMsg{margin:10px 2px;color:var(--mute);font-size:14px;line-height:1.45}
 .skel{height:58px;border-radius:16px;margin:8px 0;background:linear-gradient(90deg,#ECE8DD 25%,#F6F2E8 50%,#ECE8DD 75%) 0 0/200% 100%;animation:skel 1.2s linear infinite}
 @keyframes skel{to{background-position:-200% 0}}
+.mkWrap svg{filter:drop-shadow(0 3px 4px rgba(20,20,43,.35))}
 .rtLabel.alt{background:#fff;color:#14142B;box-shadow:0 3px 10px rgba(20,20,43,.25)}
 
 #jEmpty .jTimeline{flex:none}
@@ -784,7 +785,7 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 .mkWrap{display:flex;flex-direction:column;align-items:center;pointer-events:none}
 .mkLabel{margin-bottom:3px;background:#14142B;color:#fff;border-radius:999px;font:800 12px DM Sans,system-ui,sans-serif;padding:3px 10px;white-space:nowrap;box-shadow:0 3px 8px rgba(20,20,43,.3)}
 .mkWrap svg{display:block;filter:drop-shadow(0 4px 5px rgba(0,0,0,.35));animation:pinDrop .45s cubic-bezier(.22,1.4,.4,1)}
-.mkStart{display:block;width:18px;height:18px;border-radius:50%;background:#14142B;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.mkStart{display:block;width:18px;height:18px;border-radius:50%;background:#2FE38A;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
 .mapMsg small{display:block;margin:-4px 0 10px;font-size:12px;color:var(--mute);line-height:1.35}
 .mapMsg small:empty{display:none}
 /* MapLibre sets position:relative on its container, which collapsed the map to zero height */
@@ -991,7 +992,7 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 <h3 id="hubTitle">Routes<span></span></h3>
 <button type="button" class="hubClose" id="hubClose" aria-label="Close">&times;</button>
 </div>
-<div class="hubFT"><div class="hubFTrow"><i class="ftDot a"></i><span id="hubFrom" class="hubFromTap" role="button" tabindex="0">Your location</span><input id="hubFromIn" class="hubFromIn" type="text" placeholder="Search for a start" autocomplete="off" hidden></div><div class="hubFTrow"><i class="ftDot b"></i><span id="hubTo">Choose a destination</span></div></div>
+<div class="hubFT" hidden><div class="hubFTrow"><i class="ftDot a"></i><span id="hubFrom" class="hubFromTap" role="button" tabindex="0">Your location</span><input id="hubFromIn" class="hubFromIn" type="text" placeholder="Search for a start" autocomplete="off" hidden></div><div class="hubFTrow"><i class="ftDot b"></i><span id="hubTo">Choose a destination</span></div></div>
 <div class="sugList sugIn" id="sugFrom" hidden></div>
 <div id="hubRows"></div>
 <p class="discNote hubNote"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".8"/></svg><span>Some links may earn us a commission, at no extra cost to you. Map data &copy; OpenStreetMap contributors. Routes by OSRM (FOSSGIS). London public transport powered by TfL Open Data. Times are estimates.</span></p>
@@ -1709,7 +1710,7 @@ load();
 function setup(){
 if(!window.maplibregl)return fail();
 var box=gid("hubMap"),hq=gid("hubQ"),mm=gid("mapMsg"),map=null,ready=false,meLL=null,meMk=null,marks=[],pending=[];
-var PIN='<svg width="30" height="38" viewBox="0 0 30 38" aria-hidden="true"><path d="M15 0C6.7 0 0 6.6 0 14.8 0 25.9 15 38 15 38S30 25.9 30 14.8C30 6.6 23.3 0 15 0z" fill="#FF5C35"/><circle cx="15" cy="14.5" r="5.5" fill="#fff"/></svg>';
+var PIN='<svg width="30" height="38" viewBox="0 0 30 38" aria-hidden="true"><path d="M15 0C6.7 0 0 6.6 0 14.8 0 25.9 15 38 15 38S30 25.9 30 14.8C30 6.6 23.3 0 15 0z" fill="#2FE38A"/><circle cx="15" cy="14.5" r="5.5" fill="#fff"/></svg>';
 function mk(label,start){var d=document.createElement("div");d.className="mkWrap";
 if(label){var l=document.createElement("span");l.className="mkLabel";l.textContent=label;d.appendChild(l)}
 if(start){var c=document.createElement("span");c.className="mkStart";d.appendChild(c)}else d.insertAdjacentHTML("beforeend",PIN);
@@ -1842,7 +1843,7 @@ if(!map)return;
 ["rt-dash","rt-line","rt-case","rt-alt"].forEach(function(id){if(map.getLayer(id))map.removeLayer(id)});
 if(map.getSource("rt"))map.removeSource("rt")}
 var st={dest:null,orig:null,res:null,mode:null,alt:0,seq:0,A:null,B:null},altBound=false;
-var COL={drive:"#2D74FF",walk:"#14142B",cycle:"#1FA463"};
+var COL={drive:"#2D74FF",walk:"#2D74FF",cycle:"#2D74FF"};
 var LCOL={"central":"#E32017","victoria":"#0098D4","northern":"#1F1F1F","jubilee":"#7C858C","piccadilly":"#003688","bakerloo":"#B36305","district":"#00782A","circle":"#E4A800","hammersmith & city":"#E08CA6","metropolitan":"#9B0056","waterloo & city":"#6FBFA6","elizabeth line":"#6950A1","dlr":"#00A4A7","liberty":"#5D6061","lioness":"#FFA600","mildmay":"#0077AD","suffragette":"#18A95D","weaver":"#9B5F8A","windrush":"#DC241F"};
 function lineCol(id,ln){var k=(ln||"").toLowerCase();if(LCOL[k])return LCOL[k];
 if(id==="bus")return"#E1251B";if(id==="tram")return"#5FB526";if(id==="dlr")return"#00A4A7";if(id==="overground")return"#EE7C0E";if(id==="elizabeth-line")return"#6950A1";if(id==="national-rail")return"#1D2B6B";if(id==="river-bus"||id==="river-tour")return"#0098D4";return"#14142B"}
@@ -1918,19 +1919,19 @@ return fetch("https://router.project-osrm.org/route/v1/driving/"+co+"?overview=f
 .then(function(x){return x.json()}).then(function(j){return j&&j.code==="Ok"&&j.routes&&j.routes.length?j.routes:null}).catch(function(){return null})})}
 function mkR(mode,rs){
 if(!rs)return null;
-return{alts:rs.slice(0,3).map(function(r){return{dur:r.duration,dist:r.distance,segs:[{c:r.geometry.coordinates,col:COL[mode],dash:mode==="walk"}]}})}}
+return{alts:rs.slice(0,1).map(function(r){return{dur:r.duration,dist:r.distance,segs:[{c:r.geometry.coordinates,col:COL[mode],dash:mode==="walk"}]}})}}
 function tfl(A,B){
 var u="https://api.tfl.gov.uk/Journey/JourneyResults/"+A[1].toFixed(5)+","+A[0].toFixed(5)+"/to/"+B[1].toFixed(5)+","+B[0].toFixed(5);
 return fetch(u).then(function(r){return r.ok?r.json():null}).then(function(j){
 if(!j||!j.journeys||!j.journeys.length)return null;
-var alts=j.journeys.slice(0,3).map(function(jy){
+var alts=j.journeys.slice(0,1).map(function(jy){
 var segs=[],names=[],len=0;
 (jy.legs||[]).forEach(function(l){
 var id=(l.mode&&l.mode.id)||"",cs=[];
 try{cs=JSON.parse(l.path.lineString).map(function(q){return[q[1],q[0]]})}catch(e){}
 if(cs.length<2)return;
 var ln=(l.routeOptions&&l.routeOptions[0]&&l.routeOptions[0].name)||"";
-segs.push({c:cs,col:id==="walking"?"#14142B":lineCol(id,ln),dash:id==="walking"});
+segs.push({c:cs,col:id==="walking"?"#2FE38A":"#2D74FF",dash:id==="walking"});
 len+=pathLen(cs);
 if(id!=="walking"){var nm=id==="bus"?(ln?"Bus "+ln:"Bus"):(id==="tube"&&ln?ln:((l.mode&&l.mode.name)||id));if(names.indexOf(nm)<0)names.push(nm)}});
 if(!segs.length)return null;
@@ -1975,13 +1976,12 @@ var before=map.getLayer("road-label")?"road-label":undefined,lay={"line-cap":"ro
 map.addLayer({id:"rt-alt",type:"line",source:"rt",filter:["==",["get","alt"],1],layout:lay,paint:{"line-color":"#9AA3B2","line-width":6,"line-opacity":.9}},before);
 map.addLayer({id:"rt-case",type:"line",source:"rt",filter:["==",["get","alt"],0],layout:lay,paint:{"line-color":"#ffffff","line-width":11,"line-opacity":.95}},before);
 map.addLayer({id:"rt-line",type:"line",source:"rt",filter:["all",["==",["get","alt"],0],["==",["get","dash"],0]],layout:lay,paint:{"line-color":["get","col"],"line-width":7}},before);
-map.addLayer({id:"rt-dash",type:"line",source:"rt",filter:["all",["==",["get","alt"],0],["==",["get","dash"],1]],layout:lay,paint:{"line-color":["get","col"],"line-width":6,"line-dasharray":[.1,2]}},before);
+map.addLayer({id:"rt-dash",type:"line",source:"rt",filter:["all",["==",["get","alt"],0],["==",["get","dash"],1]],layout:lay,paint:{"line-color":["get","col"],"line-width":7,"line-dasharray":[.1,1.9]}},before);
 if(!altBound){altBound=true;
 map.on("click","rt-alt",function(e){var f=e.features&&e.features[0];if(!f)return;st.alt=+f.properties.i;draw(false);renderRows()});
 map.on("mouseenter","rt-alt",function(){map.getCanvas().style.cursor="pointer"});
 map.on("mouseleave","rt-alt",function(){map.getCanvas().style.cursor=""})}}
 lbl(a,false);
-r.alts.forEach(function(x,i){if(x!==a)lbl(x,true)});
 if(fitIt)fitTo(a)});
 updateHead()}
 /* ---- route rows ---- */
