@@ -1850,6 +1850,24 @@ function lineCol(id,ln){var k=(ln||"").toLowerCase();if(LCOL[k])return LCOL[k];
 if(id==="bus")return"#E1251B";if(id==="tram")return"#5FB526";if(id==="dlr")return"#00A4A7";if(id==="overground")return"#EE7C0E";if(id==="elizabeth-line")return"#6950A1";if(id==="national-rail")return"#1D2B6B";if(id==="river-bus"||id==="river-tour")return"#0098D4";return"#14142B"}
 function hav(A,B){var R=6371000,r=Math.PI/180,dL=(B[1]-A[1])*r,dN=(B[0]-A[0])*r,a=Math.sin(dL/2)*Math.sin(dL/2)+Math.cos(A[1]*r)*Math.cos(B[1]*r)*Math.sin(dN/2)*Math.sin(dN/2);return 2*R*Math.asin(Math.sqrt(a))}
 function pathLen(c){var t=0;for(var i=1;i<c.length;i++)t+=hav(c[i-1],c[i]);return t}
+function dpSimplify(c,tol){
+if(c.length<3)return c;
+var k=Math.cos(c[0][1]*Math.PI/180)*111320,m=110540,keep=new Uint8Array(c.length),st1=[[0,c.length-1]];
+keep[0]=keep[c.length-1]=1;
+function d2(p,a,b){var x=(p[0]-a[0])*k,y=(p[1]-a[1])*m,dx=(b[0]-a[0])*k,dy=(b[1]-a[1])*m,l=dx*dx+dy*dy,t=l?Math.max(0,Math.min(1,(x*dx+y*dy)/l)):0,ex=x-t*dx,ey=y-t*dy;return Math.sqrt(ex*ex+ey*ey)}
+while(st1.length){var r=st1.pop(),i0=r[0],i1=r[1],mx=0,ix=-1;
+for(var i=i0+1;i<i1;i++){var d=d2(c[i],c[i0],c[i1]);if(d>mx){mx=d;ix=i}}
+if(mx>tol&&ix>0){keep[ix]=1;st1.push([i0,ix],[ix,i1])}}
+var out=[];for(var j=0;j<c.length;j++)if(keep[j])out.push(c[j]);return out}
+function chaikin(c,n){
+for(var it=0;it<n;it++){
+if(c.length<3)return c;
+var o=[c[0]];
+for(var i=0;i<c.length-1;i++){var a=c[i],b=c[i+1];
+o.push([a[0]*.75+b[0]*.25,a[1]*.75+b[1]*.25],[a[0]*.25+b[0]*.75,a[1]*.25+b[1]*.75])}
+o.push(c[c.length-1]);c=o}
+return c}
+function sm(c){return c.length<3?c:chaikin(dpSimplify(c,2.5),2)}
 function fmtT(sec){var m=Math.max(1,Math.round(sec/60));if(m<60)return m+" min";var h=Math.floor(m/60),r=m%60;return h+"h "+(r<10?"0":"")+r+"m"}
 function fmtD(m){var u="mi";try{u=(JSON.parse(localStorage.getItem("acctPrefs")||"{}").unit)||"mi"}catch(e){}var v=u==="km"?m/1000:m/1609.344;return(v<10?v.toFixed(1):Math.round(v))+" "+u}
 function inLondon(P){return P[1]>51.28&&P[1]<51.70&&P[0]>-0.55&&P[0]<0.35}
@@ -1920,7 +1938,7 @@ return fetch("https://router.project-osrm.org/route/v1/driving/"+co+"?overview=f
 .then(function(x){return x.json()}).then(function(j){return j&&j.code==="Ok"&&j.routes&&j.routes.length?j.routes:null}).catch(function(){return null})})}
 function mkR(mode,rs){
 if(!rs)return null;
-return{alts:rs.slice(0,1).map(function(r){return{dur:r.duration,dist:r.distance,segs:[{c:r.geometry.coordinates,col:COL[mode],dash:false}]}})}}
+return{alts:rs.slice(0,1).map(function(r){return{dur:r.duration,dist:r.distance,segs:[{c:sm(r.geometry.coordinates),col:COL[mode],dash:false}]}})}}
 function tfl(A,B){
 var u="https://api.tfl.gov.uk/Journey/JourneyResults/"+A[1].toFixed(5)+","+A[0].toFixed(5)+"/to/"+B[1].toFixed(5)+","+B[0].toFixed(5);
 return fetch(u).then(function(r){return r.ok?r.json():null}).then(function(j){
@@ -1932,7 +1950,7 @@ var id=(l.mode&&l.mode.id)||"",cs=[];
 try{cs=JSON.parse(l.path.lineString).map(function(q){return[q[1],q[0]]})}catch(e){}
 if(cs.length<2)return;
 var ln=(l.routeOptions&&l.routeOptions[0]&&l.routeOptions[0].name)||"";
-segs.push({c:cs,col:id==="walking"?"#1FD17A":"#14142B",dash:false});
+segs.push({c:sm(cs),col:id==="walking"?"#1FD17A":"#14142B",dash:false});
 len+=pathLen(cs);
 if(id!=="walking"){var nm=id==="bus"?(ln?"Bus "+ln:"Bus"):(id==="tube"&&ln?ln:((l.mode&&l.mode.name)||id));if(names.indexOf(nm)<0)names.push(nm)}});
 if(!segs.length)return null;
@@ -1974,8 +1992,8 @@ if(src)src.setData(data);
 else{
 map.addSource("rt",{type:"geojson",data:data});
 var lay={"line-cap":"round","line-join":"round"};
-map.addLayer({id:"rt-case",type:"line",source:"rt",layout:lay,paint:{"line-color":"#ffffff","line-width":12,"line-opacity":1}});
-map.addLayer({id:"rt-line",type:"line",source:"rt",layout:lay,paint:{"line-color":["get","col"],"line-width":7}})}
+map.addLayer({id:"rt-case",type:"line",source:"rt",layout:lay,paint:{"line-color":"#ffffff","line-width":["interpolate",["exponential",1.5],["zoom"],10,3,13,6,16,9,19,14],"line-opacity":1}});
+map.addLayer({id:"rt-line",type:"line",source:"rt",layout:lay,paint:{"line-color":["get","col"],"line-width":["interpolate",["exponential",1.5],["zoom"],10,1.6,13,3.2,16,5,19,8]}})}
 lbl(a,false);
 if(fitIt)fitTo(a)});
 updateHead()}
