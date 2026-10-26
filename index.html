@@ -713,6 +713,63 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 .fForm{position:absolute;inset:0;padding:6px 2px 18px;background:var(--bg);border-radius:20px}
 .nextTile:has(#fForm:not([hidden])){min-height:640px}
 @media (prefers-reduced-motion:reduce){.jTrack::before,.jPlane{transition:none}}
+.jNames{margin:10px 0 0;font:700 12.5px/1.3 DM Sans,system-ui,sans-serif;color:rgba(246,241,231,.72)}
+#modeChips{margin:10px 0 12px}
+.jEmptyHero .jOnDark{display:block;width:100%;margin-top:10px;color:#F6F1E7;opacity:.85;text-align:center}
+/* ===== Tracker v2 ===== */
+#jFlight{display:flex;flex-direction:column;gap:14px}
+.jHero{position:relative;overflow:hidden;margin:0;padding:18px 18px 16px;border-radius:28px;background:radial-gradient(90% 70% at 100% 0,rgba(47,227,138,.28),transparent 60%),linear-gradient(165deg,#262854,#14142B 70%);box-shadow:0 16px 32px rgba(20,20,43,.3)}
+.jHeroTop{flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.jChip{background:rgba(255,255,255,.1);border:0;padding:5px 12px;font-size:12px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+#fNo{background:var(--trim);color:var(--navy)}
+.jCodes b{font-size:56px}
+.jTrack{height:4px;background:rgba(255,255,255,.16)}
+.jTrack::before{background:linear-gradient(90deg,rgba(47,227,138,.25),var(--trim))}
+.jPlane{width:28px;height:28px;margin:-14px 0 0 -14px;background-color:var(--trim);box-shadow:0 0 0 6px rgba(47,227,138,.22),0 0 18px rgba(47,227,138,.55)}
+.jNames{margin:12px 0 0;color:rgba(246,241,231,.75)}
+.jStatus{position:relative;margin-top:18px;padding-top:16px;border-top:2px dashed rgba(255,255,255,.2)}
+.jStatus::before,.jStatus::after{content:"";position:absolute;top:-11px;width:20px;height:20px;border-radius:50%;background:var(--bg)}
+.jStatus::before{left:-28px}
+.jStatus::after{right:-28px}
+.jStatus b{font-size:19px}
+#fStat::before{content:"";display:inline-block;width:9px;height:9px;margin-right:8px;border-radius:50%;background:var(--trim);box-shadow:0 0 0 4px rgba(47,227,138,.25);animation:jPulse 2.2s infinite;vertical-align:1px}
+#jFlight .jTimeline,#jEmpty .jTimeline{margin:0;padding:18px 18px 14px;background:var(--card);border:1px solid var(--line);border-radius:26px;box-shadow:0 8px 22px rgba(20,20,43,.07)}
+#jEmpty .jTimeline{margin-bottom:12px}
+#jFlight .jDot-done{background:var(--trim);border-color:var(--trim)}
+#jFlight .jDot-off{background:var(--card);border-color:#CFC8B8}
+#jFlight .jLine{width:2px;margin-left:6px;background:#E4DCCB}
+#jFlight .jTxt b{font-size:14.5px}
+.jActs{display:flex;gap:8px}
+.jActs .linkBtn{flex:1;min-width:0;padding:11px 8px;border-radius:999px;background:var(--card);border:1px solid var(--line);color:var(--navy);font-size:13px}
+.jActs .linkBtn:active{transform:scale(.97)}
+.jActs .jDanger{color:#B8341A;border-color:#F0C4B8}
+.jEmptyHero{position:relative;overflow:hidden;border-radius:28px;padding:24px 20px;background:radial-gradient(90% 80% at 100% 0,rgba(47,227,138,.28),transparent 60%),linear-gradient(165deg,#262854,#14142B 70%);box-shadow:0 16px 32px rgba(20,20,43,.3)}
+.jEmptyHero .psBtnMain{background:var(--trim);border-radius:999px}
+
+/* ===== Map v2 ===== */
+.sugList{margin-top:8px;background:var(--card);border-radius:20px;box-shadow:0 12px 30px rgba(20,20,43,.22);border:1px solid var(--line);overflow:hidden;max-height:min(46vh,340px);overflow-y:auto}
+.sugItem{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:11px 14px;font-family:DM Sans,system-ui,sans-serif;cursor:pointer;color:var(--ink)}
+.sugItem:last-child{border-bottom:0}
+.sugItem:active{background:var(--accent-soft)}
+.sugItem i{flex:none;width:30px;height:30px;border-radius:50%;background:var(--accent-soft);display:grid;place-items:center}
+.sugItem i svg{width:16px;height:16px;stroke:var(--navy);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sugItem span{min-width:0}
+.sugItem b{display:block;font-size:14.5px;font-weight:800;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sugItem small{display:block;font-size:12.5px;color:var(--mute);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sugEmpty{padding:14px;font-size:13.5px;color:var(--mute)}
+.hubQx{flex:none;border:0;background:var(--accent-soft);color:var(--navy);width:22px;height:22px;border-radius:50%;font-size:14px;line-height:1;padding:0;cursor:pointer}
+.sugIn{margin:-4px 0 10px}
+.hubFromTap{cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}
+.hubFromIn{border:0;outline:0;background:none;font:700 14px DM Sans,system-ui,sans-serif;color:var(--ink);flex:1;min-width:0;padding:0}
+.hubSheet:not(.open) .hubSheetHead span{display:block}
+.hubRow{cursor:pointer;border-radius:16px;padding:10px 8px;margin:0 -8px;border-bottom:0;transition:background .15s}
+.hubRow.sel{background:rgba(47,227,138,.16)}
+.hubRow .hubTime small{margin-left:6px}
+.hubMsg{margin:10px 2px;color:var(--mute);font-size:14px;line-height:1.45}
+.skel{height:58px;border-radius:16px;margin:8px 0;background:linear-gradient(90deg,#ECE8DD 25%,#F6F2E8 50%,#ECE8DD 75%) 0 0/200% 100%;animation:skel 1.2s linear infinite}
+@keyframes skel{to{background-position:-200% 0}}
+.rtLabel.alt{background:#fff;color:#14142B;box-shadow:0 3px 10px rgba(20,20,43,.25)}
+
 #jEmpty .jTimeline{flex:none}
 #jEmpty .jLine{flex:none;min-height:28px}
 #jEmpty .jHandle{margin-top:12px}
@@ -821,7 +878,7 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 </div>
 <div class="nextTile" id="nextTile" aria-live="polite">
 <div class="jBody" id="jEmpty">
-<div class="jEmptyHero"><b>Add your flight</b><p>Track check-in, gate and landing, and plan the way to your hotel.</p><button type="button" class="psBtnMain" id="addFlightBtn">Enter flight details</button></div>
+<div class="jEmptyHero"><b>Add your journey</b><p>Scan a boarding pass or ticket, or type it in. Works for flights, trains, Eurostar, coaches and ferries.</p><button type="button" class="psBtnMain" id="liveScanBtn">Scan boarding pass or ticket</button><button type="button" class="linkBtn jOnDark" id="addFlightBtn">Enter journey details instead</button></div>
 <div class="jTimeline jTimeline-solo">
 <div class="jRow"><span class="jDot jDot-on"></span><div class="jTxt"><b>Your location</b><small>Now</small></div></div>
 <div class="jLine"></div>
@@ -832,12 +889,13 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 </div>
 <div class="jBody" id="jFlight" hidden>
 <div class="jHero">
-<div class="jHeroTop"><span class="jChip" id="fNo"></span><span class="jChip" id="fDur"></span><span id="fRoute" hidden></span></div>
+<div class="jHeroTop"><span class="jChip" id="fNo"></span><span class="jChip" id="fDur"></span><span class="jChip" id="fSeat" hidden></span><span id="fRoute" hidden></span></div>
 <div class="jCodes"><b id="fFrom">---</b><div class="jTrack" id="fTrack"><i class="jPlane" id="fPlane"></i></div><b id="fTo">---</b></div>
+<p class="jNames" id="fNames" hidden></p>
 <div class="jStatus"><div><small>Status</small><b id="fStat"></b></div><div class="r"><small>Next</small><b id="fCount"></b></div></div>
 </div>
 <div class="jTimeline">
-<div class="jRow"><span class="jDot jDot-done" id="d1"></span><div class="jTxt"><b>Check-in</b><small id="fCheck"></small><button type="button" class="loungeBtn" id="loungeBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 11V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3"/><path d="M3 13a2 2 0 0 1 4 0v2h10v-2a2 2 0 0 1 4 0v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M6 18v2M18 18v2"/></svg>Check lounges</button></div><span class="jT" id="tCheck"></span></div>
+<div class="jRow"><span class="jDot jDot-done" id="d1"></span><div class="jTxt"><b id="r1T">Check-in</b><small id="fCheck"></small><button type="button" class="loungeBtn" id="loungeBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 11V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3"/><path d="M3 13a2 2 0 0 1 4 0v2h10v-2a2 2 0 0 1 4 0v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M6 18v2M18 18v2"/></svg>Check lounges</button></div><span class="jT" id="tCheck"></span></div>
 <div class="jLine jLineTight"></div>
 <div class="jRow jRowDot"><span class="jDot jDot-on" id="hereDot"></span></div>
 <div class="jLine jLineTight"></div>
@@ -850,15 +908,18 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 <div class="jLine jLineTail"></div>
 </div>
 <button type="button" class="jHandle" id="landedHandle">Add connection</button>
+<div class="jActs"><button type="button" class="linkBtn" id="editJourney">Edit details</button><button type="button" class="linkBtn" id="rescanBtn">Scan another</button><button type="button" class="linkBtn jDanger" id="clearJourney">Remove journey</button></div>
 </div>
 <div class="fForm" id="fForm" hidden>
-<h3>Flight details</h3>
+<h3>Journey details</h3>
 <p class="small" id="fNote"></p>
-<label>Flight<input id="inFlight" type="text" maxlength="8" placeholder="For example BA112" autocapitalize="characters"></label>
-<div class="row"><label>From<input id="inFrom" type="text" maxlength="3" placeholder="JFK" autocapitalize="characters"></label><label>To<input id="inTo" type="text" maxlength="3" placeholder="LHR" autocapitalize="characters"></label></div>
+<div class="chips scroll" id="modeChips" aria-label="Type of transport"><button type="button" data-m="flight" aria-pressed="true">Flight</button><button type="button" data-m="train" aria-pressed="false">Train</button><button type="button" data-m="eurostar" aria-pressed="false">Eurostar</button><button type="button" data-m="coach" aria-pressed="false">Coach</button><button type="button" data-m="ferry" aria-pressed="false">Ferry</button></div>
+<label><span id="lbNo">Flight</span><input id="inFlight" type="text" maxlength="8" placeholder="For example BA112" autocapitalize="characters"></label>
+<div class="row"><label><span id="lbA">From</span><input id="inFrom" type="text" maxlength="3" placeholder="JFK" autocapitalize="characters"></label><label><span id="lbB">To</span><input id="inTo" type="text" maxlength="3" placeholder="LHR" autocapitalize="characters"></label></div>
 <div class="row"><label>Date<input id="inDate" type="date"></label><label>Departs<input id="inTime" type="time"></label></div>
-<div class="row"><label>Flight time<input id="inDur" type="time" value="02:00"></label><label>Gate<input id="inGate" type="text" maxlength="4" placeholder="Optional"></label></div>
-<div class="row"><label>Departure terminal<input id="inDTerm" type="text" maxlength="12" placeholder="Optional"></label><label>Arrival terminal<input id="inTerm" type="text" maxlength="12" placeholder="Optional"></label></div>
+<div class="row"><label><span id="lbDur">Flight time</span><input id="inDur" type="time" value="02:00"></label><label><span id="lbGate">Gate</span><input id="inGate" type="text" maxlength="4" placeholder="Optional"></label></div>
+<div class="row"><label>Seat or carriage<input id="inSeat" type="text" maxlength="14" placeholder="Optional"></label><label>Booking reference<input id="inRef" type="text" maxlength="14" placeholder="Optional" autocapitalize="characters"></label></div>
+<div class="row" id="termRow"><label>Departure terminal<input id="inDTerm" type="text" maxlength="12" placeholder="Optional"></label><label>Arrival terminal<input id="inTerm" type="text" maxlength="12" placeholder="Optional"></label></div>
 <label>Hotel booked<input id="inHotel" type="text" maxlength="40" placeholder="Optional"></label>
 <p class="small" id="fErr" role="alert"></p>
 <button type="button" class="jScanBtn" id="fSave">Save and track</button>
@@ -916,8 +977,9 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 <div class="mapSearchFloat">
 <div class="hubSearchBar">
 <svg class="brandMark" viewBox="0 0 100 100" role="img" aria-label="PlugIn England"><rect width="100" height="100" rx="24" fill="#2FE38A"/><rect x="43" y="19" width="14" height="30" rx="4" fill="#14142B"/><rect x="19" y="60" width="26" height="13" rx="4" fill="#14142B"/><rect x="55" y="60" width="26" height="13" rx="4" fill="#14142B"/></svg>
-<input id="hubQ" type="text" placeholder="Where to in England?">
+<input id="hubQ" type="text" placeholder="Where to in England?" autocomplete="off" autocapitalize="words" spellcheck="false" enterkeyhint="go"><button type="button" class="hubQx" id="hubQx" aria-label="Clear search" hidden>&times;</button>
 </div>
+<div class="sugList" id="sugList" role="listbox" hidden></div>
 <div class="hubChipsRow">
 <button type="button" class="hubChip" data-hubpick="Tower of London">Tower of London</button>
 <button type="button" class="hubChip" data-hubpick="Buckingham Palace">Buckingham Palace</button>
@@ -926,26 +988,13 @@ nav button[aria-selected="true"] span{max-width:92px;opacity:1;margin-left:8px;t
 <div class="hubSheet" id="hubSheet">
 <div class="hubHandle" id="hubHandle"></div>
 <div class="hubSheetHead">
-<h3 id="hubTitle">Routes<span>3 ways to get there</span></h3>
+<h3 id="hubTitle">Routes<span></span></h3>
 <button type="button" class="hubClose" id="hubClose" aria-label="Close">&times;</button>
 </div>
-<div class="hubFT"><div class="hubFTrow"><i class="ftDot a"></i><span id="hubFrom">Your location</span></div><div class="hubFTrow"><i class="ftDot b"></i><span id="hubTo">Choose a destination</span></div></div>
-<div class="hubRow">
-<span class="gIco"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3.5" width="14" height="14" rx="3"/><path d="M5 11h14M9 21l2-3.5M15 21l-2-3.5"/><circle cx="9" cy="14.2" r=".6"/><circle cx="15" cy="14.2" r=".6"/></svg></span>
-<div class="hubText"><div class="hubTime">35 min<small>&pound;12.50</small></div><b>National Rail / Tube</b><p>Fastest route via King's Cross</p></div>
-<button type="button" class="hubCta" onclick="event.stopPropagation()">Book<svg width="11" height="11" viewBox="0 0 24 24" style="stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></button>
-</div>
-<div class="hubRow">
-<span class="gIco"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 15l1.6-5.2A2 2 0 0 1 8.5 8.5h7a2 2 0 0 1 1.9 1.3L19 15"/><rect x="3.5" y="15" width="17" height="4.5" rx="1.5"/><circle cx="7.5" cy="17.2" r=".7"/><circle cx="16.5" cy="17.2" r=".7"/><path d="M10.5 6h3"/></svg></span>
-<div class="hubText"><div class="hubTime">20 min<small>&pound;24.00</small></div><b>London Black Cab</b><p>Iconic city route via bus lanes</p></div>
-<button type="button" class="hubCta" onclick="event.stopPropagation()">Hail<svg width="11" height="11" viewBox="0 0 24 24" style="stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></button>
-</div>
-<div class="hubRow">
-<span class="gIco"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/></svg></span>
-<div class="hubText"><div class="hubTime">22 min<small>&pound;18.50</small></div><b>UberX / Bolt</b><p>Standard private hire pickup</p></div>
-<button type="button" class="hubCta" onclick="event.stopPropagation()">Request<svg width="11" height="11" viewBox="0 0 24 24" style="stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></button>
-</div>
-<p class="discNote hubNote"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".8"/></svg><span>Some links may earn us a commission, at no extra cost to you. Map data &copy; OpenStreetMap contributors.</span></p>
+<div class="hubFT"><div class="hubFTrow"><i class="ftDot a"></i><span id="hubFrom" class="hubFromTap" role="button" tabindex="0">Your location</span><input id="hubFromIn" class="hubFromIn" type="text" placeholder="Search for a start" autocomplete="off" hidden></div><div class="hubFTrow"><i class="ftDot b"></i><span id="hubTo">Choose a destination</span></div></div>
+<div class="sugList sugIn" id="sugFrom" hidden></div>
+<div id="hubRows"></div>
+<p class="discNote hubNote"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".8"/></svg><span>Some links may earn us a commission, at no extra cost to you. Map data &copy; OpenStreetMap contributors. Routes by OSRM (FOSSGIS). London public transport powered by TfL Open Data. Times are estimates.</span></p>
 </div>
 </section>
 
@@ -1347,58 +1396,148 @@ function showV(v){["find","mine","ideas"].forEach(function(x){gid("v-"+x).hidden
 Array.prototype.forEach.call(document.querySelectorAll(".seg button"),function(b){b.onclick=function(){showV(b.dataset.v)}});
 renderAll();
 
-var fl=null,MIN=6e4,TRF=60,PH=["Upcoming","Check-in open","Boarding","In transit","Landed","At hotel"];
+var fl=null,MIN=6e4;
+var MODES={
+flight:{name:"Flight",tag:"",air:true,noL:"Flight",noP:"For example BA112",aL:"From",bL:"To",aP:"JFK",bP:"LHR",dL:"Flight time",dD:"02:00",gL:"Gate",open:108e5,by:36e5,tr:60,r1:"Check-in",q:"airport",o0:"Check-in opens at ",o1:"Check-in is open. It closes around ",go:"Departed. You are now in transit",ph:["Upcoming","Check-in open","Boarding","In transit","Landed","At hotel"],c:["Check-in opens in ","Check-in closes in ","Departs in ","Lands in ","At hotel in ","Journey complete"]},
+train:{name:"Train",tag:"Train",air:false,noL:"Train or service (optional)",noP:"For example 9024",aL:"From",bL:"To",aP:"London Paddington",bP:"Bath Spa",dL:"Journey time",dD:"01:30",gL:"Platform",open:27e5,by:6e5,tr:30,r1:"At the station",q:"station",o0:"Head to the station from ",o1:"Be at the station by ",go:"Departed. You are on your way",ph:["Upcoming","Head to station","Boarding","On board","Arrived","At hotel"],c:["Head to the station in ","Be at the station in ","Departs in ","Arrives in ","At hotel in ","Journey complete"]},
+eurostar:{name:"Eurostar",tag:"Eurostar",air:false,noL:"Train number (optional)",noP:"For example 9024",aL:"From",bL:"To",aP:"London St Pancras",bP:"Paris Nord",dL:"Journey time",dD:"02:20",gL:"Platform",open:72e5,by:18e5,tr:30,r1:"Check-in",q:"station",o0:"Check-in opens at ",o1:"Check-in is open. It closes around ",go:"Departed. You are on your way",ph:["Upcoming","Check-in open","Boarding","On board","Arrived","At hotel"],c:["Check-in opens in ","Check-in closes in ","Departs in ","Arrives in ","At hotel in ","Journey complete"]},
+coach:{name:"Coach",tag:"Coach",air:false,noL:"Service (optional)",noP:"For example NX 25",aL:"From",bL:"To",aP:"Victoria Coach Station",bP:"Oxford",dL:"Journey time",dD:"02:00",gL:"Bay",open:27e5,by:6e5,tr:30,r1:"At the stop",q:"coach station",o0:"Head to the stop from ",o1:"Be at the stop by ",go:"Departed. You are on your way",ph:["Upcoming","Head to stop","Boarding","On board","Arrived","At hotel"],c:["Head to the stop in ","Be at the stop in ","Departs in ","Arrives in ","At hotel in ","Journey complete"]},
+ferry:{name:"Ferry",tag:"Ferry",air:false,noL:"Sailing or vessel (optional)",noP:"Optional",aL:"From",bL:"To",aP:"Calais",bP:"Dover",dL:"Crossing time",dD:"01:30",gL:"Gate or lane",open:108e5,by:27e5,tr:45,r1:"Check-in",q:"ferry terminal",o0:"Check-in opens at ",o1:"Check-in is open. It closes around ",go:"Departed. You are now sailing",ph:["Upcoming","Check-in open","Boarding","Sailing","Arrived","At hotel"],c:["Check-in opens in ","Check-in closes in ","Departs in ","Arrives in ","At hotel in ","Journey complete"]}
+};
+var curMode="flight";
 try{fl=JSON.parse(localStorage.getItem("flight")||"null")}catch(e){}
-if(!fl)fl={no:"BA112",from:"JFK",to:"LHR",date:"",time:"",durS:"06:50",dur:410,dep:Date.now()-(410+40)*6e4,gate:"42",hotel:"Riverside Hotel",terminal:"5",dterm:"7",ph:-1,log:[],mock:true};
+if(!fl)fl=null;
 function saveFl(){if(fl&&fl.mock)return;try{localStorage.setItem("flight",JSON.stringify(fl))}catch(e){}}
 function p2(n){return(n<10?"0":"")+n}
 function tl(t){t=(t||"").trim();return /^[0-9A-Za-z]$/.test(t)?"Terminal "+t:t}
 function hm(ms){var d=new Date(ms);return p2(d.getHours())+":"+p2(d.getMinutes())}
 function hmm(m){m=Math.max(0,Math.round(m));var h=Math.floor(m/60);return h?h+"h "+p2(m%60)+"m":m+"m"}
 function say(t){gid("qrOut").textContent=t;gid("jMsg").textContent=t}
+function abbr(x){x=(x||"").trim();if(x.length<=3)return x.toUpperCase();return(x.replace(/[^A-Za-z]/g,"").slice(0,3)||x.slice(0,3)).toUpperCase()}
+function seatTxt(x){x=(x||"").trim();return !x?"":/^\d{1,3}[A-Za-z]?$/.test(x)?"Seat "+x.toUpperCase():x}
 function parseBcbp(t){
 if(!t||t.length<58||t.charAt(0)!=="M")return null;
+var fr=t.slice(30,33),to=t.slice(33,36);if(!/^[A-Za-z]{3}$/.test(fr)||!/^[A-Za-z]{3}$/.test(to))return null;
 var jd=+t.slice(44,47);if(!(jd>0&&jd<367))return null;
 var y=new Date().getFullYear(),d=new Date(y,0,jd);
 if(d<Date.now()-15552e6)d=new Date(y+1,0,jd);
-return{no:t.slice(36,39).trim()+t.slice(39,44).trim().replace(/^0+/,""),from:t.slice(30,33),to:t.slice(33,36),date:d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())}}
+return{mode:"flight",kind:"flight",no:t.slice(36,39).trim()+t.slice(39,44).trim().replace(/^0+/,""),from:fr.toUpperCase(),to:to.toUpperCase(),date:d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate()),seat:t.slice(48,52).trim().replace(/^0+/,""),ref:t.slice(23,30).trim()}}
+function classify(raw){
+var t=(raw||"").trim(),o={kind:"unknown",mode:null},b=parseBcbp(t);
+if(b)return b;
+if(/^#UT/.test(t)){o.kind="rail";o.mode="train";return o}
+var lo=t.toLowerCase();
+if(/eurostar/.test(lo))o.mode="eurostar";
+else if(/ferry|p&o|dfds|stena|brittany ferries|condor/.test(lo))o.mode="ferry";
+else if(/flixbus|national ?express|megabus/.test(lo))o.mode="coach";
+else if(/trainline|\brail\b|lner|gwr|avanti|thameslink|southeastern|scotrail|crosscountry/.test(lo))o.mode="train";
+var m=t.match(/(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2})/);
+if(m){o.date=m[1]+"-"+m[2]+"-"+m[3];o.time=m[4]+":"+m[5]}
+else{var d=t.match(/\b(\d{1,2})[\/.](\d{1,2})[\/.](20\d{2})\b/),tm=t.match(/\b([01]?\d|2[0-3]):([0-5]\d)\b/);
+if(d&&+d[2]>=1&&+d[2]<=12)o.date=d[3]+"-"+p2(+d[2])+"-"+p2(+d[1]);
+if(tm)o.time=p2(+tm[1])+":"+tm[2]}
+if(/^(?=.*\d)[A-Za-z0-9]{5,12}$/.test(t))o.ref=t.toUpperCase();
+return o}
+function applyMode(m){
+var M=MODES[m]||MODES.flight;curMode=MODES[m]?m:"flight";
+Array.prototype.forEach.call(gid("modeChips").children,function(b){b.setAttribute("aria-pressed",b.dataset.m===curMode)});
+gid("lbNo").textContent=M.noL;gid("inFlight").placeholder=M.noP;
+gid("lbA").textContent=M.aL;gid("lbB").textContent=M.bL;
+var fa=gid("inFrom"),fb=gid("inTo");fa.placeholder=M.aP;fb.placeholder=M.bP;
+fa.maxLength=M.air?3:28;fb.maxLength=M.air?3:28;
+fa.setAttribute("autocapitalize",M.air?"characters":"words");fb.setAttribute("autocapitalize",M.air?"characters":"words");
+gid("lbDur").textContent=M.dL;gid("lbGate").textContent=M.gL;
+gid("termRow").hidden=!M.air}
 function openForm(p,note){
 go("live");
-var d=p||(fl?{no:fl.no,from:fl.from,to:fl.to,date:fl.date,time:fl.time,dur:fl.durS,gate:fl.gate}:{});
-gid("inFlight").value=d.no||"";gid("inFrom").value=d.from||"";gid("inTo").value=d.to||"";gid("inDate").value=d.date||"";gid("inTime").value=d.time||"";gid("inDur").value=d.dur||"02:00";gid("inGate").value=d.gate||"";gid("inHotel").value=(fl&&fl.hotel)||"";gid("inTerm").value=(fl&&fl.terminal)||"";gid("inDTerm").value=(fl&&fl.dterm)||"";
+var d=p||(fl?{mode:fl.mode,no:fl.no,from:fl.from,to:fl.to,date:fl.date,time:fl.time,dur:fl.durS,gate:fl.gate,seat:fl.seat,ref:fl.ref}:{});
+applyMode(d.mode||curMode);
+var keep=fl&&!fl.mock;
+gid("inFlight").value=d.no||"";gid("inFrom").value=d.from||"";gid("inTo").value=d.to||"";gid("inDate").value=d.date||"";gid("inTime").value=d.time||"";gid("inDur").value=d.dur||MODES[curMode].dD;gid("inGate").value=d.gate||"";gid("inSeat").value=d.seat||"";gid("inRef").value=d.ref||"";
+gid("inHotel").value=keep&&fl.hotel||"";gid("inTerm").value=!p&&keep&&fl.terminal||"";gid("inDTerm").value=!p&&keep&&fl.dterm||"";
 gid("fNote").textContent=note||"Use the times shown on your boarding pass or ticket.";gid("fErr").textContent="";gid("fForm").hidden=false}
+var zxLoad=null;
+function loadZX(){
+if(window.ZXing)return Promise.resolve();
+if(zxLoad)return zxLoad;
+zxLoad=new Promise(function(ok,no){
+var u=["https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js","https://unpkg.com/@zxing/library@0.21.3/umd/index.min.js"],i=0;
+(function next(){if(i>=u.length){zxLoad=null;no(new Error("zxing"));return}
+var sc=document.createElement("script");sc.src=u[i++];
+sc.onload=function(){window.ZXing?ok():next()};sc.onerror=next;document.head.appendChild(sc)})()});
+return zxLoad}
+function toCanvas(f,max){return new Promise(function(ok,no){
+var u=URL.createObjectURL(f),im=new Image();
+im.onload=function(){var w=im.naturalWidth,h=im.naturalHeight,k=Math.min(1,max/Math.max(w,h)),c=document.createElement("canvas");
+c.width=Math.max(1,Math.round(w*k));c.height=Math.max(1,Math.round(h*k));
+var x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);
+URL.revokeObjectURL(u);ok(c)};
+im.onerror=function(){URL.revokeObjectURL(u);no(new Error("img"))};im.src=u})}
+function zxTry(c){
+var Z=ZXing,h=new Map();
+h.set(Z.DecodeHintType.TRY_HARDER,true);
+h.set(Z.DecodeHintType.POSSIBLE_FORMATS,[Z.BarcodeFormat.QR_CODE,Z.BarcodeFormat.AZTEC,Z.BarcodeFormat.PDF_417,Z.BarcodeFormat.DATA_MATRIX,Z.BarcodeFormat.CODE_128,Z.BarcodeFormat.CODE_39,Z.BarcodeFormat.ITF]);
+var src=new Z.HTMLCanvasElementLuminanceSource(c),srcs=[src];
+try{srcs.push(src.invert())}catch(e){}
+var B=[Z.HybridBinarizer,Z.GlobalHistogramBinarizer];
+for(var a=0;a<srcs.length;a++)for(var b=0;b<B.length;b++){
+try{var r=new Z.MultiFormatReader().decode(new Z.BinaryBitmap(new B[b](srcs[a])),h);if(r&&r.getText())return r.getText()}catch(e){}}
+return null}
+function zxScan(f){
+var sizes=[1600,900,2400],i=0;
+function nx(){if(i>=sizes.length)return Promise.resolve([]);
+return toCanvas(f,sizes[i++]).then(function(c){var r=zxTry(c);if(r)return[r];return new Promise(function(ok){setTimeout(ok,0)}).then(nx)})}
+return nx()}
+var scanFail=false;
+function readCodes(f){
+scanFail=false;
+function viaBD(){
+if(!("BarcodeDetector" in window)||!window.createImageBitmap)return Promise.resolve([]);
+return createImageBitmap(f).then(function(b){return new BarcodeDetector().detect(b)}).then(function(c){return c.map(function(x){return x.rawValue}).filter(Boolean)}).catch(function(){return[]})}
+function viaZX(){return loadZX().then(function(){return zxScan(f)}).catch(function(){scanFail=true;return[]})}
+return viaBD().then(function(a){return a.length?a:viaZX()})}
 function scanFile(f){
-say("Reading boarding pass...");
-if(!("BarcodeDetector" in window)||!window.createImageBitmap){say("");openForm(null,"This browser can't read barcodes yet. Enter the details from your pass.");return}
-createImageBitmap(f).then(function(b){return new BarcodeDetector().detect(b)}).then(function(c){
-var p=null;for(var i=0;i<c.length&&!p;i++)p=parseBcbp(c[i].rawValue);
+say("Reading ticket...");
+readCodes(f).then(function(list){
 say("");
-if(p)openForm(p,"Scanned "+p.no+". Your pass doesn't include times, so add them from the pass.");
-else openForm(null,"Couldn't read a boarding pass barcode. Enter the details instead.")}).catch(function(){say("");openForm(null,"Couldn't read that image. Enter the details instead.")})}
+if(!list.length){openForm({},scanFail?"Couldn't load the scanner. Check your connection, or enter the details from your ticket.":"Couldn't find a barcode in that image. Pick your transport and enter the details from your ticket.");return}
+var best=null,rank={flight:3,rail:2,unknown:1};
+list.forEach(function(r){var c=classify(r);if(!best||(rank[c.kind]||0)>(rank[best.kind]||0))best=c});
+if(best.kind==="flight")openForm(best,"Scanned "+best.no+", "+best.from+" to "+best.to+(best.seat?", seat "+best.seat:"")+". Boarding passes don't include times, so add them from your pass.");
+else if(best.kind==="rail")openForm(best,"Scanned a rail ticket. Rail barcodes are encrypted, so add the stations and times from your ticket.");
+else openForm(best,"Scanned a ticket"+(best.mode?" ("+MODES[best.mode].name+")":"")+", but its barcode doesn't hold journey details. Choose your transport and add them from your ticket.")
+}).catch(function(){say("");openForm({},"Couldn't read that image. Enter the details instead.")})}
 function flTick(){
 var on=!!fl,seg=gid("journeySeg");
 gid("jEmpty").hidden=on;gid("jFlight").hidden=!on;seg.className=on?"seg auto":"seg";
 if(!on){return}
-var n=Date.now(),d=fl.dep,e=d+fl.dur*MIN,h=e+TRF*MIN,ph=n<d-108e5?0:n<d-36e5?1:n<d?2:n<e?3:n<h?4:5,g=fl.gate;
+var M=MODES[fl.mode]||MODES.flight,n=Date.now(),d=fl.dep,e=d+fl.dur*MIN,h=e+M.tr*MIN,ph=n<d-M.open?0:n<d-M.by?1:n<d?2:n<e?3:n<h?4:5,g=fl.gate,fa=fl.from||"",tb=fl.to||"";
+if(!fl.log)fl.log=[];
 if(fl.ph!==ph){fl.ph=ph;
-fl.log.unshift({t:n,x:["Tracking "+fl.no+". Check-in opens at "+hm(d-108e5),"Check-in is open. It closes around "+hm(d-36e5),g?"Boarding. Head to Gate "+g:"Boarding soon. Check the airport screens for your gate","Departed. You are now in transit","Landed"+(fl.to?". Welcome to "+fl.to:"")+". Heading to your hotel","Arrived at your hotel"][ph]});
+var w=(M.tag&&fl.no?M.tag+" ":"")+(fl.no||M.name);
+fl.log.unshift({t:n,x:["Tracking "+w+". "+M.o0+hm(d-M.open),M.o1+hm(d-M.by),g?"Boarding. Head to "+M.gL+" "+g:"Boarding soon. Check the screens for your "+M.gL.toLowerCase(),M.go,(M.air?"Landed":"Arrived")+(tb?(M.air?". Welcome to ":" in ")+tb:"")+". Heading to your hotel","Arrived at your hotel"][ph]});
 fl.log=fl.log.slice(0,6);saveFl()}
-gid("fNo").textContent=fl.no;gid("fFrom").textContent=fl.from||"\u2014";gid("fTo").textContent=fl.to||"\u2014";gid("fDur").textContent=hmm(fl.dur);
-(function(){var p0=d-108e5,pr=Math.max(0,Math.min(1,(n-p0)/(h-p0)));gid("fPlane").style.left=(pr*100)+"%";gid("fTrack").style.setProperty("--p",(pr*100)+"%")})();
-gid("fRoute").textContent=((fl.from||fl.to)?(fl.from||"?")+" \u2192 "+(fl.to||"?")+" \u00b7 ":"")+hmm(fl.dur);
-var dt2=tl(fl.dterm);gid("fCheck").textContent=dt2||"Terminal to be confirmed";gid("tCheck").innerHTML="<small>by</small>"+hm(d-36e5);
-gid("fDep").textContent=g?"Gate "+g:"Gate to be confirmed";gid("tDep").innerHTML="<small>Departs</small>"+hm(d);
-var tm=tl(fl.terminal);gid("fArr").textContent=tm||"Terminal to be confirmed";gid("tArr").innerHTML="<small>ETA</small>"+hm(e);
-gid("fHotelT").textContent="Hotel";gid("fHotel").textContent=fl.hotel||"Add one in flight details";gid("fHotel").hidden=false;gid("tHotel").innerHTML="<small>ETA</small>"+hm(h);
-function S(a){return ph>a?"done":"off"}
+gid("fNo").textContent=(M.tag&&fl.no?M.tag+" ":"")+(fl.no||M.name);
+gid("fFrom").textContent=abbr(fa)||"\u2014";gid("fTo").textContent=abbr(tb)||"\u2014";
+var nm=gid("fNames");nm.textContent=(fa.length>3||tb.length>3)?(fa||"?")+" \u2192 "+(tb||"?"):"";nm.hidden=!nm.textContent;
+gid("fDur").textContent=hmm(fl.dur);
+var st=gid("fSeat");st.textContent=seatTxt(fl.seat);st.hidden=!fl.seat;
+(function(){var p0=d-M.open,pr=Math.max(0,Math.min(1,(n-p0)/(h-p0)));gid("fPlane").style.left=(pr*100)+"%";gid("fTrack").style.setProperty("--p",(pr*100)+"%")})();
+gid("fRoute").textContent=((fa||tb)?(fa||"?")+" \u2192 "+(tb||"?")+" \u00b7 ":"")+hmm(fl.dur);
+gid("r1T").textContent=M.r1;gid("loungeBtn").hidden=!M.air;
+var dt2=tl(fl.dterm);gid("fCheck").textContent=M.air?(dt2||"Terminal to be confirmed"):(fa||"Departure point to be confirmed");gid("tCheck").innerHTML="<small>by</small>"+hm(d-M.by);
+gid("fDep").textContent=g?M.gL+" "+g:M.gL+" to be confirmed";gid("tDep").innerHTML="<small>Departs</small>"+hm(d);
+var tm=tl(fl.terminal);gid("fArr").textContent=M.air?(tm||"Terminal to be confirmed"):(tb||"Arrival point to be confirmed");gid("tArr").innerHTML="<small>ETA</small>"+hm(e);
+gid("fHotelT").textContent="Hotel";gid("fHotel").textContent=fl.hotel||"Add one in journey details";gid("fHotel").hidden=false;gid("tHotel").innerHTML="<small>ETA</small>"+hm(h);
 if(window.paintDots)window.paintDots();if(window.paintWarn)window.paintWarn();
-gid("fStat").textContent=PH[ph];
-gid("fCount").textContent=["Check-in opens in "+hmm((d-108e5-n)/MIN),"Check-in closes in "+hmm((d-36e5-n)/MIN),"Departs in "+hmm((d-n)/MIN),"Lands in "+hmm((e-n)/MIN),"At hotel in "+hmm((h-n)/MIN),"Journey complete"][ph];
+gid("fStat").textContent=M.ph[ph];
+var tt=[d-M.open-n,d-M.by-n,d-n,e-n,h-n][ph];
+gid("fCount").textContent=ph<5?M.c[ph]+hmm(tt/MIN):M.c[5];
 var idx=ph<3?2:ph===3?1:0;
 Array.prototype.forEach.call(seg.children,function(b,i){b.setAttribute("aria-pressed",i===idx)});
 }
 gid("qrBtn").onclick=function(){gid("qrFile").click()};
-gid("addFlightBtn").onclick=function(){openForm()};
+gid("addFlightBtn").onclick=function(){openForm({},"")};
 gid("qrFile").onchange=function(){var f=this.files&&this.files[0];this.value="";if(f)scanFile(f)};
 (function(){
 var handle=gid("jHandle"),zone=gid("jDropZone"),startY=0,startX=0,dragging=false,moved=false;
@@ -1430,22 +1569,31 @@ handle.addEventListener("pointerdown",onDown)
 })();
 gid("fCancel").onclick=function(){gid("fForm").hidden=true};
 gid("fSave").onclick=function(){
-var no=gid("inFlight").value.trim().toUpperCase(),dt=gid("inDate").value,tm=gid("inTime").value,du=gid("inDur").value||"02:00";
-if(!no||!dt||!tm){gid("fErr").textContent="Add the flight number, date and departure time.";return}
+var M=MODES[curMode],no=gid("inFlight").value.trim().toUpperCase(),dt=gid("inDate").value,tm=gid("inTime").value,du=gid("inDur").value||M.dD,fa=gid("inFrom").value.trim(),fb=gid("inTo").value.trim();
+if(M.air){fa=fa.toUpperCase();fb=fb.toUpperCase()}
+if(M.air&&!no){gid("fErr").textContent="Add the flight number, date and departure time.";return}
+if(!dt||!tm){gid("fErr").textContent="Add the date and departure time.";return}
+if(!M.air&&!(fa&&fb)){gid("fErr").textContent="Add where you leave from and where you arrive.";return}
 var dep=new Date(dt+"T"+tm).getTime(),dd=du.split(":");
 if(isNaN(dep)){gid("fErr").textContent="Check the date and time.";return}
-fl={no:no,from:gid("inFrom").value.trim().toUpperCase(),to:gid("inTo").value.trim().toUpperCase(),date:dt,time:tm,durS:du,dur:Math.max(+dd[0]*60+ +dd[1],1),dep:dep,gate:gid("inGate").value.trim(),hotel:gid("inHotel").value.trim(),terminal:gid("inTerm").value.trim(),dterm:gid("inDTerm").value.trim(),ph:-1,log:[]};
-saveFl();gid("fForm").hidden=true;flTick()};
+fl={mode:curMode,no:no,from:fa,to:fb,date:dt,time:tm,durS:du,dur:Math.max(+dd[0]*60+ +dd[1],1),dep:dep,gate:gid("inGate").value.trim(),seat:gid("inSeat").value.trim(),ref:gid("inRef").value.trim().toUpperCase(),hotel:gid("inHotel").value.trim(),terminal:M.air?gid("inTerm").value.trim():"",dterm:M.air?gid("inDTerm").value.trim():"",ph:-1,log:[]};
+saveFl();gid("fForm").hidden=true;flTick();window.scrollTo(0,0)};
+Array.prototype.forEach.call(gid("modeChips").children,function(b){b.onclick=function(){var old=gid("inDur").value,was=MODES[curMode].dD;applyMode(b.dataset.m);if(old===was)gid("inDur").value=MODES[curMode].dD}});
+gid("liveScanBtn").onclick=function(){gid("qrFile").click()};
+gid("rescanBtn").onclick=function(){gid("qrFile").click()};
+gid("editJourney").onclick=function(){openForm(null,"")};
+(function(){var b=gid("clearJourney"),t=null;b.onclick=function(){
+if(!t){b.textContent="Tap again to remove";t=setTimeout(function(){t=null;b.textContent="Remove journey"},3000);return}
+clearTimeout(t);t=null;b.textContent="Remove journey";fl=null;try{localStorage.removeItem("flight")}catch(e){}
+flTick();if(window.paintWarn)window.paintWarn();window.scrollTo(0,0)}})();
 flTick();setInterval(flTick,15000);
 (function(){
 var hq=gid("hubQ"),hsheet=gid("hubSheet"),hpin=gid("hubPin"),hroute=gid("hubRoute"),htitle=gid("hubTitle");
 function hubSet(name,sub){
-if(name){htitle.innerHTML="Routes to "+name+"<span>"+(sub||"3 ways to get there")+"</span>";gid("hubFrom").textContent=(sub&&/^From /.test(sub))?sub.replace(/^From /,""):"Your location";gid("hubTo").textContent=name;hsheet.classList.add("shown","open");hpin.classList.add("show");hroute.classList.add("show")}
-else{htitle.innerHTML="Routes<span>3 ways to get there</span>";hsheet.classList.remove("shown","open");hpin.classList.remove("show");hroute.classList.remove("show")}
+if(name){htitle.textContent="Routes to "+name;var sp0=document.createElement("span");sp0.textContent=sub||"Finding routes...";htitle.appendChild(sp0);gid("hubFrom").textContent=(sub&&/^From /.test(sub))?sub.replace(/^From /,""):"Your location";gid("hubTo").textContent=name;hsheet.classList.add("shown","open");hpin.classList.add("show");hroute.classList.add("show")}
+else{htitle.innerHTML="Routes<span></span>";hsheet.classList.remove("shown","open");hpin.classList.remove("show");hroute.classList.remove("show")}
 }
 window.hubSet=hubSet;
-Array.prototype.forEach.call(document.querySelectorAll("[data-hubpick]"),function(b){b.onclick=function(){hq.value=b.dataset.hubpick;hubSet(b.dataset.hubpick)}});
-hq.addEventListener("keydown",function(ev){if(ev.key==="Enter"&&hq.value.trim())hubSet(hq.value.trim())});
 gid("hubClose").onclick=function(e){e.stopPropagation();hubSet(null)};
 hsheet.onclick=function(){if(!hsheet.classList.contains("open"))hsheet.classList.add("open")};
 (function(){var hh=gid("hubHandle"),y0=null;
@@ -1493,8 +1641,8 @@ gid("loungeBtn").onclick=function(){var a=(fl&&fl.from)||"";window.open("https:/
 gid("warnDismiss").onclick=function(){if(fl){fl.transfer=true;saveFl()}window.paintWarn()};
 gid("warnCard").onclick=function(){
 var AP={LHR:"Heathrow",LGW:"Gatwick",STN:"Stansted",LTN:"Luton",LCY:"London City",MAN:"Manchester",BHX:"Birmingham",BRS:"Bristol",LPL:"Liverpool John Lennon",NCL:"Newcastle",EMA:"East Midlands",LBA:"Leeds Bradford",SOU:"Southampton",EXT:"Exeter",NWI:"Norwich"};
-var c=(fl&&fl.to)||"",n=AP[c]||c,t=fl&&fl.terminal?fl.terminal:"";
-var o={label:n+(t?" Terminal "+t:" Airport"),q:n+" Airport"+(t?" Terminal "+t:""),q2:n+" Airport"},h=(fl&&fl.hotel)||"Your hotel";
+var M=MODES[(fl&&fl.mode)||"flight"]||MODES.flight,c=(fl&&fl.to)||"",n=M.air?(AP[c]||c):c,t=fl&&fl.terminal?fl.terminal:"";
+var o=M.air?{label:n+(t?" Terminal "+t:" Airport"),q:n+" Airport"+(t?" Terminal "+t:""),q2:n+" Airport"}:{label:n,q:n+" "+M.q,q2:n+" "+M.q},h=(fl&&fl.hotel)||"Your hotel";
 go("travel");
 window.hubTrip(o,{label:h,q:h},"From "+o.label)};
 (function(){
@@ -1691,52 +1839,277 @@ if(force||!marks.length)map.easeTo({center:meLL,zoom:15.4,duration:1100})},funct
 function clear(){
 marks.forEach(function(m){m.remove()});marks=[];
 if(!map)return;
-["rt-line","rt-case"].forEach(function(id){if(map.getLayer(id))map.removeLayer(id)});
+["rt-dash","rt-line","rt-case","rt-alt"].forEach(function(id){if(map.getLayer(id))map.removeLayer(id)});
 if(map.getSource("rt"))map.removeSource("rt")}
-function line(A,B){
-routeLabel(A,B);
+var st={dest:null,orig:null,res:null,mode:null,alt:0,seq:0,A:null,B:null},altBound=false;
+var COL={drive:"#2D74FF",walk:"#14142B",cycle:"#1FA463"};
+var LCOL={"central":"#E32017","victoria":"#0098D4","northern":"#1F1F1F","jubilee":"#7C858C","piccadilly":"#003688","bakerloo":"#B36305","district":"#00782A","circle":"#E4A800","hammersmith & city":"#E08CA6","metropolitan":"#9B0056","waterloo & city":"#6FBFA6","elizabeth line":"#6950A1","dlr":"#00A4A7","liberty":"#5D6061","lioness":"#FFA600","mildmay":"#0077AD","suffragette":"#18A95D","weaver":"#9B5F8A","windrush":"#DC241F"};
+function lineCol(id,ln){var k=(ln||"").toLowerCase();if(LCOL[k])return LCOL[k];
+if(id==="bus")return"#E1251B";if(id==="tram")return"#5FB526";if(id==="dlr")return"#00A4A7";if(id==="overground")return"#EE7C0E";if(id==="elizabeth-line")return"#6950A1";if(id==="national-rail")return"#1D2B6B";if(id==="river-bus"||id==="river-tour")return"#0098D4";return"#14142B"}
+function hav(A,B){var R=6371000,r=Math.PI/180,dL=(B[1]-A[1])*r,dN=(B[0]-A[0])*r,a=Math.sin(dL/2)*Math.sin(dL/2)+Math.cos(A[1]*r)*Math.cos(B[1]*r)*Math.sin(dN/2)*Math.sin(dN/2);return 2*R*Math.asin(Math.sqrt(a))}
+function pathLen(c){var t=0;for(var i=1;i<c.length;i++)t+=hav(c[i-1],c[i]);return t}
+function fmtT(sec){var m=Math.max(1,Math.round(sec/60));if(m<60)return m+" min";var h=Math.floor(m/60),r=m%60;return h+"h "+(r<10?"0":"")+r+"m"}
+function fmtD(m){var u="mi";try{u=(JSON.parse(localStorage.getItem("acctPrefs")||"{}").unit)||"mi"}catch(e){}var v=u==="km"?m/1000:m/1609.344;return(v<10?v.toFixed(1):Math.round(v))+" "+u}
+function inLondon(P){return P[1]>51.28&&P[1]<51.70&&P[0]>-0.55&&P[0]<0.35}
+function gmaps(A,B,m){return"https://www.google.com/maps/dir/?api=1&origin="+A[1]+","+A[0]+"&destination="+B[1]+","+B[0]+"&travelmode="+m}
+function uber(A,B,n){return"https://m.uber.com/ul/?action=setPickup&pickup%5Blatitude%5D="+A[1]+"&pickup%5Blongitude%5D="+A[0]+"&dropoff%5Blatitude%5D="+B[1]+"&dropoff%5Blongitude%5D="+B[0]+"&dropoff%5Bnickname%5D="+encodeURIComponent(n||"Destination")}
+/* ---- place search ---- */
+function photon(q,bias){
+var u="https://photon.komoot.io/api/?lang=en&limit=7&bbox=-6.5,49.8,2.0,55.9&q="+encodeURIComponent(q);
+var c=bias?{lat:bias[1],lng:bias[0]}:(map?map.getCenter():null);
+if(c)u+="&lat="+(+c.lat).toFixed(4)+"&lon="+(+c.lng).toFixed(4);
+return fetch(u).then(function(r){return r.json()}).then(function(j){
+var seen={},out=[];
+(j.features||[]).forEach(function(f){
+var p=f.properties||{},g=f.geometry&&f.geometry.coordinates;
+if(!g||g.length<2)return;
+if(p.countrycode&&p.countrycode!=="GB")return;
+var st1=p.street?((p.housenumber?p.housenumber+" ":"")+p.street):"";
+var name=p.name||st1;if(!name)return;
+var parts=[];
+if(p.name&&st1)parts.push(st1);
+var loc=p.district||p.locality||"",cty=p.city||p.town||p.county||"";
+if(loc&&loc!==name)parts.push(loc);
+if(cty&&cty!==name&&cty!==loc)parts.push(cty);
+if(p.postcode)parts.push(p.postcode);
+var sub=parts.slice(0,3).join(", "),key=name+"|"+sub;
+if(seen[key])return;seen[key]=1;
+out.push({name:name,sub:sub,ll:[+g[0],+g[1]]})});
+return out})}
+function nomi(q,bias){
+return fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=6&countrycodes=gb&q="+encodeURIComponent(q))
+.then(function(r){return r.json()}).then(function(a){
+return(a||[]).map(function(x){var d=(x.display_name||"").split(", ");return{name:x.name||d[0]||q,sub:d.slice(1,3).join(", "),ll:[+x.lon,+x.lat]}})}).catch(function(){return[]})}
+function suggest(q,bias){return photon(q,bias).then(function(r){return r.length?r:nomi(q,bias)}).catch(function(){return nomi(q,bias)})}
+var PINI='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10" r="2.3"/></svg>';
+var MEI='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5L21 3l-8.5 18-2-7.5z"/></svg>';
+function attachSug(inp,list,onPick,pre){
+var t=null,seq=0;
+function hide(){list.hidden=true;list.innerHTML=""}
+function render(items){
+list.innerHTML="";
+(pre||[]).concat(items).forEach(function(it){
+var b=document.createElement("button");b.type="button";b.className="sugItem";b.setAttribute("role","option");
+b.innerHTML="<i>"+(it.me?MEI:PINI)+"</i><span><b></b><small></small></span>";
+b.querySelector("b").textContent=it.name;b.querySelector("small").textContent=it.sub||"";
+b.addEventListener("pointerdown",function(e){e.preventDefault()});
+b.onclick=function(){hide();onPick(it)};list.appendChild(b)});
+if(!items.length&&!(pre&&pre.length)){var d=document.createElement("div");d.className="sugEmpty";d.textContent="No matches. Try a different spelling.";list.appendChild(d)}
+list.hidden=false}
+inp.addEventListener("input",function(){
+var q=inp.value.trim();clearTimeout(t);
+if(q.length<2){if(pre&&pre.length)render([]);else hide();return}
+t=setTimeout(function(){var my=++seq;suggest(q).then(function(r){if(my!==seq)return;render(r)})},260)});
+inp.addEventListener("focus",function(){if(pre&&pre.length&&!inp.value.trim())render([])});
+inp.addEventListener("blur",function(){setTimeout(hide,160)});
+inp.addEventListener("keydown",function(e){
+if(e.key!=="Enter")return;
+e.preventDefault();clearTimeout(t);
+var q=inp.value.trim();if(q.length<2)return;
+var my=++seq;
+suggest(q).then(function(r){if(my!==seq)return;if(r.length){hide();onPick(r[0])}else render([])})})}
+/* ---- routing ---- */
+function osrm(prof,co){
+return fetch("https://routing.openstreetmap.de/routed-"+prof+"/route/v1/driving/"+co+"?overview=full&geometries=geojson&alternatives=true")
+.then(function(r){return r.json()}).then(function(j){return j&&j.code==="Ok"&&j.routes&&j.routes.length?j.routes:null}).catch(function(){return null})}
+function carRoute(co){
+return osrm("car",co).then(function(r){if(r)return r;
+return fetch("https://router.project-osrm.org/route/v1/driving/"+co+"?overview=full&geometries=geojson&alternatives=true")
+.then(function(x){return x.json()}).then(function(j){return j&&j.code==="Ok"&&j.routes&&j.routes.length?j.routes:null}).catch(function(){return null})})}
+function mkR(mode,rs){
+if(!rs)return null;
+return{alts:rs.slice(0,3).map(function(r){return{dur:r.duration,dist:r.distance,segs:[{c:r.geometry.coordinates,col:COL[mode],dash:mode==="walk"}]}})}}
+function tfl(A,B){
+var u="https://api.tfl.gov.uk/Journey/JourneyResults/"+A[1].toFixed(5)+","+A[0].toFixed(5)+"/to/"+B[1].toFixed(5)+","+B[0].toFixed(5);
+return fetch(u).then(function(r){return r.ok?r.json():null}).then(function(j){
+if(!j||!j.journeys||!j.journeys.length)return null;
+var alts=j.journeys.slice(0,3).map(function(jy){
+var segs=[],names=[],len=0;
+(jy.legs||[]).forEach(function(l){
+var id=(l.mode&&l.mode.id)||"",cs=[];
+try{cs=JSON.parse(l.path.lineString).map(function(q){return[q[1],q[0]]})}catch(e){}
+if(cs.length<2)return;
+var ln=(l.routeOptions&&l.routeOptions[0]&&l.routeOptions[0].name)||"";
+segs.push({c:cs,col:id==="walking"?"#14142B":lineCol(id,ln),dash:id==="walking"});
+len+=pathLen(cs);
+if(id!=="walking"){var nm=id==="bus"?(ln?"Bus "+ln:"Bus"):(id==="tube"&&ln?ln:((l.mode&&l.mode.name)||id));if(names.indexOf(nm)<0)names.push(nm)}});
+if(!segs.length)return null;
+return{dur:(jy.duration||0)*60,dist:len,segs:segs,names:names,fare:jy.fare&&jy.fare.totalCost?jy.fare.totalCost/100:0}}).filter(Boolean);
+return alts.length?{alts:alts}:null}).catch(function(){return null})}
+function getRoutes(A,B){
+var m=hav(A,B),co=A[0]+","+A[1]+";"+B[0]+","+B[1],lon=inLondon(A)&&inLondon(B);
+return Promise.all([m<=25000?osrm("foot",co):null,m<=120000?osrm("bike",co):null,carRoute(co),lon?tfl(A,B):null]).then(function(x){
+return{walk:mkR("walk",x[0]),cycle:mkR("cycle",x[1]),drive:mkR("drive",x[2]),transit:x[3]}})}
+/* ---- drawing ---- */
+function lbl(a,alt){
+var c=a.segs.reduce(function(m,s){return s.c.length>m.length?s.c:m},[]),p=c[Math.floor(c.length/2)];
+if(!p)return;
+var d=document.createElement("div");d.className="rtLabel"+(alt?" alt":"");d.textContent=fmtT(a.dur);
+var mk2=new maplibregl.Marker({element:d,anchor:"center"}).setLngLat(p).addTo(map);mk2._lbl=1;marks.push(mk2)}
+function fitTo(a){
+var mn=[1e9,1e9],mx=[-1e9,-1e9];
+a.segs.forEach(function(s){s.c.forEach(function(q){if(q[0]<mn[0])mn[0]=q[0];if(q[1]<mn[1])mn[1]=q[1];if(q[0]>mx[0])mx[0]=q[0];if(q[1]>mx[1])mx[1]=q[1]})});
+if(mn[0]>mx[0])return;
+map.fitBounds([mn,mx],{padding:{top:150,bottom:Math.min(230,box.clientHeight*.34),left:46,right:46},maxZoom:16,duration:900})}
+function updateHead(){
+var d=st.dest;if(!d)return;
+var r=st.res&&st.res[st.mode],a=r&&(r.alts[st.alt]||r.alts[0]);
+var nm={transit:"Public transport",walk:"Walk",cycle:"Cycle",drive:"Drive"}[st.mode]||"";
+if(window.hubSet)window.hubSet(d.name,a?nm+" \u00b7 "+fmtT(a.dur)+" \u00b7 "+fmtD(a.dist):"Choose a start");
+gid("hubTo").textContent=d.name;gid("hubFrom").textContent=st.orig?st.orig.name:"Your location";
+gid("hubSheet").classList.remove("open")}
+function draw(fitIt){
+var r=st.res&&st.res[st.mode];if(!r||!map)return;
+var a=r.alts[st.alt]||r.alts[0];
+marks=marks.filter(function(m){if(m._lbl){m.remove();return false}return true});
+var F=[];
+r.alts.forEach(function(x,i){x.segs.forEach(function(sg){
+F.push({type:"Feature",properties:r.alts[st.alt]===x?{alt:0,col:sg.col,dash:sg.dash?1:0}:{alt:1,i:i,col:"#9AA3B2",dash:0},geometry:{type:"LineString",coordinates:sg.c}})})});
+var data={type:"FeatureCollection",features:F};
 whenReady(function(){
-if(map.getSource("rt"))return;
-map.addSource("rt",{type:"geojson",data:{type:"Feature",geometry:{type:"LineString",coordinates:[A,B]}}});
-map.addLayer({id:"rt-case",type:"line",source:"rt",layout:{"line-cap":"round","line-join":"round"},paint:{"line-color":"#ffffff","line-width":11,"line-opacity":.95}});
-map.addLayer({id:"rt-line",type:"line",source:"rt",layout:{"line-cap":"round","line-join":"round"},paint:{"line-color":"#2D74FF","line-width":7}})})}
-function fit(A,B,top,bottom){
-map.fitBounds([[Math.min(A[0],B[0]),Math.min(A[1],B[1])],[Math.max(A[0],B[0]),Math.max(A[1],B[1])]],{padding:{top:top,bottom:bottom,left:50,right:50},maxZoom:15,duration:1100})}
-function show(r){
-clear();var ll=[+r.lon,+r.lat];
-marks.push(new maplibregl.Marker({element:mk("",false),anchor:"bottom"}).setLngLat(ll).addTo(map));
-if(meLL){line(meLL,ll);fit(meLL,ll,130,Math.min(380,box.clientHeight*.5))}
-else map.flyTo({center:ll,zoom:15.6,duration:1400})}
-function geo(q,vb){
-return fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=gb&q="+encodeURIComponent(q)+(vb?"&viewbox="+vb+"&bounded=1":""))
-.then(function(r){return r.json()}).then(function(a){return a&&a.length?a[0]:null}).catch(function(){return null})}
+var src=map.getSource("rt");
+if(src)src.setData(data);
+else{
+map.addSource("rt",{type:"geojson",data:data});
+var before=map.getLayer("road-label")?"road-label":undefined,lay={"line-cap":"round","line-join":"round"};
+map.addLayer({id:"rt-alt",type:"line",source:"rt",filter:["==",["get","alt"],1],layout:lay,paint:{"line-color":"#9AA3B2","line-width":6,"line-opacity":.9}},before);
+map.addLayer({id:"rt-case",type:"line",source:"rt",filter:["==",["get","alt"],0],layout:lay,paint:{"line-color":"#ffffff","line-width":11,"line-opacity":.95}},before);
+map.addLayer({id:"rt-line",type:"line",source:"rt",filter:["all",["==",["get","alt"],0],["==",["get","dash"],0]],layout:lay,paint:{"line-color":["get","col"],"line-width":7}},before);
+map.addLayer({id:"rt-dash",type:"line",source:"rt",filter:["all",["==",["get","alt"],0],["==",["get","dash"],1]],layout:lay,paint:{"line-color":["get","col"],"line-width":6,"line-dasharray":[.1,2]}},before);
+if(!altBound){altBound=true;
+map.on("click","rt-alt",function(e){var f=e.features&&e.features[0];if(!f)return;st.alt=+f.properties.i;draw(false);renderRows()});
+map.on("mouseenter","rt-alt",function(){map.getCanvas().style.cursor="pointer"});
+map.on("mouseleave","rt-alt",function(){map.getCanvas().style.cursor=""})}}
+lbl(a,false);
+r.alts.forEach(function(x,i){if(x!==a)lbl(x,true)});
+if(fitIt)fitTo(a)});
+updateHead()}
+/* ---- route rows ---- */
+var ICO={
+transit:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3.5" width="14" height="14" rx="3"/><path d="M5 11h14M9 21l2-3.5M15 21l-2-3.5"/><circle cx="9" cy="14.2" r=".6"/><circle cx="15" cy="14.2" r=".6"/></svg>',
+walk:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4.5" r="1.8"/><path d="M9.5 21l2-6 3 1.2V21M11.5 15l-.6-5 4 .6 2.4 3.2M10.9 10L8 12.8"/></svg>',
+cycle:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="16" r="3.5"/><circle cx="18" cy="16" r="3.5"/><path d="M6 16l4-8h5l3 8M10 8l4.5 8M13 5h3"/></svg>',
+drive:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 15l1.6-5.2A2 2 0 0 1 8.5 8.5h7a2 2 0 0 1 1.9 1.3L19 15"/><rect x="3.5" y="15" width="17" height="4.5" rx="1.5"/><circle cx="7.5" cy="17.2" r=".7"/><circle cx="16.5" cy="17.2" r=".7"/></svg>',
+ride:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/></svg>'};
+function rowsMsg(t){var w=gid("hubRows");w.innerHTML="";var p=document.createElement("p");p.className="hubMsg";p.textContent=t;w.appendChild(p)}
+function skel(){gid("hubRows").innerHTML='<div class="skel"></div><div class="skel"></div><div class="skel"></div>'}
+function renderRows(){
+var w=gid("hubRows"),res=st.res,A=st.A,B=st.B,d=st.dest;
+w.innerHTML="";if(!res||!A||!B)return;
+var best=null,bd=1e12;
+["transit","walk","cycle","drive"].forEach(function(k){if(res[k]){var x=res[k].alts[0].dur;if(x<bd){bd=x;best=k}}});
+var defs=[
+{k:"transit",t:"Public transport",cta:"Open",href:gmaps(A,B,"transit")},
+{k:"walk",t:"Walk",cta:"Go",href:gmaps(A,B,"walking")},
+{k:"cycle",t:"Cycle",cta:"Go",href:gmaps(A,B,"bicycling")},
+{k:"drive",t:"Drive",cta:"Go",href:gmaps(A,B,"driving")},
+{k:"ride",t:"Taxi or ride",cta:"Request",href:uber(A,B,d&&d.name)}];
+defs.forEach(function(R){
+var k=R.k,r=k==="ride"?res.drive:res[k];
+if(!r&&k!=="transit"&&k!=="ride")return;
+if(!r&&k==="ride")return;
+var a=r?r.alts[0]:null,row=document.createElement("div"),sel=(k===st.mode)||(k==="ride"&&false);
+row.className="hubRow"+(sel?" sel":"");
+row.innerHTML='<span class="gIco">'+ICO[k]+'</span><div class="hubText"><div class="hubTime"><span></span><small></small></div><b></b><p></p></div><button type="button" class="hubCta"></button>';
+var tm=row.querySelector(".hubTime span"),sm=row.querySelector(".hubTime small"),bb=row.querySelector("b"),pp=row.querySelector("p"),cta=row.querySelector(".hubCta");
+bb.textContent=R.t;
+if(k==="transit"&&!a){tm.textContent="Live times";sm.textContent="";pp.textContent="Opens Google Maps for services and fares"}
+else{
+tm.textContent=fmtT(a.dur);sm.textContent=k==="ride"?"":fmtD(a.dist);
+if(k==="transit")pp.textContent=(a.names&&a.names.length?a.names.slice(0,3).join(" \u203a "):"Walk")+(a.fare?" \u00b7 \u00a3"+a.fare.toFixed(2):"");
+else if(k==="ride")pp.textContent="Price shown in the app";
+else pp.textContent=r.alts.length>1?"Plus "+(r.alts.length-1)+" other route"+(r.alts.length>2?"s":"")+" on the map":(k==="walk"?"On foot":k==="cycle"?"By bike":"By car")}
+if(k===best&&k!=="ride"){var bg=document.createElement("span");bg.className="hubBest";bg.textContent="Fastest";bb.appendChild(bg)}
+cta.textContent=R.cta;
+cta.onclick=function(e){e.stopPropagation();window.open(R.href,"_blank","noopener")};
+row.onclick=function(e){
+e.stopPropagation();
+if(k==="ride"||!res[k]){window.open(R.href,"_blank","noopener");return}
+st.mode=k;st.alt=0;draw(true);renderRows()};
+w.appendChild(row)})}
+/* ---- flow ---- */
+function getMe(){
+return new Promise(function(ok){
+if(meLL)return ok(meLL);
+if(!navigator.geolocation)return ok(null);
+navigator.geolocation.getCurrentPosition(function(p){
+meLL=[p.coords.longitude,p.coords.latitude];
+if(map&&!meMk){var d=document.createElement("div");d.className="mapMe";d.innerHTML="<span></span>";meMk=new maplibregl.Marker({element:d}).setLngLat(meLL).addTo(map)}
+ok(meLL)},function(){ok(null)},{enableHighAccuracy:true,timeout:9000,maximumAge:60000})})}
+function route(){
+var d=st.dest;if(!d)return;
+var my=++st.seq;
+clear();st.res=null;st.A=null;st.B=null;
+if(window.hubSet)window.hubSet(d.name,"Finding routes...");
+gid("hubTo").textContent=d.name;gid("hubFrom").textContent=st.orig?st.orig.name:"Your location";
+gid("hubSheet").classList.remove("open");
+skel();
+var oP=st.orig?Promise.resolve(st.orig.ll):getMe();
+oP.then(function(A){
+if(my!==st.seq)return;
+var B=d.ll;
+map.resize();
+marks.push(new maplibregl.Marker({element:mk(d.name,false),anchor:"bottom"}).setLngLat(B).addTo(map));
+if(!A){
+map.flyTo({center:B,zoom:15,duration:800});
+if(window.hubSet)window.hubSet(d.name,"Choose a start");
+gid("hubSheet").classList.add("open");
+rowsMsg("Turn on location access, or tap From above to choose a starting point.");return}
+if(st.orig)marks.push(new maplibregl.Marker({element:mk(st.orig.name,true),anchor:"center"}).setLngLat(A).addTo(map));
+getRoutes(A,B).then(function(res){
+if(my!==st.seq)return;
+var any=res.walk||res.cycle||res.drive||res.transit;
+if(!any){
+map.flyTo({center:B,zoom:13,duration:800});
+if(window.hubSet)window.hubSet(d.name,"No route found");
+gid("hubSheet").classList.add("open");
+rowsMsg("We couldn't find a route between these places. Try Google Maps for this one.");
+var link=document.createElement("button");link.type="button";link.className="hubCta";link.style.width="auto";link.textContent="Open in Google Maps";link.onclick=function(){window.open(gmaps(A,B,"transit"),"_blank","noopener")};gid("hubRows").appendChild(link);return}
+st.res=res;st.A=A;st.B=B;
+var dw=res.walk&&res.walk.alts[0].dur;
+st.mode=(res.walk&&dw<=1500)?"walk":res.transit?"transit":res.drive?"drive":res.cycle?"cycle":"walk";
+st.alt=0;
+renderRows();draw(true)})})}
+function setDest(it){
+init();if(noGL){ext(it.name);return}
+st.dest={name:it.name,ll:it.ll};
+hq.value=it.name;gid("hubQx").hidden=false;
+route()}
 window.hubTrip=function(o,d,sub){
 init();if(noGL)return window.hubTrip(o,d,sub);
-clear();hq.value=d.label;
-if(window.hubSet)window.hubSet(d.label,sub);
-geo(o.q).then(function(a){return a||geo(o.q2)}).then(function(a){
-if(!a){hq.placeholder="Couldn't find the start of this journey.";return}
-var A=[+a.lon,+a.lat],vb=(A[0]-.6)+","+(A[1]+.5)+","+(A[0]+.6)+","+(A[1]-.5);
-return geo(d.q,vb).then(function(b){return b||geo(d.q)}).then(function(b){
-map.resize();
-marks.push(new maplibregl.Marker({element:mk(o.label,true),anchor:"center"}).setLngLat(A).addTo(map));
-if(!b){map.flyTo({center:A,zoom:14.5,duration:900});hq.placeholder="Couldn't find "+d.label+" on the map.";return}
-var B=[+b.lon,+b.lat];
-marks.push(new maplibregl.Marker({element:mk(d.label,false),anchor:"bottom"}).setLngLat(B).addTo(map));
-line(A,B);fit(A,B,130,Math.min(300,box.clientHeight*.45))})})};
-function find(q){
-if(!q)return;init();if(noGL)return ext(q);
-fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=gb&q="+encodeURIComponent(q))
-.then(function(r){return r.json()}).then(function(a){
-if(a&&a.length)show(a[0]);
-else{gid("hubClose").click();hq.value="";hq.placeholder="Couldn't find that place. Try another."}})
-.catch(function(){gid("hubClose").click();hq.placeholder="Couldn't load the map search. Check your connection."})}
+clear();hq.value=d.label;gid("hubQx").hidden=false;
+if(window.hubSet)window.hubSet(d.label,"Finding routes...");
+suggest(o.q).then(function(r){return r.length?r:suggest(o.q2||o.q)}).then(function(r){
+if(!r.length){hq.placeholder="Couldn't find the start of this journey.";return}
+var A=r[0].ll;
+return suggest(d.q,A).then(function(r2){
+if(!r2.length){map.flyTo({center:A,zoom:14.5,duration:900});hq.placeholder="Couldn't find "+d.label+" on the map.";return}
+st.orig={name:o.label,ll:A};st.dest={name:d.label,ll:r2[0].ll};route()})})};
 window.hubMapShow=function(){init();if(map)setTimeout(function(){map.resize()},50)};
 window.addEventListener("resize",function(){if(map)map.resize()});
-gid("mapRetry").onclick=function(){mm.hidden=true;if(map){try{map.remove()}catch(e){}map=null;meMk=null;marks=[]}init()};
-hq.addEventListener("keydown",function(e){if(e.key==="Enter"&&hq.value.trim())find(hq.value.trim())});
-Array.prototype.forEach.call(document.querySelectorAll("[data-hubpick]"),function(b){b.addEventListener("click",function(){find(b.dataset.hubpick)})});
-gid("hubClose").addEventListener("click",function(){if(map)clear()});
+gid("mapRetry").onclick=function(){mm.hidden=true;if(map){try{map.remove()}catch(e){}map=null;meMk=null;marks=[];altBound=false}init()};
+/* search bar */
+var qx=gid("hubQx"),sl=gid("sugList");
+attachSug(hq,sl,function(it){hq.blur();setDest(it)});
+hq.addEventListener("input",function(){qx.hidden=!hq.value});
+qx.onclick=function(){hq.value="";qx.hidden=true;sl.hidden=true;gid("hubClose").click();hq.focus()};
+Array.prototype.forEach.call(document.querySelectorAll("[data-hubpick]"),function(b){b.addEventListener("click",function(){
+var q=b.dataset.hubpick;hq.value=q;qx.hidden=false;
+suggest(q).then(function(r){if(r[0])setDest(r[0]);else hq.placeholder="Couldn't find that place."})})});
+/* editable start point */
+var fSp=gid("hubFrom"),fIn=gid("hubFromIn"),fSl=gid("sugFrom");
+function closeFrom(){fIn.hidden=true;fSp.hidden=false}
+function openFrom(e){if(e)e.stopPropagation();fSp.hidden=true;fIn.hidden=false;fIn.value="";fIn.focus()}
+fSp.addEventListener("click",openFrom);
+fSp.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();openFrom()}});
+fIn.addEventListener("click",function(e){e.stopPropagation()});
+fIn.addEventListener("blur",function(){setTimeout(closeFrom,200)});
+attachSug(fIn,fSl,function(it){
+closeFrom();
+if(it.me)st.orig=null;else st.orig={name:it.name,ll:it.ll};
+if(st.dest)route()},[{me:1,name:"My location",sub:"Use GPS"}]);
+gid("hubClose").addEventListener("click",function(){st.seq++;st.dest=null;st.res=null;if(map)clear();gid("hubRows").innerHTML="";hq.value="";qx.hidden=true});
+
 if(!gid("travel").hidden)window.hubMapShow()}
 })();
 
